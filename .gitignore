@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/swift,xcode,macos,objective-c,swiftpackagemanager
-# Edit at https://www.gitignore.io/?templates=swift,xcode,macos,objective-c,swiftpackagemanager
+# Created by https://www.gitignore.io/api/swift,xcode,macos,objective-c
+# Edit at https://www.gitignore.io/?templates=swift,xcode,macos,objective-c
 
 ### macOS ###
 # General
@@ -144,12 +144,6 @@ Dependencies/
 # https://github.com/johnno1962/injectionforxcode
 
 
-### SwiftPackageManager ###
-Packages
-xcuserdata
-*.xcodeproj
-
-
 ### Xcode ###
 # Xcode
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
@@ -170,4 +164,4 @@ xcuserdata
 ### Xcode Patch ###
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.gitignore.io/api/swift,xcode,macos,objective-c,swiftpackagemanager
+# End of https://www.gitignore.io/api/swift,xcode,macos,objective-c
