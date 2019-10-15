@@ -11,14 +11,14 @@ import SpriteKit
 
 class Character: SKSpriteNode {
     
-    let movement: Int
     var coord: (Int, Int)
     var spriteAtlas: SKTextureAtlas
-//    var state: StateMachine
+    var state: StateMachine
+    private let movement: Int
     var damage: Int
     var health: Int
     var attackRange: Int
-//    var breadcrumbs: [Tile]
+    var breadcrumbs: [Tile]
     
     
     init(name: String, movement: Int, coord: (Int,Int), spriteAtlas: SKTextureAtlas, state: StateMachine, damage: Int, health: Int, attackRange: Int, breadcrumbs: [Tile]) {
@@ -40,18 +40,20 @@ class Character: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func basicAttack(){
+    func basicAttack() -> [Int] {
+        return [damage, attackRange]
     }
     
-    func specialAttack(){
-        
+    func specialAttack() {}
+    
+    func takeDamage(damage: Int){
+        self.health -= damage
+        if (self.health <= 0) {
+            //change state to dead
+        }
     }
     
-    func takeDamage(){
-        
-    }
-    
-    func move([Tile]){
-        
+    func move() -> Int {
+        return movement
     }
 }

@@ -23,8 +23,10 @@ class GameManager {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func moveEnemies(){
-        
+    func moveOnBoard(currentCharacter: Character, tile: Tile) {
+        currentCharacter.position = tile.position
     }
+    
+    
     
 }

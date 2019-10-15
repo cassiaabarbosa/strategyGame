@@ -1,5 +1,5 @@
 //
-//  Melee.swift
+//  Trapper.swift
 //  strategyGame
 //
 //  Created by Cassia Aparecida Barbosa on 15/10/19.
@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Melee: Character {
+class Trapper: Character {
     
     init(name: String, movement: Int, coord: (Int,Int), spriteAtlas: SKTextureAtlas, state: StateMachine, damage: Int, health: Int, attackRange: Int, breadcrumbs: [Tile]) {
         super.init(name: name, movement: movement, coord: coord, spriteAtlas: spriteAtlas, state: state, damage: damage, health: health, attackRange: attackRange, breadcrumbs: breadcrumbs)
@@ -21,6 +21,4 @@ class Melee: Character {
     
     override func specialAttack() {
     }
-    
 }
-
