@@ -17,13 +17,13 @@ class Grid : SKNode {
     func drawGrid(tileSet: String) {
         let charArray = Array(tileSet)
         let amout = gridAspect.0 * gridAspect.1
-        for i in 0..<amout {
-            let row = i / gridAspect.0
-            let col = i % gridAspect.0
+        for id in 0..<amout {
+            let row = id / gridAspect.0
+            let col = id % gridAspect.0
             let xPos = CGFloat(col) * tileSize.width
             let yPos = CGFloat(row) * tileSize.height * -1
-            let tile = Tile(id: i, x: xPos, y: yPos, rectSide: tileSize.width, type: charArray[i])
-            print(charArray[i])
+            let tile = Tile(id: id, positionX: xPos, positionY: yPos, rectSide: tileSize.width, type: charArray[id])
+            print(charArray[id])
             tiles.append(tile)
             addChild(tile)
         }

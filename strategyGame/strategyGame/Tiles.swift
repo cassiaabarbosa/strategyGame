@@ -17,7 +17,7 @@ class Tile : SKNode {
     public private(set) var center: CGPoint
     public private(set) var size: CGSize
     
-    init (id: Int, x: CGFloat, y: CGFloat, rectSide: CGFloat, type: Character) {
+    init (id: Int, positionX: CGFloat, positionY: CGFloat, rectSide: CGFloat, type: Character) {
         self.id = id
         self.isOcupied = false
         self.clear = true
@@ -26,7 +26,7 @@ class Tile : SKNode {
         super.init()
         self.center = CGPoint(x: self.position.x + self.size.width/2,
                               y: self.position.y + self.size.height/2)
-        self.position = CGPoint(x: x, y: y)
+        self.position = CGPoint(x: positionX, y: positionY)
         drawTile(char: type)
     }
     
