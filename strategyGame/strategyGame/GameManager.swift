@@ -26,7 +26,4 @@ class GameManager {
     func moveOnBoard(currentCharacter: Character, tile: Tile) {
         currentCharacter.position = tile.position
     }
-    
-    
-    
 }

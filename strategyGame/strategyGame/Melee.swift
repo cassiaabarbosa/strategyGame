@@ -21,6 +21,5 @@ class Melee: Character {
     
     override func specialAttack() {
     }
-    
 }
 
