@@ -17,6 +17,12 @@
 		CB9D6C80234E6BF7000FA87E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C7E234E6BF7000FA87E /* Main.storyboard */; };
 		CB9D6C82234E6BFA000FA87E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C81234E6BFA000FA87E /* Assets.xcassets */; };
 		CB9D6C85234E6BFA000FA87E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C83234E6BFA000FA87E /* LaunchScreen.storyboard */; };
+		CBDBB1B52356374B004F7AC1 /* HeavyEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */; };
+		CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */; };
+		CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B8235637D1004F7AC1 /* Melee.swift */; };
+		CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BA235637E5004F7AC1 /* Ranged.swift */; };
+		CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BE235639B3004F7AC1 /* GameManager.swift */; };
+		CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1C0235649E3004F7AC1 /* Trapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,12 @@
 		CB9D6C81234E6BFA000FA87E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9D6C84234E6BFA000FA87E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB9D6C86234E6BFA000FA87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyEnemy.swift; sourceTree = "<group>"; };
+		CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinterEnemy.swift; sourceTree = "<group>"; };
+		CBDBB1B8235637D1004F7AC1 /* Melee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melee.swift; sourceTree = "<group>"; };
+		CBDBB1BA235637E5004F7AC1 /* Ranged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranged.swift; sourceTree = "<group>"; };
+		CBDBB1BE235639B3004F7AC1 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		CBDBB1C0235649E3004F7AC1 /* Trapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +79,13 @@
 				CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */,
 				CB9D6C76234E6BF7000FA87E /* GameScene.sks */,
 				CB9D6C78234E6BF7000FA87E /* Actions.sks */,
+				CBDBB1BE235639B3004F7AC1 /* GameManager.swift */,
+				CB1B231A23562C0D00E867E8 /* Character.swift */,
+				CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */,
+				CBDBB1C0235649E3004F7AC1 /* Trapper.swift */,
+				CBDBB1BA235637E5004F7AC1 /* Ranged.swift */,
+				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
+				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
 				CB9D6C7A234E6BF7000FA87E /* GameScene.swift */,
 				8C02075023565849009A8659 /* Grid.swift */,
 				8C02075123565849009A8659 /* Tiles.swift */,
@@ -174,11 +193,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
-				8C02075323565849009A8659 /* Tiles.swift in Sources */,
+				CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */,
+				CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */,
 				CB9D6C7D234E6BF7000FA87E /* GameViewController.swift in Sources */,
 				CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */,
-				8C02075223565849009A8659 /* Grid.swift in Sources */,
+				CBDBB1B52356374B004F7AC1 /* HeavyEnemy.swift in Sources */,
+				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
+				CB1B231B23562C0D00E867E8 /* Character.swift in Sources */,
+				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
