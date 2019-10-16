@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB1B231B23562C0D00E867E8 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1B231A23562C0D00E867E8 /* Character.swift */; };
+		8C02075223565849009A8659 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02075023565849009A8659 /* Grid.swift */; };
+		8C02075323565849009A8659 /* Tiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C02075123565849009A8659 /* Tiles.swift */; };
 		CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */; };
 		CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C76234E6BF7000FA87E /* GameScene.sks */; };
 		CB9D6C79234E6BF7000FA87E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C78234E6BF7000FA87E /* Actions.sks */; };
@@ -25,7 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CB1B231A23562C0D00E867E8 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		8C02075123565849009A8659 /* Tiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiles.swift; sourceTree = "<group>"; };
 		CB9D6C71234E6BF7000FA87E /* strategyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = strategyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB9D6C76234E6BF7000FA87E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
 				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
 				CB9D6C7A234E6BF7000FA87E /* GameScene.swift */,
+				8C02075023565849009A8659 /* Grid.swift */,
+				8C02075123565849009A8659 /* Tiles.swift */,
 				CB9D6C7C234E6BF7000FA87E /* GameViewController.swift */,
 				CB9D6C7E234E6BF7000FA87E /* Main.storyboard */,
 				CB9D6C81234E6BFA000FA87E /* Assets.xcassets */,
