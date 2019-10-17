@@ -9,10 +9,10 @@
 import Foundation
 import SpriteKit
 
-class Ranged: Character {
+class Ranged: Actor {
     
-    init(name: String, movement: Int, coord: (Int,Int), spriteAtlas: SKTextureAtlas, state: StateMachine, damage: Int, health: Int, attackRange: Int, breadcrumbs: [Tile]) {
-        super.init(name: name, movement: movement, coord: coord, spriteAtlas: spriteAtlas, state: state, damage: damage, health: health, attackRange: attackRange, breadcrumbs: breadcrumbs)
+    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
+        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -20,6 +20,6 @@ class Ranged: Character {
     }
     
     override func specialAttack() {
+        
     }
 }
-

@@ -1,8 +1,8 @@
 import SpriteKit
 
-class Grid : SKNode {
+class Grid: SKNode {
 
-    var tiles = [Tile]()
+    var tiles: [Tile] = [Tile]()
     let tileSize: CGSize
     let gridAspect: (Int, Int) // width, height
     var tileSet: String?
@@ -15,15 +15,14 @@ class Grid : SKNode {
     }
     
     func drawGrid(tileSet: String) {
-        let charArray = Array(tileSet)
-        let amout = gridAspect.0 * gridAspect.1
+        let charArray: [String.Element] = Array(tileSet)
+        let amout: Int = gridAspect.0 * gridAspect.1
         for id in 0..<amout {
-            let row = id / gridAspect.0
-            let col = id % gridAspect.0
-            let xPos = CGFloat(col) * tileSize.width
-            let yPos = CGFloat(row) * tileSize.height * -1
-            let tile = Tile(id: id, positionX: xPos, positionY: yPos, rectSide: tileSize.width, type: charArray[id])
-            print(charArray[id])
+            let row: Int = id / gridAspect.0
+            let col: Int = id % gridAspect.0
+            let xPos: CGFloat = CGFloat(col) * tileSize.width
+            let yPos: CGFloat = CGFloat(row) * tileSize.height * -1
+            let tile: Tile = Tile(id: id, positionX: xPos, positionY: yPos, rectSide: tileSize.width, type: charArray[id])
             tiles.append(tile)
             addChild(tile)
         }

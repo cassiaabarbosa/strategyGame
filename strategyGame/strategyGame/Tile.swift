@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class Tile : SKNode {
+class Tile: SKNode {
     
     let id: Int
     var isOcupied: Bool
