@@ -10,6 +10,7 @@ import Foundation
 import SpriteKit
 
 class Trapper: Actor {
+    var trapNumber: Int = 3
     
     override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
         super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
@@ -20,5 +21,11 @@ class Trapper: Actor {
     }
     
     override func specialAttack() {
+    }
+    
+    func throwTrap() {
+        if (trapNumber > 0) {
+            
+        }
     }
 }
