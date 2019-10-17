@@ -3,13 +3,13 @@ import SpriteKit
 class Grid: SKNode {
 
     var tiles: [Tile] = [Tile]()
-    let tileSize: CGSize
     let gridAspect: (Int, Int) // width, height
+    let tileSize: CGSize
     var tileSet: String?
     
     init(position: CGPoint, width: Int, height: Int, tileSize: CGSize) {
-        self.tileSize = tileSize
         self.gridAspect = (width, height)
+        self.tileSize = tileSize
         super.init()
         self.position = position
     }
@@ -20,12 +20,28 @@ class Grid: SKNode {
         for id in 0..<amout {
             let row: Int = id / gridAspect.0
             let col: Int = id % gridAspect.0
-            let xPos: CGFloat = CGFloat(col) * tileSize.width
-            let yPos: CGFloat = CGFloat(row) * tileSize.height * -1
-            let tile: Tile = Tile(id: id, positionX: xPos, positionY: yPos, rectSide: tileSize.width, type: charArray[id])
+            let tile: Tile = Tile(id: id, row: row, col: col, rectSide: tileSize.width, type: charArray[id])
             tiles.append(tile)
             addChild(tile)
         }
+    }
+    
+    func getTile(col: Int, row: Int) -> Tile? {
+        let nCols = gridAspect.0
+        let nRows = gridAspect.1
+        if col >= nCols || col < 0 || row >= nRows || row < 0 {
+            print("getting tile out of grid!")
+            return nil
+        }
+        let id = col + row * nCols
+        return tiles[id]
+    }
+    
+    func getTile(id: Int) -> Tile? {
+        if id >= tiles.count {
+            return tiles[id]
+        }
+        return nil
     }
     
     required init?(coder aDecoder: NSCoder) {
