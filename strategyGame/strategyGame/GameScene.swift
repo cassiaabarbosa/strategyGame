@@ -42,9 +42,11 @@ class GameScene: SKScene {
                     let touchedNodes: [SKNode] = nodes(at: location)
                     for node in touchedNodes {
                         if let actor: Actor = node as? Actor {
-                            GameManager.shared.currentCharacter = actor as? Melee
-                            GameManager.shared.showTilesPath(grid: grid)
-                            return
+                            if actor.canMove {
+                                GameManager.shared.currentCharacter = actor as? Melee
+                                GameManager.shared.showTilesPath(grid: grid)
+                                return
+                            }
                         }
                         if let tile: Tile = node as? Tile {
                             if GameManager.shared.currentCharacter != nil {
@@ -52,6 +54,8 @@ class GameScene: SKScene {
                             }
                         }
                     }
+            case .enemyMove:
+                return
             }
         }
     }
