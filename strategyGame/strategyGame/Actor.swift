@@ -20,6 +20,7 @@ class Actor: SKSpriteNode {
     var attackRange: Int
     var breadcrumbs: [Tile] = [Tile]()
     var wholeNumberValue: Float?
+    var canMove: Bool = true
     
     init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
 //        self.name = name

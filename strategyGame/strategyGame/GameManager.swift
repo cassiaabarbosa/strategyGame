@@ -22,6 +22,7 @@ class GameManager {
     }
     enum Phase {
         case playerMove
+        case enemyMove
     }
     var turnPhase: Phase
     
@@ -39,10 +40,6 @@ class GameManager {
         print("Preparing...")
     }
     
-    func moveOnBoard(currentCharacter: Actor, tile: Tile) {
-        currentCharacter.position = tile.position
-    }
-    
     func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
         players[0].position = grid.tiles[21].position
         players[0].position.x += grid.tiles[21].center.x
@@ -53,12 +50,17 @@ class GameManager {
     }
     
     func makeAMovement(tile: Tile) {
-        currentCharacter?.position = tile.position
-        currentCharacter?.position.x += tile.center.x
-        currentCharacter?.position.y += tile.center.y
-        currentCharacter?.breadcrumbs.removeAll()
-        currentCharacter?.breadcrumbs.append(tile)
-        currentCharacter = nil
+        if (currentCharacter?.breadcrumbs.contains(tile))!{
+            currentCharacter?.position = tile.position
+            currentCharacter?.position.x += tile.center.x
+            currentCharacter?.position.y += tile.center.y
+            currentCharacter?.breadcrumbs.removeAll()
+//            currentCharacter?.breadcrumbs.append(tile)
+            currentCharacter?.canMove = false
+            currentCharacter = nil
+        } else {
+            print("Fora de cogitação")
+        }
     }
     
     func showTilesPath(grid: Grid?) {
@@ -82,7 +84,7 @@ class GameManager {
                 }
             }
         }
-        
+        currentCharacter?.breadcrumbs = ableTiles
         for tiles in ableTiles {
             tiles.shape?.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
