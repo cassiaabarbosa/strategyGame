@@ -22,17 +22,18 @@ class GameManager {
     var players: [Actor] = [Actor]()
     var grid: Grid?
     var currentCharacter: Actor?
+    
     var mode: Mode {
         didSet {
             if currentCharacter == nil {
                 return
             } else {
                 if mode == .attack {
-                    showAttackOptions()
+                    grid?.showAttackOptions(character: self.currentCharacter!)
                 } else if mode == .move {
-                    showTilesPath()
+                    grid?.showMoveOptions(character: self.currentCharacter!)
                 } else {
-                    removeHighlights()
+                    grid?.removeHighlights()
                 }
             }
         }
@@ -64,83 +65,22 @@ class GameManager {
 
     }
     
-    private func showTilesPath() {
-        guard let move: Int = currentCharacter?.movement else { return }
-        guard let currentTile: Tile = currentCharacter?.tile else { return }
-        guard let grid: Grid = self.grid else { return }
-        removeHighlights()
-        grid.ableTiles.append(currentTile)
-        // TODO: Colocar método na classe Grid
-        for mov in 0...move {
-            if let tile = grid.getTile(col: currentTile.coord.col + 1 * mov, row: currentTile.coord.row) {
-                grid.ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row + 1 * mov) {
-                grid.ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col - 1 * mov, row: currentTile.coord.row) {
-                grid.ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row - 1 * mov) {
-                grid.ableTiles.append(tile)
-            }
-        }
-        for tiles in grid.ableTiles {
-            tiles.shape?.fillShader = Tile.highlightShader
-        }
-    }
-    
-    func removeHighlights() {
-        guard let grid = self.grid else {
-            print("removeHighlights(): grid is nil")
-            return
-        }
-        for til in grid.ableTiles {
-            til.shape?.fillShader = nil
-        }
-        grid.ableTiles.removeAll()
-    }
-    
-    private func showAttackOptions() {
-        guard let currentTile: Tile = currentCharacter?.tile else { return }
-        guard let grid: Grid = self.grid else { return }
-        removeHighlights()
-        if let tile = grid.getTile(col: currentTile.coord.col + 1, row: currentTile.coord.row) {
-            grid.ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row + 1) {
-            grid.ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col - 1, row: currentTile.coord.row) {
-            grid.ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row - 1) {
-            grid.ableTiles.append(tile)
-        }
-        for tiles in grid.ableTiles {
-            tiles.shape?.fillShader = Tile.attackHighlightShader
-        }
-    }
-    
-    // TODO: implementar método move() na classe Actor
-    // validateMovement() deve ser feito pela classe Grid
-    // após validada, chamar método move() do actor
     private func makeValidMove(character: Actor, tile: Tile?) {
         if tile == nil { return }
         if !(self.grid?.ableTiles.contains(tile!) ?? false) { return }
-        removeHighlights()
+        grid?.removeHighlights()
         currentCharacter?.move(tile: tile!)
         currentCharacter = nil
     }
 
     func touchTile(tile: Tile) {
         func selectCharacter(character: Actor) {
-            removeHighlights()
+            grid?.removeHighlights()
             currentCharacter = character
             if self.mode == .attack {
-                showAttackOptions()
+                grid?.showAttackOptions(character: currentCharacter!)
             } else {
-                showTilesPath()
+                grid?.showMoveOptions(character: currentCharacter!)
             }
         }
         
@@ -158,7 +98,7 @@ class GameManager {
         } else if self.mode == .attack && tile.character != nil {
             attack(attacker: currentCharacter, attacked: tile.character!)
         } else {
-            removeHighlights()
+            grid?.removeHighlights()
             self.currentCharacter = nil
             return
         }

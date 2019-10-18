@@ -27,6 +27,58 @@ class Grid: SKNode {
         }
     }
     
+    func showMoveOptions(character: Actor) {
+       let move: Int = character.movement
+       let tile: Tile = character.tile
+       removeHighlights()
+       self.ableTiles.append(tile)
+       // TODO: Colocar método na classe Grid
+       for mov in 0...move {
+           if let t = self.getTile(col: tile.coord.col + 1 * mov, row: tile.coord.row) {
+               self.ableTiles.append(t)
+           }
+           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row + 1 * mov) {
+               self.ableTiles.append(t)
+           }
+           if let t = self.getTile(col: tile.coord.col - 1 * mov, row: tile.coord.row) {
+               self.ableTiles.append(t)
+           }
+           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row - 1 * mov) {
+               self.ableTiles.append(t)
+           }
+       }
+       for t in self.ableTiles {
+           t.shape?.fillShader = Tile.highlightShader
+       }
+    }
+       
+    func removeHighlights() {
+       for t in self.ableTiles {
+           t.shape?.fillShader = nil
+       }
+       self.ableTiles.removeAll()
+    }
+       
+    func showAttackOptions(character: Actor) {
+       let tile: Tile = character.tile
+       removeHighlights()
+       if let t = getTile(col: tile.coord.col + 1, row: tile.coord.row) {
+           self.ableTiles.append(t)
+       }
+       if let t = getTile(col: tile.coord.col, row: tile.coord.row + 1) {
+           self.ableTiles.append(t)
+       }
+       if let t = getTile(col: tile.coord.col - 1, row: tile.coord.row) {
+           self.ableTiles.append(t)
+       }
+       if let t = getTile(col: tile.coord.col, row: tile.coord.row - 1) {
+           self.ableTiles.append(t)
+       }
+       for t in self.ableTiles {
+           t.shape?.fillShader = Tile.attackHighlightShader
+       }
+    }
+    
     func getTile(col: Int, row: Int) -> Tile? {
         let nCols = gridAspect.0
         let nRows = gridAspect.1

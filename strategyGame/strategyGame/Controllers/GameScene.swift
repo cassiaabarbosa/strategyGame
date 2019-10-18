@@ -47,7 +47,6 @@ class GameScene: SKScene {
         grid?.drawGrid(tileSet: templateSceneString)
         addChild(grid!)
         GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
-        GameManager.shared.grid = grid
         attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
         self.addChild(attackButton!)
     }
