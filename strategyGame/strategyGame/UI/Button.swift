@@ -5,7 +5,7 @@ class Button: SKSpriteNode {
     var buttonNormalTex = SKTexture(imageNamed: "ButtonNormal")
     var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
     var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
-    public private(set) var pressed: Bool {
+    public internal(set) var pressed: Bool {
         didSet {
             self.texture = pressed ? buttonPressedTex : buttonNormalTex
             self.label.fontColor = pressed ? .white : .black
@@ -24,15 +24,7 @@ class Button: SKSpriteNode {
         addChild(label)
     }
     
-    func press() {
-        if self.pressed {
-            GameManager.shared.turnPhase = .playerMove
-            self.pressed = false
-        } else {
-            GameManager.shared.turnPhase = .playerAttack
-            self.pressed = true
-        }
-    }
+    func press() {}
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

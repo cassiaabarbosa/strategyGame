@@ -11,20 +11,35 @@ import SpriteKit
 
 class GameManager {
     
+    enum Mode {
+        case clear
+        case move
+        case attack
+    }
+    
     static let shared: GameManager = GameManager()
     var enemies: [MachineControlled]?
     var players: [Actor] = [Actor]()
     var grid: Grid?
     var currentCharacter: Actor?
-    enum Phase {
-        case playerMove
-        case playerAttack
-        case enemyMove
+    var mode: Mode {
+        didSet {
+            if currentCharacter == nil {
+                return
+            } else {
+                if mode == .attack {
+                    showAttackOptions()
+                } else if mode == .move {
+                    showTilesPath()
+                } else {
+                    removeHighlights()
+                }
+            }
+        }
     }
-    var turnPhase: Phase
     
     private init() {
-        turnPhase = .playerMove
+        mode = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +64,8 @@ class GameManager {
         guard let move: Int = currentCharacter?.movement else { return }
         guard let currentTile: Tile = currentCharacter?.tile else { return }
         guard let grid: Grid = self.grid else { return }
-            grid.ableTiles.append(currentTile)
+        removeHighlights()
+        grid.ableTiles.append(currentTile)
         // TODO: Colocar método na classe Grid
         for mov in 0...move {
             if let tile = grid.getTile(col: currentTile.coord.col + 1 * mov, row: currentTile.coord.row) {
@@ -84,6 +100,7 @@ class GameManager {
     private func showAttackOptions() {
         guard let currentTile: Tile = currentCharacter?.tile else { return }
         guard let grid: Grid = self.grid else { return }
+        removeHighlights()
         if let tile = grid.getTile(col: currentTile.coord.col + 1, row: currentTile.coord.row) {
             grid.ableTiles.append(tile)
         }
@@ -116,27 +133,29 @@ class GameManager {
         func selectCharacter(character: Actor) {
             removeHighlights()
             currentCharacter = character
-            if self.turnPhase == .playerAttack {
+            if self.mode == .attack {
                 showAttackOptions()
             } else {
                 showTilesPath()
             }
         }
         
-        guard let char = self.currentCharacter else {
+        guard let currentCharacter = self.currentCharacter else {
             if let char = tile.character {
                 selectCharacter(character: char)
             }
             return
         }
         
-        if tile.character == char {
+        if tile.character == currentCharacter {
             return
-        } else if tile.character == nil {
-            makeValidMove(character: char, tile: tile)
-        } else if turnPhase == .playerAttack {
-            attack(attacker: char, attacked: tile.character!)
+        } else if tile.character == nil && self.mode != .attack {
+            makeValidMove(character: currentCharacter, tile: tile)
+        } else if self.mode == .attack && tile.character != nil {
+            attack(attacker: currentCharacter, attacked: tile.character!)
         } else {
+            removeHighlights()
+            self.currentCharacter = nil
             return
         }
     }

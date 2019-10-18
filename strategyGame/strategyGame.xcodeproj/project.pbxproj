@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
+		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */; };
 		8C87DBCC2358CBB1001FB9DF /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC92358CBB1001FB9DF /* StateMachine.swift */; };
 		8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBCA2358CBB1001FB9DF /* Actor.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
+		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		8C87DBCA2358CBB1001FB9DF /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -75,6 +77,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C205407235A4CE9004F73E3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				8CC08CC1235A02280005D0FD /* Button.swift */,
+				8C205405235A4C97004F73E3 /* AttackButton.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		8C87DBD92359DFCA001FB9DF /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,7 +158,7 @@
 				8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */,
 				8C87DBC92358CBB1001FB9DF /* StateMachine.swift */,
 				8C87DBD32358DDB9001FB9DF /* Coord.swift */,
-				8CC08CC1235A02280005D0FD /* Button.swift */,
+				8C205407235A4CE9004F73E3 /* UI */,
 				CB9D6C81234E6BFA000FA87E /* Assets.xcassets */,
 				CB9D6C86234E6BFA000FA87E /* Info.plist */,
 				8C87DBDA2359DFED001FB9DF /* Shaders */,
@@ -269,6 +280,7 @@
 				CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */,
 				CBDBB1B52356374B004F7AC1 /* HeavyEnemy.swift in Sources */,
 				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
+				8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */,
 				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,
 				8CC08CC2235A02280005D0FD /* Button.swift in Sources */,
 			);

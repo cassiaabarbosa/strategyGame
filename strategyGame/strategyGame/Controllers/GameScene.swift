@@ -6,7 +6,7 @@ class GameScene: SKScene {
     var grid: Grid?
     var players: [Actor]?
     var background: Background?
-    var attackButton: Button?
+    var attackButton: AttackButton?
     
     var templateSceneString: String = """
 000000\
@@ -48,7 +48,7 @@ class GameScene: SKScene {
         GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
         GameManager.shared.grid = grid
         
-        attackButton = Button(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
+        attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
         self.addChild(attackButton!)
     }
     
