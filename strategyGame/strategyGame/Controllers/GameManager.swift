@@ -53,11 +53,15 @@ class GameManager {
     func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
         self.grid = grid
         let melee = Melee(tile: grid.tiles[21])
-        let melee2 = Melee(tile: grid.tiles[15])
         grid.addChild(melee)
-        grid.addChild(melee2)
         players.append(melee)
-        players.append(melee2)
+        let ranged = Ranged(tile: grid.tiles[15])
+        grid.addChild(ranged)
+        players.append(ranged)
+        let trapper = Trapper(tile: grid.tiles[34])
+        grid.addChild(trapper)
+        players.append(trapper)
+
     }
     
     private func showTilesPath() {

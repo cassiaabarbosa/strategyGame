@@ -38,6 +38,7 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        AnimationHandler.shared.awake()
         background = Background(view: view)
         addChild(background!)
         let position: CGPoint = CGPoint(x: 0, y: 700)
@@ -47,7 +48,6 @@ class GameScene: SKScene {
         addChild(grid!)
         GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
         GameManager.shared.grid = grid
-        
         attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
         self.addChild(attackButton!)
     }

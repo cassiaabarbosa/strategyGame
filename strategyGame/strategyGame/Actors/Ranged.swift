@@ -12,7 +12,9 @@ import SpriteKit
 class Ranged: Actor {
     
     init(tile: Tile) {
-    super.init(name: "Ranged", movement: 3, damage: 1, health: 3, attackRange: 3, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
+    super.init(name: "Ranged", movement: 3, damage: 1, health: 3, attackRange: 3, sprite: SKTexture(imageNamed: "00_ranged"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.rangedFrames, timePerFrame: 1/TimeInterval(5))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
