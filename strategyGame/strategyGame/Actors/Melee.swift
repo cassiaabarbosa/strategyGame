@@ -24,11 +24,4 @@ class Melee: Actor {
     override func specialAttack() {
         
     }
-    
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//            let location = touch.location(in: self)
-//            self.position = CGPoint(x: location.x, y: location.y)
-//        }
-//    }
 }
