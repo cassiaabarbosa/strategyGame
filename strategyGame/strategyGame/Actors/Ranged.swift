@@ -11,8 +11,8 @@ import SpriteKit
 
 class Ranged: Actor {
     
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    init(tile: Tile) {
+    super.init(name: "Ranged", movement: 3, damage: 1, health: 3, attackRange: 3, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
     }
     
     required init?(coder aDecoder: NSCoder) {

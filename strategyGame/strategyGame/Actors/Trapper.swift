@@ -12,8 +12,8 @@ import SpriteKit
 class Trapper: Actor {
     var trapNumber: Int = 3
     
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    init(tile: Tile) {
+        super.init(name: "Trapper", movement: 4, damage: 1, health: 3, attackRange: 1, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
     }
     
     required init?(coder aDecoder: NSCoder) {

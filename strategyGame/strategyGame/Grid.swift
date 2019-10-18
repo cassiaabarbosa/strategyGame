@@ -3,6 +3,7 @@ import SpriteKit
 class Grid: SKNode {
 
     var tiles: [Tile] = [Tile]()
+    var ableTiles: [Tile] = [Tile]()
     let gridAspect: (Int, Int) // width, height
     let tileSize: CGSize
     var tileSet: String?
@@ -30,7 +31,6 @@ class Grid: SKNode {
         let nCols = gridAspect.0
         let nRows = gridAspect.1
         if col >= nCols || col < 0 || row >= nRows || row < 0 {
-            print("Grid: getTile(): tile out of grid!")
             return nil
         }
         let id = col + row * nCols
@@ -44,6 +44,38 @@ class Grid: SKNode {
         return nil
     }
     
+    func getUpTile(col: Int, row: Int) -> Tile? {
+        return getTile(col: col, row: row - 1)
+    }
+    
+    func getDownTile(col: Int, row: Int) -> Tile? {
+        return getTile(col: col, row: row + 1)
+    }
+    
+    func getLeftTile(col: Int, row: Int) -> Tile? {
+        return getTile(col: col - 1, row: row)
+    }
+    
+    func getRightTile(col: Int, row: Int) -> Tile? {
+        return getTile(col: col + 1, row: row)
+    }
+    
+    func getUpTile(tile: Tile) -> Tile? {
+        return getTile(col: tile.coord.col, row: tile.coord.row - 1)
+    }
+    
+    func getDownTile(tile: Tile) -> Tile? {
+        return getTile(col: tile.coord.col, row: tile.coord.row + 1)
+    }
+    
+    func getLeftTile(tile: Tile) -> Tile? {
+        return getTile(col: tile.coord.col - 1, row: tile.coord.row)
+    }
+    
+    func getRightTile(tile: Tile) -> Tile? {
+        return getTile(col: tile.coord.col + 1, row: tile.coord.row)
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

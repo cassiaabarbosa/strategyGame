@@ -11,31 +11,36 @@ import SpriteKit
 
 class Actor: SKSpriteNode {
     
-    var coord: Coord
-    var sprite: SKTexture
-    var state: State
-    var movement: Int
-    var damage: Int
-    var health: Int
-    var attackRange: Int
-    var breadcrumbs: [Tile] = [Tile]()
-    var tile: Tile {
-        return breadcrumbs[0]
+    var coord: Coord {
+        return tile.coord
     }
+    var sprite: SKTexture
+    public private(set) var movement: Int
+    public private(set) var damage: Int
+    public private(set) var health: Int
+    public private(set) var attackRange: Int
+    public private(set) var tile: Tile {
+        didSet {
+            tile.character = self
+        }
+    }
+    var breadcrumbs: [Tile] = [Tile]()
     var wholeNumberValue: Float?
     var canMove: Bool = true
     
-    init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
+    init(name: String, movement: Int, damage: Int, health: Int, attackRange: Int, sprite: SKTexture, tile: Tile) {
         self.movement = movement
-        self.coord = Coord(coord.1, coord.0)
         self.sprite = sprite
-        self.state = state
         self.damage = damage
         self.health = health
         self.attackRange = attackRange
+        self.tile = tile
         super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
         self.name = name
+        self.position = tile.center
+        self.size = tile.size
         self.isUserInteractionEnabled = false
+        move(tile: tile)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,11 +56,13 @@ class Actor: SKSpriteNode {
     func takeDamage(damage: Int) {
         self.health -= damage
         if (self.health <= 0) {
-            //change state to dead
+            print("\(self.name!) is dead")
         }
     }
     
-    func move() -> Int {
-        return movement
+    func move(tile: Tile) {
+        self.tile.character = nil
+        self.position = tile.center
+        self.tile = tile
     }
 }

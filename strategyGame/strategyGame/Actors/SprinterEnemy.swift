@@ -11,8 +11,8 @@ import SpriteKit
 
 class SprinterEmeny: Actor {
     
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    init(tile: Tile) {
+        super.init(name: "Sprinter", movement: 4, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
     }
     
     required init?(coder aDecoder: NSCoder) {
