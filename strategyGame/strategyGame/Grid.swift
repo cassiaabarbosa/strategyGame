@@ -30,7 +30,7 @@ class Grid: SKNode {
         let nCols = gridAspect.0
         let nRows = gridAspect.1
         if col >= nCols || col < 0 || row >= nRows || row < 0 {
-            print("getting tile out of grid!")
+            print("Grid: getTile(): tile out of grid!")
             return nil
         }
         let id = col + row * nCols

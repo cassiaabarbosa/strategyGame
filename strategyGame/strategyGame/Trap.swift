@@ -15,7 +15,7 @@ class Trap: SKSpriteNode {
     var sprite: SKTexture
     var qntdTurnStunned: Int
     
-    init(coord:(Int, Int), sprite: SKTexture, qntdTurnStunned: Int) {
+    init(coord: (Int, Int), sprite: SKTexture, qntdTurnStunned: Int) {
         self.coord = coord
         self.sprite = sprite
         self.qntdTurnStunned = qntdTurnStunned
@@ -30,4 +30,3 @@ class Trap: SKSpriteNode {
         
     }
 }
-

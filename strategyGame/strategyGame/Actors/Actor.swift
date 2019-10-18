@@ -11,7 +11,7 @@ import SpriteKit
 
 class Actor: SKSpriteNode {
     
-    var coord: (Int, Int)
+    var coord: Coord
     var sprite: SKTexture
     var state: State
     var movement: Int
@@ -19,19 +19,22 @@ class Actor: SKSpriteNode {
     var health: Int
     var attackRange: Int
     var breadcrumbs: [Tile] = [Tile]()
+    var tile: Tile {
+        return breadcrumbs[0]
+    }
     var wholeNumberValue: Float?
     var canMove: Bool = true
     
     init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-//        self.name = name
         self.movement = movement
-        self.coord = (coord.0, coord.1)
+        self.coord = Coord(coord.1, coord.0)
         self.sprite = sprite
         self.state = state
         self.damage = damage
         self.health = health
         self.attackRange = attackRange
-        super.init(texture: SKTexture(imageNamed: "OysterVolcano"), color: UIColor.clear, size: SKTexture(imageNamed: "OysterVolcano").size())
+        super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
+        self.name = name
         self.isUserInteractionEnabled = false
     }
     
