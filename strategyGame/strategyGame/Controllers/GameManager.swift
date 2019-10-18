@@ -47,10 +47,6 @@ class GameManager {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepareToPlay() {
-        print("Preparing...")
-    }
-    
     func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
         self.grid = grid
         let melee = Melee(tile: grid.tiles[21])
@@ -62,15 +58,6 @@ class GameManager {
         let trapper = Trapper(tile: grid.tiles[34])
         grid.addChild(trapper)
         players.append(trapper)
-
-    }
-    
-    private func makeValidMove(character: Actor, tile: Tile?) {
-        if tile == nil { return }
-        if !(self.grid?.ableTiles.contains(tile!) ?? false) { return }
-        grid?.removeHighlights()
-        currentCharacter?.move(tile: tile!)
-        currentCharacter = nil
     }
 
     func touchTile(tile: Tile) {
@@ -94,38 +81,13 @@ class GameManager {
         if tile.character == currentCharacter {
             return
         } else if tile.character == nil && self.mode != .attack {
-            makeValidMove(character: currentCharacter, tile: tile)
+            currentCharacter.makeValidMove(tile: tile)
         } else if self.mode == .attack && tile.character != nil {
-            attack(attacker: currentCharacter, attacked: tile.character!)
+            currentCharacter.basicAttack(target: tile.character!)
         } else {
             grid?.removeHighlights()
             self.currentCharacter = nil
             return
         }
-    }
-    
-    func attack(attacker: Actor, attacked: Actor) {
-        func push(character: Actor, to tile: Tile?) {
-            if tile == nil { return }
-            if tile!.prop == .standard {
-                character.move(tile: tile!)
-            } else {
-                print("\(character.name!) took push damage")
-                character.takeDamage(damage: 1)
-            }
-        }
-        switch attacked.tile {
-        case self.grid?.getUpTile(tile: attacker.tile):
-            push(character: attacked, to: self.grid?.getUpTile(tile: attacked.tile))
-        case self.grid?.getDownTile(tile: attacker.tile):
-            push(character: attacked, to: self.grid?.getDownTile(tile: attacked.tile))
-        case self.grid?.getLeftTile(tile: attacker.tile):
-            push(character: attacked, to: self.grid?.getLeftTile(tile: attacked.tile))
-        case self.grid?.getRightTile(tile: attacker.tile):
-            push(character: attacked, to: self.grid?.getRightTile(tile: attacked.tile))
-        default:
-            print("GameManager.atack(): switch exausted")
-        }
-        attacked.takeDamage(damage: attacker.damage)
     }
 }

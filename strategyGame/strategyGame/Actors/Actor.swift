@@ -47,11 +47,37 @@ class Actor: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func basicAttack() -> [Int] {
-        return [damage, attackRange]
-    }
-    
     func specialAttack() {}
+    
+    // TODO:
+    // esse método está aqui por conveniência.
+    // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
+    // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
+    func basicAttack(target: Actor) {
+        func push(character: Actor, to tile: Tile?) {
+            if tile == nil { return }
+            if tile!.prop == .standard {
+                character.move(tile: tile!)
+            } else {
+                print("\(character.name!) took push damage")
+                character.takeDamage(damage: 1)
+            }
+        }
+        guard let grid = GameManager.shared.grid else { return }
+        switch target.tile {
+        case grid.getUpTile(tile: self.tile):
+            push(character: target, to: grid.getUpTile(tile: target.tile))
+        case grid.getDownTile(tile: self.tile):
+            push(character: target, to: grid.getDownTile(tile: target.tile))
+        case grid.getLeftTile(tile: self.tile):
+            push(character: target, to: grid.getLeftTile(tile: target.tile))
+        case grid.getRightTile(tile: self.tile):
+            push(character: target, to: grid.getRightTile(tile: target.tile))
+        default:
+            print("GameManager.atack(): switch exausted")
+        }
+        target.takeDamage(damage: self.damage)
+    }
     
     func takeDamage(damage: Int) {
         self.health -= damage
@@ -64,5 +90,15 @@ class Actor: SKSpriteNode {
         self.tile.character = nil
         self.position = tile.center
         self.tile = tile
+    }
+    
+    
+    func makeValidMove(tile: Tile?) {
+        guard let grid = GameManager.shared.grid else { return }
+        if tile == nil { return }
+        if !(grid.ableTiles.contains(tile!) ?? false) { return }
+        grid.removeHighlights()
+        self.move(tile: tile!)
+        GameManager.shared.currentCharacter = nil
     }
 }
