@@ -32,7 +32,7 @@ class Grid: SKNode {
        let tile: Tile = character.tile
        removeHighlights()
        self.ableTiles.append(tile)
-       // TODO: Colocar método na classe Grid
+       // TO-DO: Colocar método na classe Grid
        for mov in 0...move {
            if let t = self.getTile(col: tile.coord.col + 1 * mov, row: tile.coord.row) {
                self.ableTiles.append(t)
@@ -77,6 +77,21 @@ class Grid: SKNode {
        for t in self.ableTiles {
            t.shape?.fillShader = Tile.attackHighlightShader
        }
+    }
+    
+    //essa função ainda só funciona se o ataque partir do trapper
+    func showSpecialAttackOptions(character: Actor) {
+        let tile: Tile = character.tile
+        removeHighlights()
+        for t in 0...tiles.count - 1 {
+            if (tiles[t].isOcupied == false && tiles[t].hasTrap == false) {
+                self.ableTiles.append(tiles[t])
+            }
+        }
+        
+        for t in self.ableTiles {
+            t.shape?.fillShader = Tile.highlightShader
+        }
     }
     
     func getTile(col: Int, row: Int) -> Tile? {

@@ -21,7 +21,7 @@ class AnimationHandler {
     
     func awake() {}
     
-    static func loadFrames(atlas: SKTextureAtlas) -> [SKTexture]{
+    static func loadFrames(atlas: SKTextureAtlas) -> [SKTexture] {
         var frames = [SKTexture]()
         let names = atlas.textureNames.sorted()
 

@@ -47,12 +47,13 @@ class Actor: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func specialAttack() {}
+    func specialAttack(toTile: Tile, gameManager: GameManager, grid: Grid?) {}
     
-    // TODO:
+    // TO-DO:
     // esse método está aqui por conveniência.
     // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
     // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
+    
     func basicAttack(target: Actor) {
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
@@ -77,6 +78,7 @@ class Actor: SKSpriteNode {
             print("GameManager.atack(): switch exausted")
         }
         target.takeDamage(damage: self.damage)
+        
     }
     
     func takeDamage(damage: Int) {
@@ -91,7 +93,6 @@ class Actor: SKSpriteNode {
         self.position = tile.center
         self.tile = tile
     }
-    
     
     func makeValidMove(tile: Tile?) {
         guard let grid = GameManager.shared.grid else { return }

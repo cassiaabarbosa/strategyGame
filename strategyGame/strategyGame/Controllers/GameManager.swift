@@ -15,13 +15,17 @@ class GameManager {
         case clear
         case move
         case attack
+        case specialAttack
     }
     
     static let shared: GameManager = GameManager()
     var enemies: [MachineControlled]?
     var players: [Actor] = [Actor]()
+    var mountains: [Mountain] = [Mountain]()
+    var holes: [Hole] = [Hole]()
     var grid: Grid?
     var currentCharacter: Actor?
+    var specialAttackButton: SpecialAttackButton?
     
     var mode: Mode {
         didSet {
@@ -30,8 +34,11 @@ class GameManager {
             } else {
                 if mode == .attack {
                     grid?.showAttackOptions(character: self.currentCharacter!)
+                    print(specialAttackButton?.pressed ?? false)
                 } else if mode == .move {
                     grid?.showMoveOptions(character: self.currentCharacter!)
+                } else if mode == .specialAttack {
+                    grid?.showSpecialAttackOptions(character: self.currentCharacter!)
                 } else {
                     grid?.removeHighlights()
                 }
@@ -49,23 +56,53 @@ class GameManager {
     
     func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
         self.grid = grid
-        let melee = Melee(tile: grid.tiles[21])
+        let meleePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        let melee = Melee(tile: grid.tiles[meleePosition])
         grid.addChild(melee)
         players.append(melee)
-        let ranged = Ranged(tile: grid.tiles[15])
+        
+        let rangedPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        while (rangedPosition == meleePosition) {
+            let rangedPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        }
+        let ranged = Ranged(tile: grid.tiles[rangedPosition])
         grid.addChild(ranged)
         players.append(ranged)
-        let trapper = Trapper(tile: grid.tiles[34])
+    
+        let trapperPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        while (trapperPosition == meleePosition || trapperPosition == rangedPosition) {
+            let trapperPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        }
+        let trapper = Trapper(tile: grid.tiles[trapperPosition])
         grid.addChild(trapper)
         players.append(trapper)
     }
-
-    func touchTile(tile: Tile) {
+    
+    func setElementsOnGrid(gameScene: GameScene, grid: Grid) {
+        self.grid = grid
+        let mountainPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+        let mountain = Mountain(tile: grid.tiles[mountainPosition])
+        grid.addChild(mountain)
+        mountains.append(mountain)
+            
+        let holePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+            while (holePosition == mountainPosition) {
+                let holePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
+            }
+            let hole = Hole(tile: grid.tiles[holePosition])
+            grid.addChild(hole)
+            holes.append(hole)
+        
+    }
+    
+    func touchTile(tile: Tile) {//função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
             grid?.removeHighlights()
             currentCharacter = character
             if self.mode == .attack {
                 grid?.showAttackOptions(character: currentCharacter!)
+            } else if (self.mode == .specialAttack) {
+                grid?.showSpecialAttackOptions(character: currentCharacter!)
             } else {
                 grid?.showMoveOptions(character: currentCharacter!)
             }
@@ -80,10 +117,12 @@ class GameManager {
         
         if tile.character == currentCharacter {
             return
-        } else if tile.character == nil && self.mode != .attack {
+        } else if tile.character == nil && self.mode == .move {
             currentCharacter.makeValidMove(tile: tile)
         } else if self.mode == .attack && tile.character != nil {
             currentCharacter.basicAttack(target: tile.character!)
+        } else if self.mode == .specialAttack && tile.character == nil {
+            currentCharacter.specialAttack(toTile: tile, gameManager: self, grid: grid)
         } else {
             grid?.removeHighlights()
             self.currentCharacter = nil

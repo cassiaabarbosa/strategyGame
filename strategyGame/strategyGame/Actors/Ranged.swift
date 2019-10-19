@@ -21,7 +21,5 @@ class Ranged: Actor {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func specialAttack() {
-        
-    }
+//    override func specialAttack(toTile: Tile?) {}
 }

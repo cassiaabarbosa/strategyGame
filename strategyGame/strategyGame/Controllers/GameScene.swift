@@ -7,6 +7,7 @@ class GameScene: SKScene {
     var players: [Actor]?
     var background: Background?
     var attackButton: AttackButton?
+    var specialAttackButton: SpecialAttackButton?
     
     var templateSceneString: String = """
 000000\
@@ -47,8 +48,11 @@ class GameScene: SKScene {
         grid?.drawGrid(tileSet: templateSceneString)
         addChild(grid!)
         GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
+        GameManager.shared.setElementsOnGrid(gameScene: self, grid: grid!)
         attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
         self.addChild(attackButton!)
+        specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
+        self.addChild(specialAttackButton!)
     }
     
     required init?(coder aDecoder: NSCoder) {

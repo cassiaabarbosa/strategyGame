@@ -20,6 +20,7 @@
 		8C87DBD62358F7DF001FB9DF /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBD52358F7DF001FB9DF /* Background.swift */; };
 		8C87DBD82358F8D9001FB9DF /* BackgroundShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */; };
 		8CC08CC2235A02280005D0FD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC08CC1235A02280005D0FD /* Button.swift */; };
+		CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63D4B1235BA04D00E57A8D /* Element.swift */; };
 		CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */; };
 		CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C76234E6BF7000FA87E /* GameScene.sks */; };
 		CB9D6C79234E6BF7000FA87E /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C78234E6BF7000FA87E /* Actions.sks */; };
@@ -28,6 +29,10 @@
 		CB9D6C80234E6BF7000FA87E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C7E234E6BF7000FA87E /* Main.storyboard */; };
 		CB9D6C82234E6BFA000FA87E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C81234E6BFA000FA87E /* Assets.xcassets */; };
 		CB9D6C85234E6BFA000FA87E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C83234E6BFA000FA87E /* LaunchScreen.storyboard */; };
+		CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA1A11B235BAEFC00B61536 /* Mountain.swift */; };
+		CBA1A11E235BAF1100B61536 /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA1A11D235BAF1100B61536 /* Hole.swift */; };
+		CBA49FA4235B373A005E9C9C /* Trap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA49FA3235B373A005E9C9C /* Trap.swift */; };
+		CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA49FA7235B3EFA005E9C9C /* SpecialAttackButton.swift */; };
 		CBDBB1B52356374B004F7AC1 /* HeavyEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */; };
 		CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */; };
 		CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1B8235637D1004F7AC1 /* Melee.swift */; };
@@ -50,6 +55,7 @@
 		8C87DBD52358F7DF001FB9DF /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BackgroundShader.fsh; sourceTree = "<group>"; };
 		8CC08CC1235A02280005D0FD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		CB63D4B1235BA04D00E57A8D /* Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		CB9D6C71234E6BF7000FA87E /* strategyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = strategyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB9D6C76234E6BF7000FA87E /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -60,6 +66,10 @@
 		CB9D6C81234E6BFA000FA87E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9D6C84234E6BFA000FA87E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB9D6C86234E6BFA000FA87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBA1A11B235BAEFC00B61536 /* Mountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mountain.swift; sourceTree = "<group>"; };
+		CBA1A11D235BAF1100B61536 /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
+		CBA49FA3235B373A005E9C9C /* Trap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trap.swift; sourceTree = "<group>"; };
+		CBA49FA7235B3EFA005E9C9C /* SpecialAttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialAttackButton.swift; sourceTree = "<group>"; };
 		CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeavyEnemy.swift; sourceTree = "<group>"; };
 		CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprinterEnemy.swift; sourceTree = "<group>"; };
 		CBDBB1B8235637D1004F7AC1 /* Melee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Melee.swift; sourceTree = "<group>"; };
@@ -83,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				8CC08CC1235A02280005D0FD /* Button.swift */,
+				CBA49FA7235B3EFA005E9C9C /* SpecialAttackButton.swift */,
 				8C205405235A4C97004F73E3 /* AttackButton.swift */,
 			);
 			path = UI;
@@ -133,6 +144,17 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		CB63D4B3235BA23D00E57A8D /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				CB63D4B1235BA04D00E57A8D /* Element.swift */,
+				CBA49FA3235B373A005E9C9C /* Trap.swift */,
+				CBA1A11D235BAF1100B61536 /* Hole.swift */,
+				CBA1A11B235BAEFC00B61536 /* Mountain.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
 		CB9D6C68234E6BF7000FA87E = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +176,7 @@
 			children = (
 				8C87DBDC2359E23F001FB9DF /* Controllers */,
 				8C87DBDB2359E030001FB9DF /* Actors */,
+				CB63D4B3235BA23D00E57A8D /* Elements */,
 				8C205408235A54B5004F73E3 /* AnimationHandler.swift */,
 				8C02075023565849009A8659 /* Grid.swift */,
 				8C87DBCE2358CBC9001FB9DF /* Tile.swift */,
@@ -268,15 +291,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA49FA4235B373A005E9C9C /* Trap.swift in Sources */,
 				8C87DBD02358CBD9001FB9DF /* Grid.swift in Sources */,
+				CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */,
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
 				CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */,
+				CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */,
 				8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */,
+				CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */,
 				8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */,
 				8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */,
 				8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */,
 				8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */,
+				CBA1A11E235BAF1100B61536 /* Hole.swift in Sources */,
 				CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */,
 				CB9D6C7D234E6BF7000FA87E /* GameViewController.swift in Sources */,
 				8C87DBCC2358CBB1001FB9DF /* StateMachine.swift in Sources */,
