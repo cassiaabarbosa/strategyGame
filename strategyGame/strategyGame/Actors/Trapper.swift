@@ -33,7 +33,7 @@ class Trapper: Actor {
                 grid.addChild(trap)
 
             }
-        
         }
+        self.isExausted = true
     }
 }

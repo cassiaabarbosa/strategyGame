@@ -27,71 +27,11 @@ class Grid: SKNode {
         }
     }
     
-    func showMoveOptions(character: Actor) {
-       let move: Int = character.movement
-       let tile: Tile = character.tile
-       removeHighlights()
-       self.ableTiles.append(tile)
-       // TO-DO: Colocar método na classe Grid
-       for mov in 0...move {
-           if let t = self.getTile(col: tile.coord.col + 1 * mov, row: tile.coord.row) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row + 1 * mov) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col - 1 * mov, row: tile.coord.row) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row - 1 * mov) {
-               self.ableTiles.append(t)
-           }
-       }
-       for t in self.ableTiles {
-           t.shape?.fillShader = Tile.highlightShader
-       }
-    }
-       
     func removeHighlights() {
        for t in self.ableTiles {
            t.shape?.fillShader = nil
        }
        self.ableTiles.removeAll()
-    }
-       
-    func showAttackOptions(character: Actor) {
-       let tile: Tile = character.tile
-       removeHighlights()
-       if let t = getTile(col: tile.coord.col + 1, row: tile.coord.row) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col, row: tile.coord.row + 1) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col - 1, row: tile.coord.row) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col, row: tile.coord.row - 1) {
-           self.ableTiles.append(t)
-       }
-       for t in self.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
-       }
-    }
-    
-    //essa função ainda só funciona se o ataque partir do trapper
-    func showSpecialAttackOptions(character: Actor) {
-        let tile: Tile = character.tile
-        removeHighlights()
-        for t in 0...tiles.count - 1 {
-            if (tiles[t].isOcupied == false && tiles[t].hasTrap == false) {
-                self.ableTiles.append(tiles[t])
-            }
-        }
-        
-        for t in self.ableTiles {
-            t.shape?.fillShader = Tile.highlightShader
-        }
     }
     
     func getTile(col: Int, row: Int) -> Tile? {
@@ -142,7 +82,55 @@ class Grid: SKNode {
     func getRightTile(tile: Tile) -> Tile? {
         return getTile(col: tile.coord.col + 1, row: tile.coord.row)
     }
-
+    
+    func getStraightDistance(from tile1: Tile, to tile2: Tile) -> UInt? {
+        if tile1.coord.col != tile2.coord.col && tile1.coord.row != tile2.coord.row { return nil }
+        if tile1.coord.col == tile2.coord.col {
+            return Int.Magnitude(tile1.coord.col - tile2.coord.col)
+        } else  {
+            return Int.Magnitude(tile1.coord.row - tile2.coord.row)
+        }
+    }
+    
+    func getTilesAround(tile: Tile, distance: Int) -> [Tile] {
+        var tiles = [Tile]()
+        if distance <= 0 {
+            print("getTilesAround(): returned empty array")
+            return tiles
+        }
+        for i in 0...3 {
+            var count = 0
+            var lastTile: Tile = tile
+            while count < distance {
+                switch i {
+                case 0:
+                    if let t = getUpTile(tile: lastTile) {
+                       tiles.append(t)
+                        lastTile = t
+                    }
+                case 1:
+                    if let t = getDownTile(tile: lastTile) {
+                       tiles.append(t)
+                        lastTile = t
+                    }
+                case 2:
+                    if let t = getLeftTile(tile: lastTile) {
+                       tiles.append(t)
+                        lastTile = t
+                    }
+                case 3:
+                    if let t = getRightTile(tile: lastTile) {
+                       tiles.append(t)
+                        lastTile = t
+                    }
+                default: fatalError("getTilesAround(): switch exausted")
+                }
+                count += 1
+            }
+        }
+        return tiles
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
