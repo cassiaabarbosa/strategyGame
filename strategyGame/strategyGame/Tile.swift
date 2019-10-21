@@ -8,11 +8,37 @@
 
 import SpriteKit
 
+enum TileProps {
+    case standard
+    case mountain
+    case trap
+    case hole
+}
+
 class Tile: SKNode {
     
     let id: Int
-    var isOcupied: Bool
-    var clear: Bool
+    var character: Actor?
+    var prop: TileProps = .standard
+    static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
+    static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
+    public private(set) var shape: SKShapeNode?
+    
+    public private(set) var coord: Coord
+    public private(set) var center: CGPoint
+    public private(set) var size: CGSize
+    var isOcupied: Bool {
+        if character == nil {
+            return false
+        }
+        return true
+    }
+    var hasTrap: Bool {
+        if prop == .trap {
+            return true
+        }
+        return false
+    }
     var isHighlighted: Bool {
         didSet {
             if shape == nil { return }
@@ -23,17 +49,9 @@ class Tile: SKNode {
             }
         }
     }
-    static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
-    public private(set) var shape: SKShapeNode?
-    public private(set) var coord: Coord
-    public private(set) var center: CGPoint
-    public private(set) var size: CGSize
     
     init (id: Int, row: Int, col: Int, rectSide: CGFloat, type: Character) {
         self.id = id
-        print(id)
-        self.isOcupied = false
-        self.clear = true
         self.size = CGSize(width: rectSide, height: rectSide)
         self.center = CGPoint.zero
         self.isHighlighted = false

@@ -7,6 +7,9 @@ disabled_rules:
   - leading_whitespace
   - line_length
   - trailing_whitespace
+  - explicit_type_interface
+  - identifier_name
+  - force_unwrapping
 
 
 # rule identifiers to opt in
