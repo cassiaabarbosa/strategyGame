@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class Pathfinding {
+    
+    var currentLocation: Tile?
+    var destination: Tile?
+    var grid: Grid? = GameManager.shared.grid
+    
+    func generatePath(currentTile: Tile, destinationTile: Tile) {
+    }
+    
+    func destinationRadar(destination: Tile) {
+    }
+    
+    func setWeights(weight: Int, index: Int) {
+        
+    }
+}

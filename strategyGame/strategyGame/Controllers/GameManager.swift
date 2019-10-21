@@ -55,6 +55,7 @@ class GameManager {
         players[1].size = grid.tileSize
         players[1].breadcrumbs.append(grid.tiles[12])
         grid.tiles[12].character = players[1]
+        grid.testRoundTiles(tile: grid.tiles[21])
     }
     
     private func showTilesPath() {
