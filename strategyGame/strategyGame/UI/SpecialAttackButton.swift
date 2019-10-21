@@ -16,6 +16,8 @@ class SpecialAttackButton: Button {
     }
     
     override func press() {
+        Button.unpressAll()
+        
         if self.pressed {
             GameManager.shared.mode = .move
             self.pressed = false
