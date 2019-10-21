@@ -69,7 +69,11 @@ class GameScene: SKScene {
                     return
                 }
                 if let button: Button = node as? Button {
-                    button.press()
+                    if button.pressed {
+                        button.unpress()
+                    } else {
+                        button.press()
+                    }
                 }
             }
         }

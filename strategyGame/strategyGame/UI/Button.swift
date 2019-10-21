@@ -12,6 +12,7 @@ class Button: SKSpriteNode {
         }
     }
     var label: SKLabelNode
+    static var buttonList: [Button] = []
     
     init(rect: CGRect, text: String) {
         self.label = SKLabelNode(text: text)
@@ -22,9 +23,28 @@ class Button: SKSpriteNode {
         self.label.fontColor = .black
         self.label.zPosition = 1.0
         addChild(label)
+        Button.buttonList.append(self)
+    }
+    
+    deinit {
+        for i in (0..<Button.buttonList.count) where self == Button.buttonList[i] {
+            Button.buttonList.remove(at: i)
+        }
     }
     
     func press() {}
+    
+    func unpress() {
+        self.pressed = false
+        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
+    }
+    
+    static func unpressAll() {
+        for i in (0..<Button.buttonList.count) {
+            Button.buttonList[i].pressed = false
+        }
+        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
