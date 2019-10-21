@@ -21,5 +21,29 @@ class Ranged: Actor {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func specialAttack(toTile: Tile?) {}
+    override func basicAttack(target: Actor) {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
+        guard let grid = GameManager.shared.grid else { return }
+        target.takeDamage(damage: self.damage)
+        isExausted = true
+    }
+    
+    override func showAttackOptions() {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
+        guard let grid = GameManager.shared.grid else { return }
+        grid.removeHighlights()
+        let tiles = grid.getTilesAround(tile: self.tile, distance: max(grid.gridAspect.0, grid.gridAspect.1))
+        for t in tiles {
+            grid.ableTiles.append(t)
+        }
+        for t in grid.ableTiles {
+           t.shape?.fillShader = Tile.attackHighlightShader
+        }
+    }
 }

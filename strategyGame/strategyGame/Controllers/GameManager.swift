@@ -34,7 +34,6 @@ class GameManager {
             } else {
                 if mode == .attack {
                     currentCharacter?.showAttackOptions()
-                    print(specialAttackButton?.pressed ?? false)
                 } else if mode == .move {
                     currentCharacter?.showMoveOptions()
                 } else if mode == .specialAttack {

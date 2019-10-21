@@ -25,6 +25,7 @@ class Actor: SKSpriteNode {
             tile.character = self
         }
     }
+    internal var isExausted: Bool = false
     var breadcrumbs: [Tile] = [Tile]()
     var wholeNumberValue: Float?
     var canMove: Bool = true
@@ -77,6 +78,10 @@ class Actor: SKSpriteNode {
     // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
     // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
     func basicAttack(target: Actor) {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
             if tile!.prop == .standard {
@@ -97,10 +102,10 @@ class Actor: SKSpriteNode {
         case grid.getRightTile(tile: self.tile):
             push(character: target, to: grid.getRightTile(tile: target.tile))
         default:
-            print("GameManager.atack(): switch exausted")
+            return
         }
         target.takeDamage(damage: self.damage)
-        
+        isExausted = true
     }
     
     func specialAttack(toTile: Tile, gameManager: GameManager, grid: Grid?) {}
@@ -108,20 +113,10 @@ class Actor: SKSpriteNode {
     func showMoveOptions() {
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
-        grid.ableTiles.append(tile)
-        for mov in 0...movesLeft {
-           if let t = grid.getTile(col: tile.coord.col + 1 * mov, row: tile.coord.row) {
-               grid.ableTiles.append(t)
-           }
-           if let t = grid.getTile(col: tile.coord.col, row: tile.coord.row + 1 * mov) {
-               grid.ableTiles.append(t)
-           }
-           if let t = grid.getTile(col: tile.coord.col - 1 * mov, row: tile.coord.row) {
-               grid.ableTiles.append(t)
-           }
-           if let t = grid.getTile(col: tile.coord.col, row: tile.coord.row - 1 * mov) {
-               grid.ableTiles.append(t)
-           }
+        if self.movesLeft == 0 { return }
+        let tiles = grid.getTilesAround(tile: self.tile, distance: self.movesLeft)
+        for t in tiles {
+            grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
            t.shape?.fillShader = Tile.highlightShader
@@ -129,24 +124,20 @@ class Actor: SKSpriteNode {
     }
        
     func showAttackOptions() {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
-        if let t = grid.getTile(col: tile.coord.col + 1, row: tile.coord.row) {
-           grid.ableTiles.append(t)
-        }
-        if let t = grid.getTile(col: tile.coord.col, row: tile.coord.row + 1) {
-           grid.ableTiles.append(t)
-        }
-        if let t = grid.getTile(col: tile.coord.col - 1, row: tile.coord.row) {
-           grid.ableTiles.append(t)
-        }
-        if let t = grid.getTile(col: tile.coord.col, row: tile.coord.row - 1) {
-           grid.ableTiles.append(t)
+        let tiles = grid.getTilesAround(tile: self.tile, distance: 1)
+        for t in tiles {
+            grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
            t.shape?.fillShader = Tile.attackHighlightShader
         }
-        }
+    }
     
     //essa função ainda só funciona se o ataque partir do trapper
     func showSpecialAttackOptions() {
@@ -165,5 +156,6 @@ class Actor: SKSpriteNode {
     
     func beginTurn() {
         self.movesLeft = movement
+        self.isExausted = false
     }
 }
