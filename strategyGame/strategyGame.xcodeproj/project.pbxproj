@@ -20,6 +20,7 @@
 		8C87DBD62358F7DF001FB9DF /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBD52358F7DF001FB9DF /* Background.swift */; };
 		8C87DBD82358F8D9001FB9DF /* BackgroundShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */; };
 		8CC08CC2235A02280005D0FD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC08CC1235A02280005D0FD /* Button.swift */; };
+		8CC91D3C235E2AA900A3C9C7 /* EndTurnButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */; };
 		CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB63D4B1235BA04D00E57A8D /* Element.swift */; };
 		CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */; };
 		CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CB9D6C76234E6BF7000FA87E /* GameScene.sks */; };
@@ -55,6 +56,7 @@
 		8C87DBD52358F7DF001FB9DF /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BackgroundShader.fsh; sourceTree = "<group>"; };
 		8CC08CC1235A02280005D0FD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnButton.swift; sourceTree = "<group>"; };
 		CB63D4B1235BA04D00E57A8D /* Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		CB9D6C71234E6BF7000FA87E /* strategyGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = strategyGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9D6C74234E6BF7000FA87E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				8CC08CC1235A02280005D0FD /* Button.swift */,
 				CBA49FA7235B3EFA005E9C9C /* SpecialAttackButton.swift */,
 				8C205405235A4C97004F73E3 /* AttackButton.swift */,
+				8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
 				CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */,
 				CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */,
+				8CC91D3C235E2AA900A3C9C7 /* EndTurnButton.swift in Sources */,
 				8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */,
 				CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */,
 				8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */,

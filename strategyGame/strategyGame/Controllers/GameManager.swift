@@ -33,12 +33,12 @@ class GameManager {
                 return
             } else {
                 if mode == .attack {
-                    grid?.showAttackOptions(character: self.currentCharacter!)
+                    currentCharacter?.showAttackOptions()
                     print(specialAttackButton?.pressed ?? false)
                 } else if mode == .move {
-                    grid?.showMoveOptions(character: self.currentCharacter!)
+                    currentCharacter?.showMoveOptions()
                 } else if mode == .specialAttack {
-                    grid?.showSpecialAttackOptions(character: self.currentCharacter!)
+                    currentCharacter?.showSpecialAttackOptions()
                 } else {
                     grid?.removeHighlights()
                 }
@@ -92,7 +92,20 @@ class GameManager {
             let hole = Hole(tile: grid.tiles[holePosition])
             grid.addChild(hole)
             holes.append(hole)
+    }
+    
+    func endTurn() {
         
+        // enemies move
+        // ...
+        
+        beginTurn()
+    }
+    
+    private func beginTurn() {
+        for p in players {
+            p.beginTurn()
+        }
     }
     
     func touchTile(tile: Tile) {//função que mostra qual tile foi clicado
@@ -100,11 +113,12 @@ class GameManager {
             grid?.removeHighlights()
             currentCharacter = character
             if self.mode == .attack {
-                grid?.showAttackOptions(character: currentCharacter!)
+                currentCharacter?.showAttackOptions()
             } else if (self.mode == .specialAttack) {
-                grid?.showSpecialAttackOptions(character: currentCharacter!)
+                currentCharacter?.showSpecialAttackOptions()
             } else {
-                grid?.showMoveOptions(character: currentCharacter!)
+                currentCharacter?.showMoveOptions()
+                self.mode = .move
             }
         }
         

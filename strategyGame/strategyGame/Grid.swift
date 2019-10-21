@@ -27,71 +27,11 @@ class Grid: SKNode {
         }
     }
     
-    func showMoveOptions(character: Actor) {
-       let move: Int = character.movement
-       let tile: Tile = character.tile
-       removeHighlights()
-       self.ableTiles.append(tile)
-       // TO-DO: Colocar método na classe Grid
-       for mov in 0...move {
-           if let t = self.getTile(col: tile.coord.col + 1 * mov, row: tile.coord.row) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row + 1 * mov) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col - 1 * mov, row: tile.coord.row) {
-               self.ableTiles.append(t)
-           }
-           if let t = self.getTile(col: tile.coord.col, row: tile.coord.row - 1 * mov) {
-               self.ableTiles.append(t)
-           }
-       }
-       for t in self.ableTiles {
-           t.shape?.fillShader = Tile.highlightShader
-       }
-    }
-       
     func removeHighlights() {
        for t in self.ableTiles {
            t.shape?.fillShader = nil
        }
        self.ableTiles.removeAll()
-    }
-       
-    func showAttackOptions(character: Actor) {
-       let tile: Tile = character.tile
-       removeHighlights()
-       if let t = getTile(col: tile.coord.col + 1, row: tile.coord.row) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col, row: tile.coord.row + 1) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col - 1, row: tile.coord.row) {
-           self.ableTiles.append(t)
-       }
-       if let t = getTile(col: tile.coord.col, row: tile.coord.row - 1) {
-           self.ableTiles.append(t)
-       }
-       for t in self.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
-       }
-    }
-    
-    //essa função ainda só funciona se o ataque partir do trapper
-    func showSpecialAttackOptions(character: Actor) {
-        let tile: Tile = character.tile
-        removeHighlights()
-        for t in 0...tiles.count - 1 {
-            if (tiles[t].isOcupied == false && tiles[t].hasTrap == false) {
-                self.ableTiles.append(tiles[t])
-            }
-        }
-        
-        for t in self.ableTiles {
-            t.shape?.fillShader = Tile.highlightShader
-        }
     }
     
     func getTile(col: Int, row: Int) -> Tile? {
@@ -142,7 +82,6 @@ class Grid: SKNode {
     func getRightTile(tile: Tile) -> Tile? {
         return getTile(col: tile.coord.col + 1, row: tile.coord.row)
     }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
