@@ -8,29 +8,30 @@ class GameScene: SKScene {
     var background: Background?
     var attackButton: AttackButton?
     var specialAttackButton: SpecialAttackButton?
+    var endTurnButton: EndTurnButton?
     
     var templateSceneString: String = """
 000000\
 111111\
-222222\
-333333\
+228222\
+333303\
 444444\
-555555\
+555255\
 666666\
-777777
+777077
 """
     var templateSceneString2: String = """
 00000\
 11111\
 22222\
-33333\
+33303\
 44444\
 55555\
-66666\
+61666\
 77777\
-88888\
+88388\
 99999\
-00000\
+00030\
 11111
 """
     
@@ -53,6 +54,8 @@ class GameScene: SKScene {
         self.addChild(attackButton!)
         specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
         self.addChild(specialAttackButton!)
+        endTurnButton = EndTurnButton(rect: CGRect(x: 145, y: 20, width: 150, height: 80), text: "End Turn")
+        self.addChild(endTurnButton!)
     }
     
     required init?(coder aDecoder: NSCoder) {
