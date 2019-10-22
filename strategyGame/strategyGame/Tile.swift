@@ -20,10 +20,10 @@ class Tile: SKNode {
     let id: Int
     var character: Actor?
     var prop: TileProps = .standard
+    var weight: Int = 1000
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
     public private(set) var shape: SKShapeNode?
-    
     public private(set) var coord: Coord
     public private(set) var center: CGPoint
     public private(set) var size: CGSize
@@ -35,6 +35,12 @@ class Tile: SKNode {
     }
     var hasTrap: Bool {
         if prop == .trap {
+            return true
+        }
+        return false
+    }
+    var isEmpty: Bool {
+        if !isOcupied && prop == .standard {
             return true
         }
         return false

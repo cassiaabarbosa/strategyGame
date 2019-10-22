@@ -4,7 +4,6 @@ import GameplayKit
 class GameScene: SKScene {
     
     var grid: Grid?
-    var players: [Actor]?
     var background: Background?
     var hud: HUD?
     
@@ -39,15 +38,13 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         AnimationHandler.shared.awake()
-        background = Background(view: view)
+        self.background = Background(view: view)
         addChild(background!)
-        let position: CGPoint = CGPoint(x: 0, y: 700)
-        let size: CGSize = CGSize(width: 70, height: 70)
-        self.grid = Grid(position: position, width: 6, height: 8, tileSize: size)
-        grid?.drawGrid(tileSet: templateSceneString)
+        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
         GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
         GameManager.shared.setElementsOnGrid(gameScene: self, grid: grid!)
+        GameManager.shared.awake(grid: grid!)
         hud = HUD(rect: view.frame)
         addChild(hud!)
     }
