@@ -30,7 +30,7 @@ class Grid: SKNode {
     
     func removeHighlights() {
        for t in self.ableTiles {
-           t.shape?.fillShader = nil
+           t.shader = nil
        }
        self.ableTiles.removeAll()
     }

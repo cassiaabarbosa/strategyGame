@@ -43,7 +43,7 @@ class Ranged: Actor {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
+           t.shader = Tile.attackHighlightShader
         }
     }
 }
