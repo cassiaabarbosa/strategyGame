@@ -59,7 +59,7 @@ class Pathfinding {
         weights.sort(by: { $0.weight < $1.weight })
         self.path.append(weights[0])
         for aaa in 0...self.path.count - 1 {
-            self.path[aaa].shape?.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.path[aaa].color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         }
         return weights[0]
     }
