@@ -12,7 +12,6 @@ class SpecialAttackButton: Button {
     
     override init(rect: CGRect, text: String) {
         super.init(rect: rect, text: "Special Attack")
-        self.label.fontSize = 17.5
     }
     
     override func press() {
