@@ -11,21 +11,28 @@ import SpriteKit
 
 class Trapper: Actor {
     var trapNumber: Int = 3
-    
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    var specialAttackButton: SpecialAttackButton?
+   
+    init(tile: Tile) {
+        super.init(name: "Trapper", movement: 4, damage: 1, health: 3, attackRange: 1, sprite: SKTexture(imageNamed: "00_trapper"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func specialAttack() {
-    }
-    
-    func throwTrap() {
-        if (trapNumber > 0) {
-            
+    override func specialAttack(toTile: Tile) {
+        guard let grid = GameManager.shared.grid else { return }
+        if (toTile.prop == .standard) {
+            if (trapNumber > 0) {
+                trapNumber -= 1
+                let trap = Trap(tile: grid.tiles[toTile.id])
+                grid.addChild(trap)
+
+            }
         }
+        self.isExausted = true
     }
 }

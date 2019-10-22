@@ -11,161 +11,125 @@ import SpriteKit
 
 class GameManager {
     
+    enum Mode {
+        case clear
+        case move
+        case attack
+        case specialAttack
+    }
+    
     static let shared: GameManager = GameManager()
     var enemies: [MachineControlled]?
     var players: [Actor] = [Actor]()
-    var grid: Grid?
-    var currentCharacter: Actor? {
+    var mountains: [Mountain] = [Mountain]()
+    var holes: [Hole] = [Hole]()
+    var grid: Grid! // has to be garanteed because of awake()
+    var currentCharacter: Actor?
+    var specialAttackButton: SpecialAttackButton?
+    
+    var mode: Mode {
         didSet {
-            print(self.currentCharacter?.sprite as Any)
-        }  
+            if currentCharacter == nil {
+                return
+            } else {
+                if mode == .attack {
+                    currentCharacter?.showAttackOptions()
+                } else if mode == .move {
+                    currentCharacter?.showMoveOptions()
+                } else if mode == .specialAttack {
+                    currentCharacter?.showSpecialAttackOptions()
+                } else {
+                    grid?.removeHighlights()
+                }
+            }
+        }
     }
-    enum Phase {
-        case playerMove
-        case playerAttack
-        case enemyMove
-    }
-    var turnPhase: Phase
     
     private init() {
-        let melee: Melee = Melee(name: "Melee1", movement: 2, coord: (1, 1), sprite: SKTexture(imageNamed: "OysterVolcano"), state: State.idle, damage: 1, health: 3, attackRange: 1)
-        let melee2: Melee = Melee(name: "Melee2", movement: 3, coord: (1, 1), sprite: SKTexture(imageNamed: "Melee"), state: State.idle, damage: 1, health: 3, attackRange: 1)
-        players.append(melee)
-        players.append(melee2)
-        turnPhase = .playerMove
+        mode = .clear
+    }
+    
+    func awake(grid: Grid) {
+        self.grid = grid
+        setActorsOnGrid()
+        setElementsOnGrid()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func prepareToPlay() {
-        print("Preparing...")
-    }
-    
-    func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
-        grid.addChild(players[0])
-        players[0].position = grid.tiles[21].center
-        players[0].size = grid.tileSize
-        players[0].breadcrumbs.append(grid.tiles[21])
-        grid.tiles[21].character = players[0]
+    private func setActorsOnGrid() {
+        let melee = Melee(tile: grid.randomEmptyTile())
+        grid.addChild(melee)
+        players.append(melee)
         
-        grid.addChild(players[1])
-        players[1].position = grid.tiles[12].center
-        players[1].size = grid.tileSize
-        players[1].breadcrumbs.append(grid.tiles[12])
-        grid.tiles[12].character = players[1]
-        grid.testRoundTiles(tile: grid.tiles[21])
+        let ranged = Ranged(tile: grid.randomEmptyTile())
+        grid.addChild(ranged)
+        players.append(ranged)
+    
+        let trapper = Trapper(tile: grid.randomEmptyTile())
+        grid.addChild(trapper)
+        players.append(trapper)
     }
     
-    private func showTilesPath() {
-        guard let move: Int = currentCharacter?.movement else { return }
-        guard let currentTile: Tile = currentCharacter?.breadcrumbs[0] else { return }
-        guard let grid: Grid = self.grid else { return }
-        var ableTiles: [Tile] = [Tile]()
-        if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row) {
-            ableTiles.append(tile)
-        }
-        // TODO: Colocar método na classe Grid
-        for mov in 0...move {
-            if let tile = grid.getTile(col: currentTile.coord.col + 1 * mov, row: currentTile.coord.row) {
-                ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row + 1 * mov) {
-                ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col - 1 * mov, row: currentTile.coord.row) {
-                ableTiles.append(tile)
-            }
-            if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row - 1 * mov) {
-                ableTiles.append(tile)
-            }
-        }
+    private func setElementsOnGrid() {
+        let mountain = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain)
+        mountains.append(mountain)
         
-        currentCharacter?.breadcrumbs = ableTiles
-        for tiles in ableTiles {
-            tiles.shape?.fillShader = Tile.highlightShader
+        let hole = Hole(tile: grid!.randomEmptyTile())
+        grid.addChild(hole)
+        holes.append(hole)
+    }
+    
+    func endTurn() {
+        
+        // enemies move
+        // ...
+        
+        beginTurn()
+    }
+    
+    private func beginTurn() {
+        for p in players {
+            p.beginTurn()
         }
     }
     
-    func removeHighlights() {
-        guard let grid = self.grid else {
-            print("removeHighlights(): grid is nil")
-            return
-        }
-        for til in grid.tiles {
-            til.shape?.fillShader = nil
-        }
-    }
-    
-    private func showAttackOptions() {
-        guard let currentTile: Tile = currentCharacter?.breadcrumbs[0] else { return }
-        guard let grid: Grid = self.grid else { return }
-        var ableTiles: [Tile] = [Tile]()
-        if let tile = grid.getTile(col: currentTile.coord.col + 1, row: currentTile.coord.row) {
-            ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row + 1) {
-            ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col - 1, row: currentTile.coord.row) {
-            ableTiles.append(tile)
-        }
-        if let tile = grid.getTile(col: currentTile.coord.col, row: currentTile.coord.row - 1) {
-            ableTiles.append(tile)
-        }
-        currentCharacter?.breadcrumbs = ableTiles
-        for tiles in ableTiles {
-            tiles.shape?.fillShader = Tile.attackHighlightShader
-        }
-    }
-    
-    // TODO: implementar método move() na classe Actor
-    // validateMovement() deve ser feito pela classe Grid
-    // após validada, chamar método move() do actor
-    private func makeValidMove(character: Actor,tile: Tile) {
-        if !(currentCharacter?.breadcrumbs.contains(tile) ?? false) { return }
-        removeHighlights()
-        character.tile.character = nil
-        currentCharacter?.position = tile.center
-        currentCharacter?.breadcrumbs.removeAll()
-        currentCharacter?.breadcrumbs.append(tile)
-        tile.character = currentCharacter
-        currentCharacter = nil
-    }
-
-    func touchTile(tile: Tile) {
+    func touchTile(tile: Tile) {//função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
-            removeHighlights()
+            grid?.removeHighlights()
             currentCharacter = character
-            print(self.turnPhase)
-            if self.turnPhase == .playerAttack {
-                showAttackOptions()
+            if self.mode == .attack {
+                currentCharacter?.showAttackOptions()
+            } else if (self.mode == .specialAttack) {
+                currentCharacter?.showSpecialAttackOptions()
             } else {
-                showTilesPath()
+                currentCharacter?.showMoveOptions()
+                self.mode = .move
             }
         }
         
-        guard let char = self.currentCharacter else {
+        guard let currentCharacter = self.currentCharacter else {
             if let char = tile.character {
                 selectCharacter(character: char)
             }
             return
         }
         
-        if tile.character == char {
+        if tile.character == currentCharacter {
             return
-        } else if tile.character == nil {
-            makeValidMove(character: char, tile: tile)
-        } else if turnPhase == .playerAttack {
-            attack(attacker: char, attacked: tile.character!)
+        } else if tile.character == nil && self.mode == .move {
+            currentCharacter.makeValidMove(tile: tile)
+        } else if self.mode == .attack && tile.character != nil {
+            currentCharacter.basicAttack(target: tile.character!)
+        } else if self.mode == .specialAttack && tile.character == nil {
+            currentCharacter.specialAttack(toTile: tile)
         } else {
+            grid?.removeHighlights()
+            self.currentCharacter = nil
             return
         }
-    }
-    
-    func attack(attacker: Actor, attacked: Actor) {
-        // lógica de empurrar vai aqui
-        attacked.health -= attacker.damage
     }
 }

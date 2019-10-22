@@ -39,6 +39,12 @@ class Tile: SKNode {
         }
         return false
     }
+    var isEmpty: Bool {
+        if !isOcupied && prop == .standard {
+            return true
+        }
+        return false
+    }
     var isHighlighted: Bool {
         didSet {
             if shape == nil { return }
@@ -67,7 +73,7 @@ class Tile: SKNode {
         self.shape = SKShapeNode(rect: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         self.shape!.strokeColor = .black
         self.shape!.lineWidth = 2
-        self.shape!.fillColor = UIColor(hue: CGFloat(char.wholeNumberValue ?? 0) / 10, saturation: 0.6, brightness: 0.8, alpha: 1)
+        self.shape!.fillColor = UIColor(hue: CGFloat(char.wholeNumberValue ?? 0) / 10, saturation: 0.4, brightness: 0.8, alpha: 1)
         addChild(shape!)
     }
     

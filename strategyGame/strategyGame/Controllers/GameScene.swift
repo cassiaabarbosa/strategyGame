@@ -4,32 +4,33 @@ import GameplayKit
 class GameScene: SKScene {
     
     var grid: Grid?
-    var players: [Actor]?
     var background: Background?
-    var attackButton: Button?
+    var attackButton: AttackButton?
+    var specialAttackButton: SpecialAttackButton?
+    var endTurnButton: EndTurnButton?
     
     var templateSceneString: String = """
 000000\
 111111\
-222222\
-333333\
+228222\
+333303\
 444444\
-555555\
+555255\
 666666\
-777777
+777077
 """
     var templateSceneString2: String = """
 00000\
 11111\
 22222\
-33333\
+33303\
 44444\
 55555\
-66666\
+61666\
 77777\
-88888\
+88388\
 99999\
-00000\
+00030\
 11111
 """
     
@@ -38,18 +39,18 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        background = Background(view: view)
+        AnimationHandler.shared.awake()
+        self.background = Background(view: view)
         addChild(background!)
-        let position: CGPoint = CGPoint(x: 0, y: 700)
-        let size: CGSize = CGSize(width: 70, height: 70)
-        self.grid = Grid(position: position, width: 6, height: 8, tileSize: size)
-        grid?.drawGrid(tileSet: templateSceneString)
+        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
-        GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
-        GameManager.shared.grid = grid
-        
-        attackButton = Button(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
-        self.addChild(attackButton!)
+        GameManager.shared.awake(grid: grid!)
+        self.attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
+        addChild(attackButton!)
+        self.specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
+        addChild(specialAttackButton!)
+        self.endTurnButton = EndTurnButton(rect: CGRect(x: 145, y: 20, width: 150, height: 80), text: "End Turn")
+        addChild(endTurnButton!)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,7 +67,11 @@ class GameScene: SKScene {
                     return
                 }
                 if let button: Button = node as? Button {
-                    button.press()
+                    if button.pressed {
+                        button.unpress()
+                    } else {
+                        button.press()
+                    }
                 }
             }
         }

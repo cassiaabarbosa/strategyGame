@@ -11,22 +11,15 @@ import SpriteKit
 
 class Melee: Actor {
     
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    init(tile: Tile) {
+        super.init(name: "Melee", movement: 2, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "00_melee"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.meleeFrames, timePerFrame: 1/TimeInterval(5))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func specialAttack() {
-        
-    }
-    
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//            let location = touch.location(in: self)
-//            self.position = CGPoint(x: location.x, y: location.y)
-//        }
-//    }
+//    override func specialAttack(toTile: Tile?) {}
 }

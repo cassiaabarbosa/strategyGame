@@ -11,15 +11,39 @@ import SpriteKit
 
 class Ranged: Actor {
     
-    override init(name: String, movement: Int, coord: (Int, Int), sprite: SKTexture, state: State, damage: Int, health: Int, attackRange: Int) {
-        super.init(name: name, movement: movement, coord: coord, sprite: sprite, state: state, damage: damage, health: health, attackRange: attackRange)
+    init(tile: Tile) {
+    super.init(name: "Ranged", movement: 3, damage: 1, health: 3, attackRange: 3, sprite: SKTexture(imageNamed: "00_ranged"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.rangedFrames, timePerFrame: 1/TimeInterval(5))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func specialAttack() {
-        
+    override func basicAttack(target: Actor) {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
+        guard GameManager.shared.grid != nil else { return }
+        target.takeDamage(damage: self.damage)
+        isExausted = true
+    }
+    
+    override func showAttackOptions() {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
+        guard let grid = GameManager.shared.grid else { return }
+        grid.removeHighlights()
+        let tiles = grid.getTilesAround(tile: self.tile, distance: max(grid.gridAspect.0, grid.gridAspect.1))
+        for t in tiles {
+            grid.ableTiles.append(t)
+        }
+        for t in grid.ableTiles {
+           t.shape?.fillShader = Tile.attackHighlightShader
+        }
     }
 }
