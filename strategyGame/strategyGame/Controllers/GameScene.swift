@@ -50,7 +50,6 @@ class GameScene: SKScene {
         GameManager.shared.setElementsOnGrid(gameScene: self, grid: grid!)
         hud = HUD(rect: view.frame)
         addChild(hud!)
-        print(view.frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
