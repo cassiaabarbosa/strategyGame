@@ -13,9 +13,8 @@ class Trapper: Actor {
     var trapNumber: Int = 3
     var specialAttackButton: SpecialAttackButton?
    
-
     init(tile: Tile) {
-        super.init(name: "Trapper", movement: 4, damage: 1, health: 3, attackRange: 1, sprite: SKTexture(imageNamed: "00_traper"), tile: tile)
+        super.init(name: "Trapper", movement: 4, damage: 1, health: 3, attackRange: 1, sprite: SKTexture(imageNamed: "00_trapper"), tile: tile)
         let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
         self.run(SKAction.repeatForever(animation))
     }

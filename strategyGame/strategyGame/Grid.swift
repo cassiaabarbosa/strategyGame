@@ -8,14 +8,15 @@ class Grid: SKNode {
     let tileSize: CGSize
     var tileSet: String?
     
-    init(position: CGPoint, width: Int, height: Int, tileSize: CGSize) {
+    init(position: CGPoint, width: Int, height: Int, tileSize: CGSize, tileSet: String) {
         self.gridAspect = (width, height)
         self.tileSize = tileSize
         super.init()
         self.position = position
+        drawGrid(tileSet: tileSet)
     }
     
-    func drawGrid(tileSet: String) {
+    private func drawGrid(tileSet: String) {
         let charArray: [String.Element] = Array(tileSet)
         let amout: Int = gridAspect.0 * gridAspect.1
         for id in 0..<amout {
@@ -87,7 +88,7 @@ class Grid: SKNode {
         if tile1.coord.col != tile2.coord.col && tile1.coord.row != tile2.coord.row { return nil }
         if tile1.coord.col == tile2.coord.col {
             return Int.Magnitude(tile1.coord.col - tile2.coord.col)
-        } else  {
+        } else {
             return Int.Magnitude(tile1.coord.row - tile2.coord.row)
         }
     }
@@ -95,7 +96,7 @@ class Grid: SKNode {
     func getTilesAround(tile: Tile, distance: Int) -> [Tile] {
         var tiles = [Tile]()
         if distance <= 0 {
-            print("getTilesAround(): returned empty array")
+            print("Grid::getTilesAround(): returned empty array")
             return tiles
         }
         for i in 0...3 {
@@ -123,12 +124,22 @@ class Grid: SKNode {
                        tiles.append(t)
                         lastTile = t
                     }
-                default: fatalError("getTilesAround(): switch exausted")
+                default: fatalError("Grid::getTilesAround(): switch exausted")
                 }
                 count += 1
             }
         }
         return tiles
+    }
+    
+    func randomEmptyTile() -> Tile {
+        if tiles.count == 0 { fatalError("Grid::randomEmptyTile(): Tiles array is empty") }
+        
+        var randTile: Tile
+        repeat {
+            randTile = self.tiles[Int.random(in: 0..<self.tiles.count)]
+        } while !randTile.isEmpty
+        return randTile
     }
     
     required init?(coder aDecoder: NSCoder) {
