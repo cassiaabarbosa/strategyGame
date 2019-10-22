@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F698235A398F00E242FA /* Pathfinding.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				8C205407235A4CE9004F73E3 /* UI */,
 				CB9D6C81234E6BFA000FA87E /* Assets.xcassets */,
 				CB9D6C86234E6BFA000FA87E /* Info.plist */,
+				4F15F697235A396000E242FA /* Pathfinding */,
 				8C87DBDA2359DFED001FB9DF /* Shaders */,
 				8C87DBD92359DFCA001FB9DF /* Storyboards */,
 			);
@@ -322,6 +325,7 @@
 				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
 				8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */,
 				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,
+				4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */,
 				8CC08CC2235A02280005D0FD /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

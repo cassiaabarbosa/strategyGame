@@ -67,6 +67,26 @@ class Grid: SKNode {
     func getRightTile(col: Int, row: Int) -> Tile? {
         return getTile(col: col + 1, row: row)
     }
+
+    func getUpLeftTile(col: Int, row: Int) -> Tile? {
+        guard let upTile: Tile = getTile(col: col, row: row - 1) else { return nil }
+        return getTile(col: upTile.coord.col - 1, row: upTile.coord.row)
+    }
+    
+    func getUpRightTile(col: Int, row: Int) -> Tile? {
+        guard let upTile: Tile = getTile(col: col, row: row - 1) else { return nil }
+        return getTile(col: upTile.coord.col + 1, row: upTile.coord.row)
+    }
+    
+    func getDownLeftTile(col: Int, row: Int) -> Tile? {
+        guard let downTile: Tile = getTile(col: col, row: row + 1) else { return nil }
+        return getTile(col: downTile.coord.col - 1, row: downTile.coord.row)
+    }
+    
+    func getDownRightTile(col: Int, row: Int) -> Tile? {
+        guard let downTile: Tile = getTile(col: col, row: row + 1) else { return nil }
+        return getTile(col: downTile.coord.col + 1, row: downTile.coord.row)
+    }
     
     func getUpTile(tile: Tile) -> Tile? {
         return getTile(col: tile.coord.col, row: tile.coord.row - 1)
@@ -141,7 +161,7 @@ class Grid: SKNode {
         } while !randTile.isEmpty
         return randTile
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
