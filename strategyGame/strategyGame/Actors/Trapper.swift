@@ -25,7 +25,7 @@ class Trapper: Actor {
     
     override func specialAttack(toTile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
-        if (toTile.prop == .standard) {
+        if (toTile.isEmpty) {
             if (trapNumber > 0) {
                 trapNumber -= 1
                 let trap = Trap(tile: grid.tiles[toTile.id])

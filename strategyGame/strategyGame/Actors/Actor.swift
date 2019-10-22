@@ -84,7 +84,7 @@ class Actor: SKSpriteNode {
         }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
-            if tile!.prop == .standard {
+            if tile!.isEmpty {
                 character.move(tile: tile!)
             } else {
                 print("\(character.name!) took push damage")

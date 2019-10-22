@@ -8,18 +8,11 @@
 
 import SpriteKit
 
-enum TileProps {
-    case standard
-    case mountain
-    case trap
-    case hole
-}
-
 class Tile: SKSpriteNode {
     
     let id: Int
     var character: Actor?
-    var prop: TileProps = .standard
+    var prop: Element?
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
     public private(set) var coord: Coord
@@ -30,13 +23,13 @@ class Tile: SKSpriteNode {
         return true
     }
     var hasTrap: Bool {
-        if prop == .trap {
+        if let _ = prop as? Trap {
             return true
         }
         return false
     }
     var isEmpty: Bool {
-        if !isOcupied && prop == .standard {
+        if prop == nil {
             return true
         }
         return false
