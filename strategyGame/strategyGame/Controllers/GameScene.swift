@@ -4,7 +4,6 @@ import GameplayKit
 class GameScene: SKScene {
     
     var grid: Grid?
-    var players: [Actor]?
     var background: Background?
     var attackButton: AttackButton?
     var specialAttackButton: SpecialAttackButton?
@@ -41,21 +40,17 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         AnimationHandler.shared.awake()
-        background = Background(view: view)
+        self.background = Background(view: view)
         addChild(background!)
-        let position: CGPoint = CGPoint(x: 0, y: 700)
-        let size: CGSize = CGSize(width: 70, height: 70)
-        self.grid = Grid(position: position, width: 6, height: 8, tileSize: size)
-        grid?.drawGrid(tileSet: templateSceneString)
+        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
-        GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
-        GameManager.shared.setElementsOnGrid(gameScene: self, grid: grid!)
-        attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
-        self.addChild(attackButton!)
-        specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
-        self.addChild(specialAttackButton!)
-        endTurnButton = EndTurnButton(rect: CGRect(x: 145, y: 20, width: 150, height: 80), text: "End Turn")
-        self.addChild(endTurnButton!)
+        GameManager.shared.awake(grid: grid!)
+        self.attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
+        addChild(attackButton!)
+        self.specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
+        addChild(specialAttackButton!)
+        self.endTurnButton = EndTurnButton(rect: CGRect(x: 145, y: 20, width: 150, height: 80), text: "End Turn")
+        addChild(endTurnButton!)
     }
     
     required init?(coder aDecoder: NSCoder) {

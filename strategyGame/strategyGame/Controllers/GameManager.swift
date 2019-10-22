@@ -23,7 +23,7 @@ class GameManager {
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
-    var grid: Grid?
+    var grid: Grid! // has to be garanteed because of awake()
     var currentCharacter: Actor?
     var specialAttackButton: SpecialAttackButton?
     
@@ -49,48 +49,38 @@ class GameManager {
         mode = .clear
     }
     
+    func awake(grid: Grid) {
+        self.grid = grid
+        setActorsOnGrid()
+        setElementsOnGrid()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setActorsOnGrid(gameScene: GameScene, grid: Grid) {
-        self.grid = grid
-        let meleePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        let melee = Melee(tile: grid.tiles[meleePosition])
+    private func setActorsOnGrid() {
+        let melee = Melee(tile: grid.randomEmptyTile())
         grid.addChild(melee)
         players.append(melee)
         
-        let rangedPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        while (rangedPosition == meleePosition) {
-            let rangedPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        }
-        let ranged = Ranged(tile: grid.tiles[rangedPosition])
+        let ranged = Ranged(tile: grid.randomEmptyTile())
         grid.addChild(ranged)
         players.append(ranged)
     
-        let trapperPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        while (trapperPosition == meleePosition || trapperPosition == rangedPosition) {
-            let trapperPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        }
-        let trapper = Trapper(tile: grid.tiles[trapperPosition])
+        let trapper = Trapper(tile: grid.randomEmptyTile())
         grid.addChild(trapper)
         players.append(trapper)
     }
     
-    func setElementsOnGrid(gameScene: GameScene, grid: Grid) {
-        self.grid = grid
-        let mountainPosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-        let mountain = Mountain(tile: grid.tiles[mountainPosition])
+    private func setElementsOnGrid() {
+        let mountain = Mountain(tile: grid!.randomEmptyTile())
         grid.addChild(mountain)
         mountains.append(mountain)
-            
-        let holePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-            while (holePosition == mountainPosition) {
-                let holePosition: Int = Int(arc4random_uniform(UInt32(Int(grid.tiles.count - 1))))
-            }
-            let hole = Hole(tile: grid.tiles[holePosition])
-            grid.addChild(hole)
-            holes.append(hole)
+        
+        let hole = Hole(tile: grid!.randomEmptyTile())
+        grid.addChild(hole)
+        holes.append(hole)
     }
     
     func endTurn() {
@@ -135,7 +125,7 @@ class GameManager {
         } else if self.mode == .attack && tile.character != nil {
             currentCharacter.basicAttack(target: tile.character!)
         } else if self.mode == .specialAttack && tile.character == nil {
-            currentCharacter.specialAttack(toTile: tile, gameManager: self, grid: grid)
+            currentCharacter.specialAttack(toTile: tile)
         } else {
             grid?.removeHighlights()
             self.currentCharacter = nil

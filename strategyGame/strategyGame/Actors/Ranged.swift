@@ -26,7 +26,7 @@ class Ranged: Actor {
             print("\(self.name!) is exausted")
             return
         }
-        guard let grid = GameManager.shared.grid else { return }
+        guard GameManager.shared.grid != nil else { return }
         target.takeDamage(damage: self.damage)
         isExausted = true
     }

@@ -108,7 +108,7 @@ class Actor: SKSpriteNode {
         isExausted = true
     }
     
-    func specialAttack(toTile: Tile, gameManager: GameManager, grid: Grid?) {}
+    func specialAttack(toTile: Tile) {}
     
     func showMoveOptions() {
         guard let grid = GameManager.shared.grid else { return }
