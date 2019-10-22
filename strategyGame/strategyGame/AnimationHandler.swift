@@ -9,8 +9,6 @@ class AnimationHandler {
     var rangedFrames: [SKTexture]
     var trapperAtlas: SKTextureAtlas
     var trapperFrames: [SKTexture]
-    var trapAtlas: SKTextureAtlas
-    var trapFrames: [SKTexture]
     var holeAtlas: SKTextureAtlas
     var holeFrames: [SKTexture]
     var mountainAtlas: SKTextureAtlas
@@ -23,8 +21,6 @@ class AnimationHandler {
         self.rangedFrames = AnimationHandler.loadFrames(atlas: rangedAtlas)
         self.trapperAtlas = SKTextureAtlas(named: "TrapperAtlas")
         self.trapperFrames = AnimationHandler.loadFrames(atlas: trapperAtlas)
-        self.trapAtlas = SKTextureAtlas(named: "trapAtlas")
-        self.trapFrames = AnimationHandler.loadFrames(atlas: trapAtlas)
         self.holeAtlas = SKTextureAtlas(named: "HoleAtlas")
         self.holeFrames = AnimationHandler.loadFrames(atlas: holeAtlas)
         self.mountainAtlas = SKTextureAtlas(named: "MountainAtlas")

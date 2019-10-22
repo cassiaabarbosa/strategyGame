@@ -42,8 +42,6 @@ class GameScene: SKScene {
         addChild(background!)
         self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
-        GameManager.shared.setActorsOnGrid(gameScene: self, grid: grid!)
-        GameManager.shared.setElementsOnGrid(gameScene: self, grid: grid!)
         GameManager.shared.awake(grid: grid!)
         hud = HUD(rect: view.frame)
         addChild(hud!)
