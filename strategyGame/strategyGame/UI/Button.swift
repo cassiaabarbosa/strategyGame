@@ -35,16 +35,14 @@ class Button: SKSpriteNode {
     
     func press() {}
     
-    func unpress() {
-        self.pressed = false
-        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
-    }
+    func unpress() {}
     
     static func unpressAll() {
         for i in (0..<Button.buttonList.count) {
             Button.buttonList[i].pressed = false
         }
-        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
+        GameManager.shared.OnAttackButtonUnpress()
+        GameManager.shared.OnSpecialAttackButtonUnpress()
     }
     
     required init?(coder aDecoder: NSCoder) {

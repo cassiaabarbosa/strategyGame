@@ -24,23 +24,33 @@ class GameManager {
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
     var grid: Grid! // has to be garanteed because of awake()
-    var currentCharacter: Actor?
+    var currentCharacter: Actor? {
+        didSet {
+            if oldValue == nil { return }
+            oldValue!.shader = nil
+        }
+        willSet {
+            if newValue == nil { return }
+            if newValue!.isExausted {
+                newValue!.shader = SKShader(fileNamed: "ExaustedShader.fsh")
+            } else {
+                newValue!.shader = SKShader(fileNamed: "HighlightShader.fsh")
+            }
+        }
+    }
     var specialAttackButton: SpecialAttackButton?
     
-    var mode: Mode {
+    private var mode: Mode {
         didSet {
-            if currentCharacter == nil {
-                return
-            } else {
-                if mode == .attack {
-                    currentCharacter?.showAttackOptions()
-                } else if mode == .move {
-                    currentCharacter?.showMoveOptions()
-                } else if mode == .specialAttack {
-                    currentCharacter?.showSpecialAttackOptions()
-                } else {
-                    grid?.removeHighlights()
-                }
+            switch (mode) {
+            case .attack:
+                currentCharacter?.showAttackOptions()
+            case .move:
+                currentCharacter?.showMoveOptions()
+            case .specialAttack:
+                currentCharacter?.showSpecialAttackOptions()
+            default:
+                grid?.removeHighlights()
             }
         }
     }
@@ -101,13 +111,18 @@ class GameManager {
         func selectCharacter(character: Actor) {
             grid?.removeHighlights()
             currentCharacter = character
-            if self.mode == .attack {
-                currentCharacter?.showAttackOptions()
-            } else if (self.mode == .specialAttack) {
-                currentCharacter?.showSpecialAttackOptions()
-            } else {
-                currentCharacter?.showMoveOptions()
-                self.mode = .move
+            switch (self.mode) {
+            case .attack:
+                if !currentCharacter!.isExausted {
+                    currentCharacter!.showAttackOptions()
+                }
+            case .specialAttack:
+                currentCharacter!.showSpecialAttackOptions()
+            default:
+                if character.movesLeft != 0 {
+                    currentCharacter!.showMoveOptions()
+                    self.mode = .move
+                }
             }
         }
         
@@ -119,17 +134,50 @@ class GameManager {
         }
         
         if tile.character == currentCharacter {
+            grid?.removeHighlights()
+            self.currentCharacter = nil
             return
         } else if tile.character == nil && self.mode == .move {
             currentCharacter.makeValidMove(tile: tile)
         } else if self.mode == .attack && tile.character != nil {
             currentCharacter.basicAttack(target: tile.character!)
+            grid?.removeHighlights()
+            self.currentCharacter = nil
         } else if self.mode == .specialAttack && tile.character == nil {
             currentCharacter.specialAttack(toTile: tile)
+            self.currentCharacter = nil
+            grid?.removeHighlights()
         } else {
             grid?.removeHighlights()
             self.currentCharacter = nil
-            return
         }
+    }
+    
+    func OnAttackButtonPress() {
+        self.mode = .attack
+    }
+    
+    func OnAttackButtonUnpress() {
+        if self.currentCharacter == nil {
+            self.mode = .clear
+        } else {
+            self.mode = .move
+        }
+    }
+    
+    func OnSpecialAttackButtonPress() {
+        self.mode = .specialAttack
+    }
+    
+    func OnSpecialAttackButtonUnpress() {
+        if self.currentCharacter == nil {
+            self.mode = .clear
+        } else {
+            self.mode = .move
+        }
+    }
+    
+    func OnEndTurnButtonPress() {
+        endTurn()
     }
 }

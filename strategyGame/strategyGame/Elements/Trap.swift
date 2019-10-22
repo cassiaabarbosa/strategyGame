@@ -12,9 +12,7 @@ import SpriteKit
 class Trap: Element {
     
     init(tile: Tile) {
-        super.init(name: "Trap", sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile, qntdTurnStunned: 1)
-//        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
-//        self.run(SKAction.repeatForever(animation))
+        super.init(name: "Trap", sprite: SKTexture(imageNamed: "trap"), tile: tile, qntdTurnStunned: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {

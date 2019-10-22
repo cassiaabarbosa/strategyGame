@@ -30,7 +30,7 @@ class Grid: SKNode {
     
     func removeHighlights() {
        for t in self.ableTiles {
-           t.shape?.fillShader = nil
+           t.shader = nil
        }
        self.ableTiles.removeAll()
     }
@@ -181,7 +181,7 @@ class Grid: SKNode {
         
         return neighborsAreas
     }
-
+    
     func getStraightDistance(from tile1: Tile, to tile2: Tile) -> UInt? {
         if tile1.coord.col != tile2.coord.col && tile1.coord.row != tile2.coord.row { return nil }
         if tile1.coord.col == tile2.coord.col {

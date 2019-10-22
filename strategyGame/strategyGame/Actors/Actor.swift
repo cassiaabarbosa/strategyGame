@@ -40,7 +40,7 @@ class Actor: SKSpriteNode {
         self.tile = tile
         super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
         self.name = name
-        self.position = tile.center
+        self.position = tile.position
         self.size = tile.size
         self.isUserInteractionEnabled = false
         tile.character = self
@@ -59,7 +59,7 @@ class Actor: SKSpriteNode {
     
     func move(tile: Tile) {
         self.tile.character = nil
-        self.position = tile.center
+        self.position = tile.position
         self.tile = tile
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
@@ -84,7 +84,7 @@ class Actor: SKSpriteNode {
         }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
-            if tile!.prop == .standard {
+            if tile!.isEmpty {
                 character.move(tile: tile!)
             } else {
                 print("\(character.name!) took push damage")
@@ -119,7 +119,7 @@ class Actor: SKSpriteNode {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.highlightShader
+           t.shader = Tile.highlightShader
         }
     }
        
@@ -135,7 +135,7 @@ class Actor: SKSpriteNode {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
+           t.shader = Tile.attackHighlightShader
         }
     }
     
@@ -150,7 +150,7 @@ class Actor: SKSpriteNode {
         }
         
         for t in grid.ableTiles {
-            t.shape?.fillShader = Tile.highlightShader
+            t.shader = Tile.highlightShader
         }
     }
     

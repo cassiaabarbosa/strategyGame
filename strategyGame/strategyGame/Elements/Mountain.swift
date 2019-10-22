@@ -12,9 +12,9 @@ import SpriteKit
 class Mountain: Element {
     
     init(tile: Tile) {
-        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "x"), tile: tile, qntdTurnStunned: 1)
-        //        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
-        //        self.run(SKAction.repeatForever(animation))
+        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "00_mountain"), tile: tile, qntdTurnStunned: 1)
+        let animation = SKAction.animate(with: AnimationHandler.shared.mountainFrames, timePerFrame: 1/TimeInterval(5))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
