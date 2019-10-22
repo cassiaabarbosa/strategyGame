@@ -118,7 +118,6 @@ class Grid: SKNode {
     
     func getNeightborsTiles(tile: Tile) -> [Tile?] {
         var neighbors: [Tile?] = [Tile?]()
-        var neighborsTiles: [Tile] = [Tile]()
         
         neighbors.append(getUpTile(tile: tile))
         neighbors.append(getUpRightTile(tile: tile))
@@ -129,51 +128,22 @@ class Grid: SKNode {
         neighbors.append(getLeftTile(tile: tile))
         neighbors.append(getUpLeftTile(tile: tile))
         neighbors.removeAll(where: { $0 == nil })
-//        for index in 0...neighbors.count {
-//            if let aux = neighbors[index] {
-//                neighborsTiles.append(aux)
-//            }
-//        }
-        
         return neighbors
     }
     
-//    func getNeightborsTiles(tile: Tile, range: Int) -> [[Tile]] {
-//        var neighbors: [[Tile?]] = [[Tile?]]()
-//        for area in 0...range {
-//            for index in 0...
-//        }
-//    }
+    func getMovableTiles(currenTile: Tile) -> [Tile] {
+        var movableTiles: [Tile?] = [Tile?]()
+        movableTiles.append(getUpTile(tile: currenTile))
+        movableTiles.append(getRightTile(tile: currenTile))
+        movableTiles.append(getDownTile(tile: currenTile))
+        movableTiles.append(getLeftTile(tile: currenTile))
+        movableTiles.removeAll(where: { $0 == nil })
+        guard let movableNeighbors: [Tile] = movableTiles as? [Tile] else { fatalError("404 - Movable Tiles not founded") }
+        
+        return movableNeighbors
+    }
     
-//    func testRoundTiles(tile: Tile, range: Int) {
-//        var neighbors: [[Tile?]] = [[Tile?]]()
-//        var selectedTiles: [Tile?] = [Tile?]()
-//        selectedTiles.append(getUpTile(tile: tile))
-//        for area in 0...range {
-//            for index in 0...range {
-//                if let aux: Tile = tile {
-//                    var tileC: Tile? = getUpTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getUpRightTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getRightTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getDownRightTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getDownTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getDownLeftTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getLeftTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                    tileC = getUpLeftTile(tile: aux)
-//                    neighbors[area].append(tile)
-//                }
-//            }
-//        }
-//    }
-    
-    func testRoundTiles(tile: Tile) {
+    func getAllNeightborsTilesInGroup(tile: Tile) -> [[Tile?]] {
         var neighbors: [Tile?] = [Tile?]()
         var neighborsAreas: [[Tile?]] = [[Tile?]]()
         var neighborsTiles: [Tile?] = [Tile?]()
@@ -187,7 +157,7 @@ class Grid: SKNode {
             for index in 0...neighbors.count - 1 {
                 let aux = getNeightborsTiles(tile: neighbors[index]!)
                 for adjacentTile in 0...aux.count - 1 {
-                    if aux[adjacentTile] != tile && !allTiles.contains(aux[adjacentTile]) {
+                    if !allTiles.contains(aux[adjacentTile]) {
                         allTiles.append(aux[adjacentTile])
                         neighborsTiles.append(aux[adjacentTile])
                     }
@@ -200,12 +170,8 @@ class Grid: SKNode {
             neighbors = neighborsTiles
             neighborsTiles.removeAll()
         }
-
-        for index in 0...neighborsAreas.count - 1 {
-            for jindex in 0...neighborsAreas[index].count - 1 {
-                let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: {_ in neighborsAreas[index][jindex]?.shape?.strokeColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)})
-            }
-        }
+        
+        return neighborsAreas
     }
 
     required init?(coder aDecoder: NSCoder) {
