@@ -23,7 +23,7 @@ class Trapper: Actor {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func specialAttack(toTile: Tile, gameManager: GameManager, grid: Grid?) {
+    override func specialAttack(toTile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
         if (toTile.prop == .standard) {
             if (trapNumber > 0) {

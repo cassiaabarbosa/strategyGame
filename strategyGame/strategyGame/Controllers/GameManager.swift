@@ -125,7 +125,7 @@ class GameManager {
         } else if self.mode == .attack && tile.character != nil {
             currentCharacter.basicAttack(target: tile.character!)
         } else if self.mode == .specialAttack && tile.character == nil {
-            currentCharacter.specialAttack(toTile: tile, gameManager: self, grid: grid)
+            currentCharacter.specialAttack(toTile: tile)
         } else {
             grid?.removeHighlights()
             self.currentCharacter = nil
