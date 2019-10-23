@@ -28,10 +28,6 @@ class Pathfinding {
             self.path.append(ct)
         }
         
-        for index in 0...self.path.count - 1 {
-            self.path[index].shape?.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//            print(path[index].id)
-        }
         return self.path
     }
     
@@ -65,12 +61,12 @@ class Pathfinding {
                     }
                 
                 if tilesMatrix[group][tile].character != nil {
-                    if let _: MachineControlled = tilesMatrix[group][tile].character as? MachineControlled {
+                    if let _: Enemy = tilesMatrix[group][tile].character as? Enemy {
                         tilesMatrix[group][tile].weight = 100
                     } else {
                         tilesMatrix[group][tile].weight = 0
                     }
-                } else if tilesMatrix[group][tile].prop == .objective {
+                } else if let _ = tilesMatrix[group][tile].prop as? Objective {
                     tilesMatrix[group][tile].weight = 0
                 }
             }
@@ -89,10 +85,6 @@ class Pathfinding {
         }
         
         weights.sort(by: { $0.weight < $1.weight })
-        self.path.append(weights[0])
-        for aaa in 0...self.path.count - 1 {
-            self.path[aaa].color = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        }
         return weights[0]
     }
     

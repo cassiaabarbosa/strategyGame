@@ -10,4 +10,6 @@ import Foundation
 import SpriteKit
 
 protocol MachineControlled {
+
+    func findAGoal()
 }
