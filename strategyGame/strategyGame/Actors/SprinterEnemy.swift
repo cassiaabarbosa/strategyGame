@@ -11,7 +11,6 @@ import SpriteKit
 
 class SprinterEmeny: Enemy {
 
-    
     init(tile: Tile) {
         super.init(name: "Sprinter", movement: 4, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "00_clam"), tile: tile)
         let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))

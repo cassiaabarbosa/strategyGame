@@ -206,6 +206,12 @@ class GameManager {
                 }
                 enemy.breadcrumbs.removeAll()
             }
+            
+            if enemy.canAttack {
+                guard let objectiveTile: Tile = enemy.objective else { fatalError("404 - ObjectiveTile not founded in GameManger code!") }
+                guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
+                _ = enemy.basicAttack(target: player)
+            }
         }))
         
     }
