@@ -25,10 +25,11 @@ class Trapper: Actor {
     
     override func specialAttack(toTile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
-        if (toTile.isEmpty) {
+        if (toTile.isSpecialHighlighted == true) {
             if (trapNumber > 0) {
                 trapNumber -= 1
                 let trap = Trap(tile: grid.tiles[toTile.id])
+                toTile.prop = trap
                 grid.addChild(trap)
 
             }

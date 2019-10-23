@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
-		4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F698235A398F00E242FA /* Pathfinding.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
@@ -44,11 +43,11 @@
 		CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BA235637E5004F7AC1 /* Ranged.swift */; };
 		CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BE235639B3004F7AC1 /* GameManager.swift */; };
 		CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1C0235649E3004F7AC1 /* Trapper.swift */; };
+		CBFB83762360C3E600650E48 /* SpecialAttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
-		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		CBDBB1BA235637E5004F7AC1 /* Ranged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranged.swift; sourceTree = "<group>"; };
 		CBDBB1BE235639B3004F7AC1 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		CBDBB1C0235649E3004F7AC1 /* Trapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapper.swift; sourceTree = "<group>"; };
+		CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = SpecialAttackHighlightShader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +136,7 @@
 				8C871C29235F824200353C40 /* ExaustedShader.fsh */,
 				8C87DBD12358D392001FB9DF /* HighlightShader.fsh */,
 				8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */,
+				CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */,
 				8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */,
 			);
 			path = Shaders;
@@ -278,6 +279,7 @@
 				CB9D6C80234E6BF7000FA87E /* Main.storyboard in Resources */,
 				8C87DBD22358D392001FB9DF /* HighlightShader.fsh in Resources */,
 				CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */,
+				CBFB83762360C3E600650E48 /* SpecialAttackHighlightShader.fsh in Resources */,
 				CB9D6C82234E6BFA000FA87E /* Assets.xcassets in Resources */,
 				CB9D6C85234E6BFA000FA87E /* LaunchScreen.storyboard in Resources */,
 				CB9D6C79234E6BF7000FA87E /* Actions.sks in Resources */,

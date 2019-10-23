@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+
 class Tile: SKSpriteNode {
     
     let id: Int
@@ -16,6 +17,7 @@ class Tile: SKSpriteNode {
     var weight: Int = 1000
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
+    static let specialAttackHighlightShader: SKShader = SKShader(fileNamed: "SpecialAttackHighlightShader.fsh")
     public private(set) var coord: Coord
     var isOcupied: Bool {
         if character == nil {
@@ -45,9 +47,20 @@ class Tile: SKSpriteNode {
         }
     }
     
+    var isSpecialHighlighted: Bool {
+        didSet {
+            if self.isSpecialHighlighted {
+                self.shader = Tile.specialAttackHighlightShader
+            } else {
+                self.shader = nil
+            }
+        }
+    }
+    
     init (id: Int, row: Int, col: Int, rectSide: CGFloat, type: Character) {
         self.id = id
         self.isHighlighted = false
+        self.isSpecialHighlighted = false
         self.coord = Coord(row, col)
         super.init(texture: SKTexture(imageNamed: "Tile"), color: .white, size: CGSize(width: rectSide, height: rectSide))
         self.position = CGPoint(x: CGFloat(col) * rectSide + rectSide/2, y: CGFloat(row) * -rectSide + rectSide/2)

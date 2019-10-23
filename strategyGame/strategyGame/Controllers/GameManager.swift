@@ -66,6 +66,7 @@ class GameManager {
         self.grid = grid
         setActorsOnGrid()
         setElementsOnGrid()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -236,7 +236,7 @@ class Grid: SKNode {
         var randTile: Tile
         repeat {
             randTile = self.tiles[Int.random(in: 0..<self.tiles.count)]
-        } while !randTile.isEmpty
+        } while !randTile.isEmpty || randTile.isOcupied
         return randTile
     }
 
