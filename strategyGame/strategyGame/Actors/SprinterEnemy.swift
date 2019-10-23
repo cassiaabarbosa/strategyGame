@@ -9,10 +9,13 @@
 import Foundation
 import SpriteKit
 
-class SprinterEmeny: Actor {
+class SprinterEmeny: Enemy {
+
     
     init(tile: Tile) {
-        super.init(name: "Sprinter", movement: 4, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
+        super.init(name: "Sprinter", movement: 4, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "00_clam"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
+//        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {
