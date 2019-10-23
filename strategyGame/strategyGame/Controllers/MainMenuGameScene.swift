@@ -6,8 +6,6 @@
 //  Copyright © 2019 teamStrategyGame. All rights reserved.
 //
 
-let buttonScale = 1.6
-
 import SpriteKit
 
 class MainMenuGameScene: SKScene {
