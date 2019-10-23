@@ -40,7 +40,7 @@ class Actor: SKSpriteNode {
         self.tile = tile
         super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
         self.name = name
-        self.position = tile.center
+        self.position = tile.position
         self.size = tile.size
         self.isUserInteractionEnabled = false
         tile.character = self
@@ -59,39 +59,39 @@ class Actor: SKSpriteNode {
     
     func move(tile: Tile) {
         self.tile.character = nil
-        self.position = tile.center
+        self.position = tile.position
         self.tile = tile
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func makeValidMove(tile: Tile?) {
-        guard let grid = GameManager.shared.grid else { return }
-        if tile == nil { return }
-        if !(grid.ableTiles.contains(tile!)) { return }
+    func makeValidMove(tile: Tile?) -> Bool {
+        guard let grid = GameManager.shared.grid else { return false }
+        if tile == nil { return false }
+        if !(grid.ableTiles.contains(tile!)) { return false }
         grid.removeHighlights()
         self.move(tile: tile!)
-        GameManager.shared.currentCharacter = nil
+        return true
     }
     
     // TO-DO:
     // esse método está aqui por conveniência.
     // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
     // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
-    func basicAttack(target: Actor) {
+    func basicAttack(target: Actor) -> Bool {
         if self.isExausted {
             print("\(self.name!) is exausted")
-            return
+            return false
         }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
-            if tile!.prop == .standard {
+            if tile!.isEmpty {
                 character.move(tile: tile!)
             } else {
                 print("\(character.name!) took push damage")
                 character.takeDamage(damage: 1)
             }
         }
-        guard let grid = GameManager.shared.grid else { return }
+        guard let grid = GameManager.shared.grid else { return false }
         switch target.tile {
         case grid.getUpTile(tile: self.tile):
             push(character: target, to: grid.getUpTile(tile: target.tile))
@@ -102,10 +102,11 @@ class Actor: SKSpriteNode {
         case grid.getRightTile(tile: self.tile):
             push(character: target, to: grid.getRightTile(tile: target.tile))
         default:
-            return
+            return false
         }
         target.takeDamage(damage: self.damage)
         isExausted = true
+        return true
     }
     
     func specialAttack(toTile: Tile) {}
@@ -119,7 +120,7 @@ class Actor: SKSpriteNode {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.highlightShader
+           t.shader = Tile.highlightShader
         }
     }
        
@@ -135,7 +136,7 @@ class Actor: SKSpriteNode {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
+           t.shader = Tile.attackHighlightShader
         }
     }
     
@@ -150,7 +151,7 @@ class Actor: SKSpriteNode {
         }
         
         for t in grid.ableTiles {
-            t.shape?.fillShader = Tile.highlightShader
+            t.shader = Tile.highlightShader
         }
     }
     

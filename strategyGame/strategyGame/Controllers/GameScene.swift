@@ -5,9 +5,7 @@ class GameScene: SKScene {
     
     var grid: Grid?
     var background: Background?
-    var attackButton: AttackButton?
-    var specialAttackButton: SpecialAttackButton?
-    var endTurnButton: EndTurnButton?
+    var hud: HUD?
     
     var templateSceneString: String = """
 000000\
@@ -45,12 +43,8 @@ class GameScene: SKScene {
         self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
         GameManager.shared.awake(grid: grid!)
-        self.attackButton = AttackButton(rect: CGRect(x: 40, y: 100, width: 120, height: 80), text: "Attack")
-        addChild(attackButton!)
-        self.specialAttackButton = SpecialAttackButton(rect: CGRect(x: 250, y: 100, width: 120, height: 80), text: "Special")
-        addChild(specialAttackButton!)
-        self.endTurnButton = EndTurnButton(rect: CGRect(x: 145, y: 20, width: 150, height: 80), text: "End Turn")
-        addChild(endTurnButton!)
+        hud = HUD(rect: view.frame)
+        addChild(hud!)
     }
     
     required init?(coder aDecoder: NSCoder) {

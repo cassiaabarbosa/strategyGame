@@ -12,9 +12,9 @@ import SpriteKit
 class Hole: Element {
     
     init(tile: Tile) {
-        super.init(name: "Hole", sprite: SKTexture(imageNamed: "infoIcon"), tile: tile, qntdTurnStunned: 1)
-        //        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
-        //        self.run(SKAction.repeatForever(animation))
+        super.init(name: "Hole", sprite: SKTexture(imageNamed: "00_hole"), tile: tile, qntdTurnStunned: 1)
+            let animation = SKAction.animate(with: AnimationHandler.shared.holeFrames, timePerFrame: 1/TimeInterval(12))
+            self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {

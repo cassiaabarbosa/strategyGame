@@ -13,7 +13,7 @@ class Ranged: Actor {
     
     init(tile: Tile) {
     super.init(name: "Ranged", movement: 3, damage: 1, health: 3, attackRange: 3, sprite: SKTexture(imageNamed: "00_ranged"), tile: tile)
-        let animation = SKAction.animate(with: AnimationHandler.shared.rangedFrames, timePerFrame: 1/TimeInterval(5))
+        let animation = SKAction.animate(with: AnimationHandler.shared.rangedFrames, timePerFrame: 1/TimeInterval(6))
         self.run(SKAction.repeatForever(animation))
     }
     
@@ -21,14 +21,15 @@ class Ranged: Actor {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func basicAttack(target: Actor) {
+    override func basicAttack(target: Actor) -> Bool {
         if self.isExausted {
             print("\(self.name!) is exausted")
-            return
+            return false
         }
-        guard GameManager.shared.grid != nil else { return }
+        guard GameManager.shared.grid != nil else { return false }
         target.takeDamage(damage: self.damage)
         isExausted = true
+        return true
     }
     
     override func showAttackOptions() {
@@ -43,7 +44,7 @@ class Ranged: Actor {
             grid.ableTiles.append(t)
         }
         for t in grid.ableTiles {
-           t.shape?.fillShader = Tile.attackHighlightShader
+           t.shader = Tile.attackHighlightShader
         }
     }
 }

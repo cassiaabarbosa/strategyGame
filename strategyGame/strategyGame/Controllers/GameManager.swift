@@ -24,23 +24,36 @@ class GameManager {
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
     var grid: Grid! // has to be garanteed because of awake()
-    var currentCharacter: Actor?
+    var currentCharacter: Actor? {
+        didSet {
+            if oldValue == nil { return }
+            oldValue!.shader = nil
+        }
+        willSet {
+            if newValue == nil { return }
+            if newValue!.isExausted {
+                newValue!.shader = exaustedShader
+            } else {
+                newValue!.shader = highlightShader
+            }
+        }
+    }
     var specialAttackButton: SpecialAttackButton?
     
-    var mode: Mode {
+    let exaustedShader = SKShader(fileNamed: "ExaustedShader.fsh")
+    let highlightShader = SKShader(fileNamed: "HighlightShader.fsh")
+    
+    private var mode: Mode {
         didSet {
-            if currentCharacter == nil {
-                return
-            } else {
-                if mode == .attack {
-                    currentCharacter?.showAttackOptions()
-                } else if mode == .move {
-                    currentCharacter?.showMoveOptions()
-                } else if mode == .specialAttack {
-                    currentCharacter?.showSpecialAttackOptions()
-                } else {
-                    grid?.removeHighlights()
-                }
+            switch (mode) {
+            case .attack:
+                currentCharacter?.showAttackOptions()
+            case .move:
+                currentCharacter?.showMoveOptions()
+            case .specialAttack:
+                currentCharacter?.showSpecialAttackOptions()
+            default:
+                grid?.removeHighlights()
             }
         }
     }
@@ -99,20 +112,24 @@ class GameManager {
         for p in players {
             p.beginTurn()
         }
+        if currentCharacter != nil {
+            currentCharacter!.shader = self.highlightShader
+            currentCharacter!.showMoveOptions()
+        }
     }
     
     func touchTile(tile: Tile) {//função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
+            Button.unpressAll()
             grid?.removeHighlights()
             currentCharacter = character
-            if self.mode == .attack {
-                currentCharacter?.showAttackOptions()
-            } else if (self.mode == .specialAttack) {
-                currentCharacter?.showSpecialAttackOptions()
-            } else {
-                currentCharacter?.showMoveOptions()
-                self.mode = .move
-            }
+            self.mode = .move
+        }
+        
+        func deselectCharacter() {
+            Button.unpressAll()
+            grid?.removeHighlights()
+            self.currentCharacter = nil
         }
         
         guard let currentCharacter = self.currentCharacter else {
@@ -123,17 +140,53 @@ class GameManager {
         }
         
         if tile.character == currentCharacter {
-            return
+            deselectCharacter()
         } else if tile.character == nil && self.mode == .move {
-            currentCharacter.makeValidMove(tile: tile)
+            if !currentCharacter.makeValidMove(tile: tile) {
+                deselectCharacter()
+            }
         } else if self.mode == .attack && tile.character != nil {
-            currentCharacter.basicAttack(target: tile.character!)
+            if currentCharacter.basicAttack(target: tile.character!) {
+                deselectCharacter()
+            } else {
+                selectCharacter(character: tile.character!)
+            }
         } else if self.mode == .specialAttack && tile.character == nil {
             currentCharacter.specialAttack(toTile: tile)
-        } else {
-            grid?.removeHighlights()
             self.currentCharacter = nil
-            return
+            grid?.removeHighlights()
+        } else if tile.character != nil {
+            selectCharacter(character: tile.character!)
+        } else {
+            deselectCharacter()
         }
+    }
+    
+    func OnAttackButtonPress() {
+        self.mode = .attack
+    }
+    
+    func OnAttackButtonUnpress() {
+        if self.currentCharacter == nil {
+            self.mode = .clear
+        } else {
+            self.mode = .move
+        }
+    }
+    
+    func OnSpecialAttackButtonPress() {
+        self.mode = .specialAttack
+    }
+    
+    func OnSpecialAttackButtonUnpress() {
+        if self.currentCharacter == nil {
+            self.mode = .clear
+        } else {
+            self.mode = .move
+        }
+    }
+    
+    func OnEndTurnButtonPress() {
+        endTurn()
     }
 }
