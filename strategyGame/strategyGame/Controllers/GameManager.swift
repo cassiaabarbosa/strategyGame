@@ -19,7 +19,7 @@ class GameManager {
     }
     
     static let shared: GameManager = GameManager()
-    var enemies: [MachineControlled]?
+    var enemies: [Enemy] = [Enemy]()
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
@@ -85,6 +85,10 @@ class GameManager {
         let trapper = Trapper(tile: grid.randomEmptyTile())
         grid.addChild(trapper)
         players.append(trapper)
+        
+        let sprinter = SprinterEmeny(tile: grid.randomEmptyTile())
+        grid.addChild(sprinter)
+        enemies.append(sprinter)
     }
     
     private func setElementsOnGrid() {
@@ -101,7 +105,7 @@ class GameManager {
         
         // enemies move
         // ...
-        
+        enemyTurn()
         beginTurn()
     }
     
@@ -185,5 +189,24 @@ class GameManager {
     
     func OnEndTurnButtonPress() {
         endTurn()
+    }
+    
+    func enemyTurn() {
+        for enemie in 0...self.enemies.count - 1 {
+            enemieMove(enemy: self.enemies[enemie])
+        }
+    }
+    
+    func enemieMove(enemy: Enemy) {
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: ({_ in
+            enemy.findAGoal()
+            if !enemy.breadcrumbs.isEmpty {
+                for tile in 0...enemy.breadcrumbs.count - 1 {
+                    enemy.move(tile: enemy.breadcrumbs[tile])
+                }
+                enemy.breadcrumbs.removeAll()
+            }
+        }))
+        
     }
 }

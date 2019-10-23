@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B42360DD4E00568AD3 /* Objective.swift */; };
+		4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B62360E53F00568AD3 /* Enemy.swift */; };
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
@@ -47,13 +49,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F0664B42360DD4E00568AD3 /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
+		4F0664B62360E53F00568AD3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C205408235A54B5004F73E3 /* AnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHandler.swift; sourceTree = "<group>"; };
 		8C871C29235F824200353C40 /* ExaustedShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ExaustedShader.fsh; sourceTree = "<group>"; };
-		8C871C2D235FA63600353C40 /* Pathfinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		8C87DBCA2358CBB1001FB9DF /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -99,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F15F6A6235F898700E242FA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				4F15F698235A398F00E242FA /* Pathfinding.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		8C205407235A4CE9004F73E3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,12 +157,13 @@
 		8C87DBDB2359E030001FB9DF /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				4F0664B62360E53F00568AD3 /* Enemy.swift */,
 				8C87DBCA2358CBB1001FB9DF /* Actor.swift */,
 				CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */,
+				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
+				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
 				CBDBB1C0235649E3004F7AC1 /* Trapper.swift */,
 				CBDBB1BA235637E5004F7AC1 /* Ranged.swift */,
-				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
-				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -171,6 +184,7 @@
 			children = (
 				CB63D4B1235BA04D00E57A8D /* Element.swift */,
 				CBA49FA3235B373A005E9C9C /* Trap.swift */,
+				4F0664B42360DD4E00568AD3 /* Objective.swift */,
 				CBA1A11D235BAF1100B61536 /* Hole.swift */,
 				CBA1A11B235BAEFC00B61536 /* Mountain.swift */,
 			);
@@ -182,6 +196,7 @@
 			children = (
 				CB9D6C73234E6BF7000FA87E /* strategyGame */,
 				CB9D6C72234E6BF7000FA87E /* Products */,
+				4F15F6A6235F898700E242FA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,7 +336,9 @@
 				8C87DBD02358CBD9001FB9DF /* Grid.swift in Sources */,
 				CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */,
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
+				4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
+				4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */,
 				CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */,
 				CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */,
 				79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */,
