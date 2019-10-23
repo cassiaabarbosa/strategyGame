@@ -37,6 +37,18 @@ class Tile: SKSpriteNode {
         }
         return false
     }
+    var isWalkable: Bool {
+        if let _ = prop as? Mountain {
+            return false
+        }
+        if let _ = prop as? Hole {
+            return false
+        }
+        if self.isOcupied {
+            return false
+        }
+        return true
+    }
     var isHighlighted: Bool {
         didSet {
             if self.isHighlighted {
