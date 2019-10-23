@@ -70,7 +70,6 @@ class Actor: SKSpriteNode {
         if !(grid.ableTiles.contains(tile!)) { return false }
         grid.removeHighlights()
         self.move(tile: tile!)
-        GameManager.shared.currentCharacter = nil
         return true
     }
     
@@ -78,10 +77,10 @@ class Actor: SKSpriteNode {
     // esse método está aqui por conveniência.
     // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
     // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
-    func basicAttack(target: Actor) {
+    func basicAttack(target: Actor) -> Bool {
         if self.isExausted {
             print("\(self.name!) is exausted")
-            return
+            return false
         }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
@@ -92,7 +91,7 @@ class Actor: SKSpriteNode {
                 character.takeDamage(damage: 1)
             }
         }
-        guard let grid = GameManager.shared.grid else { return }
+        guard let grid = GameManager.shared.grid else { return false }
         switch target.tile {
         case grid.getUpTile(tile: self.tile):
             push(character: target, to: grid.getUpTile(tile: target.tile))
@@ -103,10 +102,11 @@ class Actor: SKSpriteNode {
         case grid.getRightTile(tile: self.tile):
             push(character: target, to: grid.getRightTile(tile: target.tile))
         default:
-            return
+            return false
         }
         target.takeDamage(damage: self.damage)
         isExausted = true
+        return true
     }
     
     func specialAttack(toTile: Tile) {}
