@@ -9,6 +9,5 @@
 import Foundation
 import SpriteKit
 
-class MachineControlled {
-    
+protocol MachineControlled {
 }

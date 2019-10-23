@@ -13,6 +13,7 @@ enum TileProps {
     case mountain
     case trap
     case hole
+    case objective
 }
 
 class Tile: SKNode {

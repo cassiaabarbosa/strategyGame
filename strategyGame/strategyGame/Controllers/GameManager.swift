@@ -19,7 +19,7 @@ class GameManager {
     }
     
     static let shared: GameManager = GameManager()
-    var enemies: [MachineControlled]?
+    var enemies: [Actor] = [Actor]()
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
@@ -71,6 +71,10 @@ class GameManager {
         let trapper = Trapper(tile: grid.randomEmptyTile())
         grid.addChild(trapper)
         players.append(trapper)
+        
+        let sprinter = SprinterEmeny(tile: grid.randomEmptyTile())
+        grid.addChild(sprinter)
+        enemies.append(sprinter)
     }
     
     private func setElementsOnGrid() {

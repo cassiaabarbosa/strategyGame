@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F698235A398F00E242FA /* Pathfinding.swift */; };
+		4F15F6AC235F8AA900E242FA /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F6AB235F8AA900E242FA /* Pathfinding.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
+		4F15F6AB235F8AA900E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
@@ -93,6 +94,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F15F6A6235F898700E242FA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				4F15F698235A398F00E242FA /* Pathfinding.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		4F15F6A7235F8A2900E242FA /* Pathfinding */ = {
+			isa = PBXGroup;
+			children = (
+				4F15F6AB235F8AA900E242FA /* Pathfinding.swift */,
+			);
+			name = Pathfinding;
+			path = strategyGame/Pathfinding;
+			sourceTree = SOURCE_ROOT;
+		};
 		8C205407235A4CE9004F73E3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,10 +148,10 @@
 			children = (
 				8C87DBCA2358CBB1001FB9DF /* Actor.swift */,
 				CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */,
+				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
+				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
 				CBDBB1C0235649E3004F7AC1 /* Trapper.swift */,
 				CBDBB1BA235637E5004F7AC1 /* Ranged.swift */,
-				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
-				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -165,6 +183,7 @@
 			children = (
 				CB9D6C73234E6BF7000FA87E /* strategyGame */,
 				CB9D6C72234E6BF7000FA87E /* Products */,
+				4F15F6A6235F898700E242FA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,7 +211,7 @@
 				8C205407235A4CE9004F73E3 /* UI */,
 				CB9D6C81234E6BFA000FA87E /* Assets.xcassets */,
 				CB9D6C86234E6BFA000FA87E /* Info.plist */,
-				4F15F697235A396000E242FA /* Pathfinding */,
+				4F15F6A7235F8A2900E242FA /* Pathfinding */,
 				8C87DBDA2359DFED001FB9DF /* Shaders */,
 				8C87DBD92359DFCA001FB9DF /* Storyboards */,
 			);
@@ -321,7 +340,7 @@
 				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
 				8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */,
 				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,
-				4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */,
+				4F15F6AC235F8AA900E242FA /* Pathfinding.swift in Sources */,
 				8CC08CC2235A02280005D0FD /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

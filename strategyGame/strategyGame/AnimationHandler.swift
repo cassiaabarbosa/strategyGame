@@ -9,6 +9,8 @@ class AnimationHandler {
     var rangedFrames: [SKTexture]
     var trapperAtlas: SKTextureAtlas
     var trapperFrames: [SKTexture]
+    var clamAtlas: SKTextureAtlas
+    var clamFrames: [SKTexture]
     
     private init() {
         self.meleeAtlas = SKTextureAtlas(named: "MeleeAtlas")
@@ -17,6 +19,9 @@ class AnimationHandler {
         self.rangedFrames = AnimationHandler.loadFrames(atlas: rangedAtlas)
         self.trapperAtlas = SKTextureAtlas(named: "TrapperAtlas")
         self.trapperFrames = AnimationHandler.loadFrames(atlas: trapperAtlas)
+        self.clamAtlas = SKTextureAtlas(named: "ClamAtlas")
+        self.clamFrames = AnimationHandler.loadFrames(atlas: clamAtlas)
+        
     }
     
     func awake() {}
