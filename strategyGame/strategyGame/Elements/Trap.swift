@@ -13,6 +13,7 @@ class Trap: Element {
     
     init(tile: Tile) {
         super.init(name: "Trap", sprite: SKTexture(imageNamed: "trap"), tile: tile, qntdTurnStunned: 1)
+        self.scale(to: CGSize(width: 55, height: 55))
     }
     
     required init?(coder aDecoder: NSCoder) {
