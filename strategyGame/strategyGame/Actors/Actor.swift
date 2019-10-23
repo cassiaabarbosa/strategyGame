@@ -27,6 +27,7 @@ class Actor: SKSpriteNode {
     }
     internal var isExausted: Bool = false
     var breadcrumbs: [Tile] = [Tile]()
+    private var stunned: Int = 0
     var wholeNumberValue: Float?
     var canMove: Bool = true
     
@@ -86,9 +87,16 @@ class Actor: SKSpriteNode {
             if tile == nil { return }
             if tile!.isEmpty {
                 character.move(tile: tile!)
-            } else {
-                print("\(character.name!) took push damage")
+            } else if let _ = tile!.prop as? Hole  {
+                character.removeFromParent()
+            } else if let _ = tile!.prop as? Mountain {
                 character.takeDamage(damage: 1)
+            } else if let trap = tile!.prop as? Trap {
+                character.stun(turns: 2)
+                character.move(tile: tile!)
+                trap.removeFromParent()
+            }else {
+                print("prop didn't conform to any Element")
             }
         }
         guard let grid = GameManager.shared.grid else { return false }
@@ -140,23 +148,37 @@ class Actor: SKSpriteNode {
         }
     }
     
-    //essa função ainda só funciona se o ataque partir do trapper
     func showSpecialAttackOptions() {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
-        for t in 0...grid.tiles.count - 1 {
-            if (grid.tiles[t].isOcupied == false && grid.tiles[t].hasTrap == false) {
-                grid.ableTiles.append(grid.tiles[t])
+        let tiles = grid.getTilesAround(tile: self.tile, distance: 1)
+        for t in tiles {
+            if t.isEmpty && !t.isOcupied {
+                grid.ableTiles.append(t)
             }
         }
-        
         for t in grid.ableTiles {
-            t.shader = Tile.highlightShader
+            t.isSpecialHighlighted = true
         }
     }
     
+    func stun(turns: Int) {
+        movesLeft = 0
+        isExausted = true
+        self.stunned = turns
+    }
+    
     func beginTurn() {
-        self.movesLeft = movement
-        self.isExausted = false
+        if stunned > 0 {
+            stun(turns: self.stunned)
+            self.stunned -= 1
+        } else {
+            self.movesLeft = movement
+            self.isExausted = false
+        }
     }
 }

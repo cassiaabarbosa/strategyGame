@@ -9,6 +9,7 @@
 import Foundation
 import SpriteKit
 
-class MachineControlled {
-    
+protocol MachineControlled {
+
+    func findAGoal()
 }
