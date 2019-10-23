@@ -126,6 +126,11 @@ class GameManager {
             }
         }
         
+        func deselectCharacter() {
+            grid?.removeHighlights()
+            self.currentCharacter = nil
+        }
+        
         guard let currentCharacter = self.currentCharacter else {
             if let char = tile.character {
                 selectCharacter(character: char)
@@ -134,11 +139,11 @@ class GameManager {
         }
         
         if tile.character == currentCharacter {
-            grid?.removeHighlights()
-            self.currentCharacter = nil
-            return
+            deselectCharacter()
         } else if tile.character == nil && self.mode == .move {
-            currentCharacter.makeValidMove(tile: tile)
+            if !currentCharacter.makeValidMove(tile: tile) {
+                deselectCharacter()
+            }
         } else if self.mode == .attack && tile.character != nil {
             currentCharacter.basicAttack(target: tile.character!)
             grid?.removeHighlights()
@@ -147,9 +152,10 @@ class GameManager {
             currentCharacter.specialAttack(toTile: tile)
             self.currentCharacter = nil
             grid?.removeHighlights()
+        } else if tile.character != nil {
+            selectCharacter(character: tile.character!)
         } else {
-            grid?.removeHighlights()
-            self.currentCharacter = nil
+            deselectCharacter()
         }
     }
     

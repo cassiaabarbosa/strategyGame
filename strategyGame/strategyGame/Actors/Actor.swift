@@ -64,13 +64,14 @@ class Actor: SKSpriteNode {
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func makeValidMove(tile: Tile?) {
-        guard let grid = GameManager.shared.grid else { return }
-        if tile == nil { return }
-        if !(grid.ableTiles.contains(tile!)) { return }
+    func makeValidMove(tile: Tile?) -> Bool {
+        guard let grid = GameManager.shared.grid else { return false }
+        if tile == nil { return false }
+        if !(grid.ableTiles.contains(tile!)) { return false }
         grid.removeHighlights()
         self.move(tile: tile!)
         GameManager.shared.currentCharacter = nil
+        return true
     }
     
     // TO-DO:
