@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
         
         if let view: SKView = self.view as? SKView {
             // Load the SKScene from 'GameScene.sks'
-            let scene: SKScene = GameScene(size: view.bounds.size)
+            let scene: SKScene = MainMenuGameScene(size: view.bounds.size)
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
                 
@@ -46,5 +46,23 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func loadGameScene() {
+        if let view: SKView = self.view as? SKView {
+            // Load the SKScene from 'GameScene.sks'
+            let scene: SKScene = GameScene(size: view.bounds.size)
+                // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFill
+                
+                // Present the scene
+            view.presentScene(scene)
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = false
+            view.showsNodeCount = false
+        } else {
+            fatalError("No SKView for viewController")
+        }
     }
 }
