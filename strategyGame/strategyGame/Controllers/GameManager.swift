@@ -119,19 +119,6 @@ class GameManager {
             Button.unpressAll()
             grid?.removeHighlights()
             currentCharacter = character
-//            switch (self.mode) {
-//            case .attack:
-//                if !currentCharacter!.isExausted {
-//                    currentCharacter!.showAttackOptions()
-//                }
-//            case .specialAttack:
-//                currentCharacter!.showSpecialAttackOptions()
-//            default:
-//                if character.movesLeft != 0 {
-//                    currentCharacter!.showMoveOptions()
-//                    self.mode = .move
-//                }
-//            }
             self.mode = .move
         }
         
