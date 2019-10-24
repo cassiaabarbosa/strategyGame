@@ -12,6 +12,8 @@
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
 		79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */; };
 		79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D82360EC8B00095A54 /* PlayButton.swift */; };
+		79F8F4E12362119F00095A54 /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4DF2362119F00095A54 /* Pathfinding.swift */; };
+		79F8F4E82362213900095A54 /* HealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4E72362213900095A54 /* HealthBar.swift */; };
 		8C1CAC9323621BED007B7A6A /* terceiraTrilha.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C1CAC8623621BED007B7A6A /* terceiraTrilha.mp3 */; };
 		8C1CAC9423621BED007B7A6A /* glassBreak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C1CAC8723621BED007B7A6A /* glassBreak.mp3 */; };
 		8C1CAC9523621BED007B7A6A /* glassBreaking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C1CAC8823621BED007B7A6A /* glassBreaking.mp3 */; };
@@ -72,6 +74,8 @@
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
 		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		79F8F4DF2362119F00095A54 /* Pathfinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
+		79F8F4E72362213900095A54 /* HealthBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthBar.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C1CAC8623621BED007B7A6A /* terceiraTrilha.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = terceiraTrilha.mp3; sourceTree = "<group>"; };
 		8C1CAC8723621BED007B7A6A /* glassBreak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = glassBreak.mp3; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */,
 				79C5E662235F6E0C00C42DA9 /* HUD.swift */,
 				79F8F4D82360EC8B00095A54 /* PlayButton.swift */,
+				79F8F4E72362213900095A54 /* HealthBar.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */,
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
 				4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */,
+				79F8F4E82362213900095A54 /* HealthBar.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
 				4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */,
 				8C1CACA123621C4B007B7A6A /* Pathfinding.swift in Sources */,

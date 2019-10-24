@@ -96,12 +96,24 @@ class GameManager {
         let sprinter = SprinterEmeny(tile: grid.randomEmptyTile())
         grid.addChild(sprinter)
         enemies.append(sprinter)
+        
+//        let heavy = HeavyEnemy(tile: grid.randomEmptyTile())
+//        grid.addChild(heavy)
+//        enemies.append(heavy)
     }
     
     private func setElementsOnGrid() {
         let mountain = Mountain(tile: grid!.randomEmptyTile())
         grid.addChild(mountain)
         mountains.append(mountain)
+        
+        let mountain1 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain1)
+        mountains.append(mountain1)
+        
+        let mountain2 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain2)
+        mountains.append(mountain2)
         
         let hole = Hole(tile: grid!.randomEmptyTile())
         grid.addChild(hole)
@@ -136,6 +148,7 @@ class GameManager {
     func touchTile(tile: Tile) { //função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
             Button.unpressAll()
+            Button.showAll()
             grid?.removeHighlights()
             currentCharacter = character
             self.mode = .move
@@ -143,6 +156,7 @@ class GameManager {
         
         func deselectCharacter() {
             Button.unpressAll()
+            Button.hideAll()
             grid?.removeHighlights()
             self.currentCharacter = nil
         }
@@ -223,6 +237,12 @@ class GameManager {
                     enemy.move(tile: enemy.breadcrumbs[tile])
                 }
                 enemy.breadcrumbs.removeAll()
+            }
+            
+            if !enemy.isExausted {
+                guard let objectiveTile: Tile = enemy.objective else { fatalError("404 - ObjectiveTile not founded in GameManger code!") }
+                guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
+                _ = enemy.basicAttack(target: player)
             }
             self.beginTurn()
         }))

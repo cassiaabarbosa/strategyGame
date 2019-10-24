@@ -10,6 +10,7 @@ import SpriteKit
 
 class HUD: SKShapeNode {
     var upperScrnArea: SKShapeNode
+    var gridScreenArea: SKShapeNode
     var lowerScrnArea: SKShapeNode
     var endTurnBtn: EndTurnButton
     var attackBtn: AttackButton
@@ -17,6 +18,7 @@ class HUD: SKShapeNode {
     
     init(rect: CGRect) {
         upperScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 770), size: CGSize(width: 414, height: 140)))
+        gridScreenArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 210), size: CGSize(width: 414, height: 560)))
         lowerScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 414, height: 210)))
         endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 107*buttonScale, height: 39*buttonScale), text: "End Turn")
         attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack")
@@ -25,12 +27,15 @@ class HUD: SKShapeNode {
         self.position = CGPoint(x: rect.minX, y: rect.minY)
         self.path = CGPath(rect: rect, transform: nil)
         upperScrnArea.strokeColor = .clear
+        gridScreenArea.strokeColor = .clear
         lowerScrnArea.strokeColor = .clear
         self.addChild(upperScrnArea)
+        self.addChild(gridScreenArea)
         self.addChild(lowerScrnArea)
         self.lowerScrnArea.addChild(endTurnBtn)
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
+        Button.hideAll()
     }
     
     required init?(coder aDecoder: NSCoder) {
