@@ -15,7 +15,7 @@ class Trapper: Actor {
    
     init(tile: Tile) {
         super.init(name: "Trapper", movement: 4, damage: 1, health: 3, attackRange: 1, sprite: SKTexture(imageNamed: "00_trapper"), tile: tile)
-        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(5))
+        let animation = SKAction.animate(with: AnimationHandler.shared.trapperFrames, timePerFrame: 1/TimeInterval(6))
         self.run(SKAction.repeatForever(animation))
     }
     
@@ -25,10 +25,11 @@ class Trapper: Actor {
     
     override func specialAttack(toTile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
-        if (toTile.prop == .standard) {
+        if (toTile.isSpecialHighlighted == true) {
             if (trapNumber > 0) {
                 trapNumber -= 1
                 let trap = Trap(tile: grid.tiles[toTile.id])
+                toTile.prop = trap
                 grid.addChild(trap)
 
             }

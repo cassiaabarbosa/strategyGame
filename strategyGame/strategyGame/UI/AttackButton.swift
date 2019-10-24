@@ -9,13 +9,13 @@ class AttackButton: Button {
     override func press() {
         Button.unpressAll()
         
-        if self.pressed {
-            GameManager.shared.mode = .move
-            self.pressed = false
-        } else {
-            GameManager.shared.mode = .attack
-            self.pressed = true
-        }
+        GameManager.shared.OnAttackButtonPress()
+        self.pressed = true
+    }
+    
+    override func unpress() {
+        GameManager.shared.OnAttackButtonUnpress()
+        self.pressed = false
     }
     
     required init?(coder aDecoder: NSCoder) {

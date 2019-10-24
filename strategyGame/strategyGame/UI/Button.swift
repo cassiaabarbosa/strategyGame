@@ -19,7 +19,8 @@ class Button: SKSpriteNode {
         self.pressed = false
         super.init(texture: buttonNormalTex, color: .white, size: rect.size)
         self.position = CGPoint(x: rect.maxX - rect.width/2, y: rect.maxY - rect.height/2)
-        self.label.position = CGPoint.zero
+        self.label.position = CGPoint(x: 0, y: -10)
+        self.label.fontSize = self.label.text!.count < 10 ? 23*(rect.size.height/39) : 17.5*(rect.size.height/39)
         self.label.fontColor = .black
         self.label.zPosition = 1.0
         addChild(label)
@@ -34,16 +35,14 @@ class Button: SKSpriteNode {
     
     func press() {}
     
-    func unpress() {
-        self.pressed = false
-        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
-    }
+    func unpress() {}
     
     static func unpressAll() {
         for i in (0..<Button.buttonList.count) {
             Button.buttonList[i].pressed = false
         }
-        GameManager.shared.mode = GameManager.shared.currentCharacter == nil ? .clear : .move
+        GameManager.shared.OnAttackButtonUnpress()
+        GameManager.shared.OnSpecialAttackButtonUnpress()
     }
     
     required init?(coder aDecoder: NSCoder) {

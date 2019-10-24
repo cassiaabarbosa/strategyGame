@@ -24,10 +24,10 @@ class Element: SKSpriteNode {
         self.qntdTurnStunned = qntdTurnStunned
         super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
         self.name = name
-        self.position = tile.center
+        self.position = tile.position
         self.size = tile.size
         self.isUserInteractionEnabled = false
-        
+        tile.prop = self
     }
     
     required init?(coder aDecoder: NSCoder) {

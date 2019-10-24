@@ -16,10 +16,16 @@
 		065B6E382360F38600A3683A /* cano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E312360F38500A3683A /* cano.mp3 */; };
 		065B6E392360F38600A3683A /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E322360F38500A3683A /* gameOver.mp3 */; };
 		065B6E3A2360F38600A3683A /* glassBreak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E332360F38600A3683A /* glassBreak.mp3 */; };
-		4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F698235A398F00E242FA /* Pathfinding.swift */; };
+		4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B42360DD4E00568AD3 /* Objective.swift */; };
+		4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B62360E53F00568AD3 /* Enemy.swift */; };
+		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
+		79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */; };
+		79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D82360EC8B00095A54 /* PlayButton.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
+		8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C871C29235F824200353C40 /* ExaustedShader.fsh */; };
+		8C871C2E235FA63600353C40 /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C871C2D235FA63600353C40 /* Pathfinding.swift */; };
 		8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */; };
 		8C87DBCC2358CBB1001FB9DF /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC92358CBB1001FB9DF /* StateMachine.swift */; };
 		8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBCA2358CBB1001FB9DF /* Actor.swift */; };
@@ -50,6 +56,7 @@
 		CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BA235637E5004F7AC1 /* Ranged.swift */; };
 		CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1BE235639B3004F7AC1 /* GameManager.swift */; };
 		CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDBB1C0235649E3004F7AC1 /* Trapper.swift */; };
+		CBFB83762360C3E600650E48 /* SpecialAttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,11 +69,17 @@
 		065B6E312360F38500A3683A /* cano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cano.mp3; sourceTree = "<group>"; };
 		065B6E322360F38500A3683A /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
 		065B6E332360F38600A3683A /* glassBreak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = glassBreak.mp3; sourceTree = "<group>"; };
+		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
+		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
+		4F0664B42360DD4E00568AD3 /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
+		4F0664B62360E53F00568AD3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C205408235A54B5004F73E3 /* AnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHandler.swift; sourceTree = "<group>"; };
+		8C871C29235F824200353C40 /* ExaustedShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ExaustedShader.fsh; sourceTree = "<group>"; };
 		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		8C87DBCA2358CBB1001FB9DF /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -98,6 +111,7 @@
 		CBDBB1BA235637E5004F7AC1 /* Ranged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ranged.swift; sourceTree = "<group>"; };
 		CBDBB1BE235639B3004F7AC1 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		CBDBB1C0235649E3004F7AC1 /* Trapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trapper.swift; sourceTree = "<group>"; };
+		CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = SpecialAttackHighlightShader.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +125,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0641834E235F9A9200A998EC /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				4F15F698235A398F00E242FA /* Pathfinding.swift */,
@@ -142,8 +155,18 @@
 				CBA49FA7235B3EFA005E9C9C /* SpecialAttackButton.swift */,
 				8C205405235A4C97004F73E3 /* AttackButton.swift */,
 				8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */,
+				79C5E662235F6E0C00C42DA9 /* HUD.swift */,
+				79F8F4D82360EC8B00095A54 /* PlayButton.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		8C871C2C235FA63600353C40 /* Pathfinding */ = {
+			isa = PBXGroup;
+			children = (
+				8C871C2D235FA63600353C40 /* Pathfinding.swift */,
+			);
+			path = Pathfinding;
 			sourceTree = "<group>";
 		};
 		8C87DBD92359DFCA001FB9DF /* Storyboards */ = {
@@ -160,8 +183,10 @@
 		8C87DBDA2359DFED001FB9DF /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				8C871C29235F824200353C40 /* ExaustedShader.fsh */,
 				8C87DBD12358D392001FB9DF /* HighlightShader.fsh */,
 				8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */,
+				CBFB83752360C3E600650E48 /* SpecialAttackHighlightShader.fsh */,
 				8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */,
 			);
 			path = Shaders;
@@ -170,12 +195,13 @@
 		8C87DBDB2359E030001FB9DF /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				4F0664B62360E53F00568AD3 /* Enemy.swift */,
 				8C87DBCA2358CBB1001FB9DF /* Actor.swift */,
 				CBDBB1B42356374B004F7AC1 /* HeavyEnemy.swift */,
+				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
+				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
 				CBDBB1C0235649E3004F7AC1 /* Trapper.swift */,
 				CBDBB1BA235637E5004F7AC1 /* Ranged.swift */,
-				CBDBB1B8235637D1004F7AC1 /* Melee.swift */,
-				CBDBB1B6235637B3004F7AC1 /* SprinterEnemy.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -187,6 +213,7 @@
 				CB9D6C7C234E6BF7000FA87E /* GameViewController.swift */,
 				CB9D6C7A234E6BF7000FA87E /* GameScene.swift */,
 				CBDBB1BE235639B3004F7AC1 /* GameManager.swift */,
+				79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -196,6 +223,7 @@
 			children = (
 				CB63D4B1235BA04D00E57A8D /* Element.swift */,
 				CBA49FA3235B373A005E9C9C /* Trap.swift */,
+				4F0664B42360DD4E00568AD3 /* Objective.swift */,
 				CBA1A11D235BAF1100B61536 /* Hole.swift */,
 				CBA1A11B235BAEFC00B61536 /* Mountain.swift */,
 			);
@@ -208,7 +236,6 @@
 				CB9D6C73234E6BF7000FA87E /* strategyGame */,
 				CB9D6C72234E6BF7000FA87E /* Products */,
 				0641834F235F9ABF00A998EC /* Sounds */,
-				0641834E235F9A9200A998EC /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -236,6 +263,7 @@
 				8C205407235A4CE9004F73E3 /* UI */,
 				CB9D6C81234E6BFA000FA87E /* Assets.xcassets */,
 				CB9D6C86234E6BFA000FA87E /* Info.plist */,
+				8C871C2C235FA63600353C40 /* Pathfinding */,
 				8C87DBDA2359DFED001FB9DF /* Shaders */,
 				8C87DBD92359DFCA001FB9DF /* Storyboards */,
 			);
@@ -309,6 +337,7 @@
 				CB9D6C80234E6BF7000FA87E /* Main.storyboard in Resources */,
 				8C87DBD22358D392001FB9DF /* HighlightShader.fsh in Resources */,
 				CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */,
+				CBFB83762360C3E600650E48 /* SpecialAttackHighlightShader.fsh in Resources */,
 				CB9D6C82234E6BFA000FA87E /* Assets.xcassets in Resources */,
 				CB9D6C85234E6BFA000FA87E /* LaunchScreen.storyboard in Resources */,
 				06418355235FC28B00A998EC /* calma.mp3 in Resources */,
@@ -316,6 +345,7 @@
 				065B6E382360F38600A3683A /* cano.mp3 in Resources */,
 				065B6E342360F38600A3683A /* camera-shutter-click-01.mp3 in Resources */,
 				065B6E3A2360F38600A3683A /* glassBreak.mp3 in Resources */,
+				8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */,
 				8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */,
 				065B6E362360F38600A3683A /* win.mp3 in Resources */,
 			);
@@ -349,13 +379,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */,
+				8C871C2E235FA63600353C40 /* Pathfinding.swift in Sources */,
 				CBA49FA4235B373A005E9C9C /* Trap.swift in Sources */,
 				8C87DBD02358CBD9001FB9DF /* Grid.swift in Sources */,
 				CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */,
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
+				4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
+				4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */,
 				CBDBB1C1235649E3004F7AC1 /* Trapper.swift in Sources */,
 				CB63D4B2235BA04D00E57A8D /* Element.swift in Sources */,
+				79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */,
 				8CC91D3C235E2AA900A3C9C7 /* EndTurnButton.swift in Sources */,
 				8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */,
 				CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */,
@@ -363,6 +398,7 @@
 				8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */,
 				8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */,
 				8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */,
+				79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */,
 				CBA1A11E235BAF1100B61536 /* Hole.swift in Sources */,
 				CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */,
 				CB9D6C7D234E6BF7000FA87E /* GameViewController.swift in Sources */,
@@ -373,7 +409,6 @@
 				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
 				8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */,
 				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,
-				4F15F699235A398F00E242FA /* Pathfinding.swift in Sources */,
 				8CC08CC2235A02280005D0FD /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

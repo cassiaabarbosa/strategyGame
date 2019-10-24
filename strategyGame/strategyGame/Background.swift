@@ -10,6 +10,7 @@ class Background: SKNode {
         self.shape = SKShapeNode(rect: view.frame)
         self.shape.fillShader = shader
         super.init()
+        self.zPosition = -100
         addChild(shape)
     }
     
