@@ -52,7 +52,7 @@ class GameManager {
                 currentCharacter?.showMoveOptions()
             case .specialAttack:
                 currentCharacter?.showSpecialAttackOptions()
-            default:
+            default: // .clear
                 grid?.removeHighlights()
             }
         }
@@ -123,7 +123,7 @@ class GameManager {
         }
     }
     
-    func touchTile(tile: Tile) {//função que mostra qual tile foi clicado
+    func touchTile(tile: Tile) { //função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
             Button.unpressAll()
             grid?.removeHighlights()
@@ -143,7 +143,11 @@ class GameManager {
             }
             return
         }
-        
+        // verificar se o tile atacado está nos ableTiles
+        // se não, desselecionar personagem
+        // switch case (.mode)
+        // se .attack: ataca o tile e o tile passa o ataque para o que for que estiver em cima dele
+        // se nao tiver nada em cima do tile, o personagem não ataca/ não fica exausto
         if tile.character == currentCharacter {
             deselectCharacter()
         } else if tile.character == nil && self.mode == .move {
@@ -154,7 +158,7 @@ class GameManager {
             if currentCharacter.basicAttack(target: tile.character!) {
                 deselectCharacter()
             } else {
-                selectCharacter(character: tile.character!)
+                selectCharacter(character: tile.character!) // nao funciona para monstros
             }
         } else if self.mode == .specialAttack && tile.character == nil {
             currentCharacter.specialAttack(toTile: tile)

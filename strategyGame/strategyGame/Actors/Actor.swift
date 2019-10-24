@@ -123,7 +123,7 @@ class Actor: SKSpriteNode {
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
         if self.movesLeft == 0 { return }
-        let tiles = grid.getTilesAround(tile: self.tile, distance: self.movesLeft)
+        let tiles = grid.getReachableTiles(fromTile: self.tile, moves: movesLeft)
         for t in tiles {
             grid.ableTiles.append(t)
         }
