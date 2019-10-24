@@ -16,6 +16,7 @@
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
+		8C3FF43A2361F9A8009FA239 /* Pathfinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3FF4392361F9A8009FA239 /* Pathfinding.swift */; };
 		8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C871C29235F824200353C40 /* ExaustedShader.fsh */; };
 		8C871C2E235FA63600353C40 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */; };
@@ -54,7 +55,6 @@
 /* Begin PBXFileReference section */
 		4F0664B42360DD4E00568AD3 /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
 		4F0664B62360E53F00568AD3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
-		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
 		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -63,6 +63,7 @@
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C205408235A54B5004F73E3 /* AnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHandler.swift; sourceTree = "<group>"; };
+		8C3FF4392361F9A8009FA239 /* Pathfinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
 		8C871C29235F824200353C40 /* ExaustedShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ExaustedShader.fsh; sourceTree = "<group>"; };
 		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -109,14 +110,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F15F6A6235F898700E242FA /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				4F15F698235A398F00E242FA /* Pathfinding.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		8C205407235A4CE9004F73E3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				79F8F4DF2362119F00095A54 /* Pathfinding.swift */,
+				8C3FF4392361F9A8009FA239 /* Pathfinding.swift */,
 			);
 			path = Pathfinding;
 			sourceTree = "<group>";
@@ -204,7 +198,6 @@
 			children = (
 				CB9D6C73234E6BF7000FA87E /* strategyGame */,
 				CB9D6C72234E6BF7000FA87E /* Products */,
-				4F15F6A6235F898700E242FA /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -344,6 +337,7 @@
 				CBA49FA4235B373A005E9C9C /* Trap.swift in Sources */,
 				8C87DBD02358CBD9001FB9DF /* Grid.swift in Sources */,
 				CBA49FA8235B3EFA005E9C9C /* SpecialAttackButton.swift in Sources */,
+				8C3FF43A2361F9A8009FA239 /* Pathfinding.swift in Sources */,
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
 				4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
@@ -361,6 +355,7 @@
 				79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */,
 				CBA1A11E235BAF1100B61536 /* Hole.swift in Sources */,
 				CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */,
+				8C3FF4382360F111009FA239 /* Pathfinding.swift in Sources */,
 				CB9D6C7D234E6BF7000FA87E /* GameViewController.swift in Sources */,
 				8C87DBCC2358CBB1001FB9DF /* StateMachine.swift in Sources */,
 				79F8F4E12362119F00095A54 /* Pathfinding.swift in Sources */,

@@ -230,6 +230,48 @@ class Grid: SKNode {
         return tiles
     }
     
+    func getTilesAround(tile: Tile) -> [Tile] {
+        var tiles = [Tile]()
+        if let t = getUpTile(tile: tile) {
+           tiles.append(t)
+        }
+        if let t = getDownTile(tile: tile) {
+           tiles.append(t)
+        }
+        if let t = getLeftTile(tile: tile) {
+           tiles.append(t)
+        }
+        if let t = getRightTile(tile: tile) {
+           tiles.append(t)
+        }
+        return tiles
+    }
+    
+    func getReachableTiles(fromTile: Tile, moves: Int) -> [Tile] {
+        var tiles = [Tile]()
+        var lastTiles = [Tile]()
+        var nextTiles = [Tile]()
+        if moves <= 0 {
+            print("Grid::getReachableTiles(): returned empty array")
+            return tiles
+        }
+        lastTiles.append(fromTile)
+        for _ in 0..<moves {
+            nextTiles.removeAll()
+            for lt in lastTiles {
+                let tilesAround = self.getTilesAround(tile: lt)
+                for ta in tilesAround {
+                    if !tiles.contains(ta) && ta.isWalkable {
+                        nextTiles.append(ta)
+                    }
+                }
+                lastTiles = nextTiles
+                tiles.append(contentsOf: lastTiles)
+            }
+        }
+        return tiles
+    }
+    
     func randomEmptyTile() -> Tile {
         if tiles.count == 0 { fatalError("Grid::randomEmptyTile(): Tiles array is empty") }
         
