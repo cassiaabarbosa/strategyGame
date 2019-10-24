@@ -23,6 +23,13 @@ class GameManager {
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
+    var objectives: [Objective] = [Objective]() {
+        willSet {
+            if newValue.isEmpty {
+                print("GAME OVER")
+            }
+        }
+    }
     var grid: Grid! // has to be garanteed because of awake()
     var currentCharacter: Actor? {
         didSet {
@@ -111,14 +118,21 @@ class GameManager {
         let hole = Hole(tile: grid!.randomEmptyTile())
         grid.addChild(hole)
         holes.append(hole)
+        
+        let sun = Objective(tile: grid.randomEmptyTile(), type: .sun)
+        grid.addChild(sun)
+        objectives.append(sun)
+        
+        let moon = Objective(tile: grid.randomEmptyTile(), type: .moon)
+        grid.addChild(moon)
+        objectives.append(moon)
     }
     
     func endTurn() {
-        
-        // enemies move
-        // ...
+        Button.unpressAll()
+        grid?.removeHighlights()
+        self.currentCharacter = nil
         enemyTurn()
-        beginTurn()
     }
     
     private func beginTurn() {
@@ -210,13 +224,13 @@ class GameManager {
     }
     
     func enemyTurn() {
-        for enemie in 0...self.enemies.count - 1 {
-            enemieMove(enemy: self.enemies[enemie])
+        for enemy in enemies {
+            enemyMove(enemy: enemy)
         }
     }
     
-    func enemieMove(enemy: Enemy) {
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: ({_ in
+    func enemyMove(enemy: Enemy) {
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: ({_ in
             enemy.findAGoal()
             if !enemy.breadcrumbs.isEmpty {
                 for tile in 0...enemy.breadcrumbs.count - 1 {
@@ -230,6 +244,7 @@ class GameManager {
                 guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
                 _ = enemy.basicAttack(target: player)
             }
+            self.beginTurn()
         }))
         
     }

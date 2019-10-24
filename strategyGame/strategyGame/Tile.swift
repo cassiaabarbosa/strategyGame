@@ -5,9 +5,7 @@
 //  Created by Alex Nascimento on 07/10/19.
 //  Copyright © 2019 Alex Nascimento. All rights reserved.
 //
-
 import SpriteKit
-
 
 class Tile: SKSpriteNode {
     
@@ -26,7 +24,7 @@ class Tile: SKSpriteNode {
         return true
     }
     var hasTrap: Bool {
-        if let _ = prop as? Trap {
+        if prop as? Trap != nil {
             return true
         }
         return false
@@ -38,10 +36,10 @@ class Tile: SKSpriteNode {
         return false
     }
     var isWalkable: Bool {
-        if let _ = prop as? Mountain {
+        if prop as? Mountain != nil {
             return false
         }
-        if let _ = prop as? Hole {
+        if prop as? Hole != nil {
             return false
         }
         if self.isOcupied {
