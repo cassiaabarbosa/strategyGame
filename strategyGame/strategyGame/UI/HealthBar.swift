@@ -24,24 +24,6 @@ class HealthBar: SKSpriteNode {
         addChild(label)
     }
     
-    deinit {
-        for i in (0..<Button.buttonList.count) where self == Button.buttonList[i] {
-            Button.buttonList.remove(at: i)
-        }
-    }
-    
-    func press() {}
-    
-    func unpress() {}
-    
-    static func unpressAll() {
-        for i in (0..<Button.buttonList.count) {
-            Button.buttonList[i].pressed = false
-        }
-        GameManager.shared.OnAttackButtonUnpress()
-        GameManager.shared.OnSpecialAttackButtonUnpress()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

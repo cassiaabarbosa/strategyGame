@@ -57,6 +57,12 @@ class Button: SKSpriteNode {
         }
     }
     
+    static func hideAttackButtons() {
+        for i in (0..<Button.buttonList.count) where (Button.buttonList[i] is AttackButton || Button.buttonList[i] is SpecialAttackButton) {
+            Button.buttonList[i].isHidden = true
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
