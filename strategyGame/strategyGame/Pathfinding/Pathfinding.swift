@@ -36,7 +36,7 @@ class Pathfinding {
         for group in 0...(tilesMatrix.count - 1) {
             weight += 1
             for tile in 0...(tilesMatrix[group].count - 1) {
-                if !tilesMatrix[group][tile].isOcupied {
+                if tilesMatrix[group][tile].isWalkable {
                     tilesMatrix[group][tile].weight = weight
                 } else {
                     tilesMatrix[group][tile].weight = 100
@@ -54,7 +54,7 @@ class Pathfinding {
         for group in 0...(tilesMatrix.count - 1) {
             weight += 1
             for tile in 0...(tilesMatrix[group].count - 1) {
-                if !tilesMatrix[group][tile].isOcupied {
+                if tilesMatrix[group][tile].isWalkable {
                     tilesMatrix[group][tile].weight = weight
                 } else {
                     tilesMatrix[group][tile].weight = 100

@@ -9,10 +9,12 @@
 import Foundation
 import SpriteKit
 
-class HeavyEnemy: Actor {
+class HeavyEnemy: Enemy {
     
     init(tile: Tile) {
-        super.init(name: "Heavy", movement: 3, damage: 1, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
+        super.init(name: "Cassias", movement: 2, damage: 2, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "00_cassias"), tile: tile)
+        let animation = SKAction.animate(with: AnimationHandler.shared.cassiasFrames, timePerFrame: 1/TimeInterval(6))
+        self.run(SKAction.repeatForever(animation))
     }
     
     required init?(coder aDecoder: NSCoder) {

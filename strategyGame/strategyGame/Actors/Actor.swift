@@ -54,8 +54,12 @@ class Actor: SKSpriteNode {
     func takeDamage(damage: Int) {
         self.health -= damage
         if (self.health <= 0) {
-            print("\(self.name!) is dead")
+            self.die()
         }
+    }
+    
+    private func die() {
+        self.removeFromParent()
     }
     
     func move(tile: Tile) {
@@ -87,16 +91,17 @@ class Actor: SKSpriteNode {
             if tile == nil { return }
             if tile!.isEmpty {
                 character.move(tile: tile!)
-            } else if let _ = tile!.prop as? Hole  {
+            } else if tile!.prop as? Hole != nil {
                 character.removeFromParent()
-            } else if let _ = tile!.prop as? Mountain {
+            } else if tile!.prop as? Mountain != nil {
                 character.takeDamage(damage: 1)
             } else if let trap = tile!.prop as? Trap {
-                character.stun(turns: 2)
                 character.move(tile: tile!)
-                trap.removeFromParent()
-            }else {
-                print("prop didn't conform to any Element")
+                trap.activateTrap(character: character)
+            } else if tile!.prop as? Objective != nil {
+                character.takeDamage(damage: 1)
+            } else {
+                print("Actor::push(): prop didn't conform to any Element")
             }
         }
         guard let grid = GameManager.shared.grid else { return false }
@@ -113,6 +118,16 @@ class Actor: SKSpriteNode {
             return false
         }
         target.takeDamage(damage: self.damage)
+        isExausted = true
+        return true
+    }
+    
+    func basicAttack(target: Objective) -> Bool{
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return false
+        }
+        target.takeDamage()
         isExausted = true
         return true
     }

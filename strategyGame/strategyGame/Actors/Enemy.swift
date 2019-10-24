@@ -35,6 +35,6 @@ class Enemy: Actor {
                 }
             }
         }
-        canAttack = pathfinded.count == 0 ? true : false
+        self.isExausted = pathfinded.count == 0 ? false : true
     }
 }

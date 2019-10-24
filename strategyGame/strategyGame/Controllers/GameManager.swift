@@ -23,6 +23,13 @@ class GameManager {
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
+    var objectives: [Objective] = [Objective]() {
+        willSet {
+            if newValue.isEmpty {
+                print("GAME OVER")
+            }
+        }
+    }
     var grid: Grid! // has to be garanteed because of awake()
     var currentCharacter: Actor? {
         didSet {
@@ -89,6 +96,10 @@ class GameManager {
         let sprinter = SprinterEmeny(tile: grid.randomEmptyTile())
         grid.addChild(sprinter)
         enemies.append(sprinter)
+        
+//        let heavy = HeavyEnemy(tile: grid.randomEmptyTile())
+//        grid.addChild(heavy)
+//        enemies.append(heavy)
     }
     
     private func setElementsOnGrid() {
@@ -96,17 +107,32 @@ class GameManager {
         grid.addChild(mountain)
         mountains.append(mountain)
         
+        let mountain1 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain1)
+        mountains.append(mountain1)
+        
+        let mountain2 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain2)
+        mountains.append(mountain2)
+        
         let hole = Hole(tile: grid!.randomEmptyTile())
         grid.addChild(hole)
         holes.append(hole)
+        
+        let sun = Objective(tile: grid.randomEmptyTile(), type: .sun)
+        grid.addChild(sun)
+        objectives.append(sun)
+        
+        let moon = Objective(tile: grid.randomEmptyTile(), type: .moon)
+        grid.addChild(moon)
+        objectives.append(moon)
     }
     
     func endTurn() {
-        
-        // enemies move
-        // ...
+        Button.unpressAll()
+        grid?.removeHighlights()
+        self.currentCharacter = nil
         enemyTurn()
-        beginTurn()
     }
     
     private func beginTurn() {
@@ -149,7 +175,11 @@ class GameManager {
         if tile.character == currentCharacter {
             deselectCharacter()
         } else if tile.character == nil && self.mode == .move {
-            if !currentCharacter.makeValidMove(tile: tile) {
+            if currentCharacter.makeValidMove(tile: tile) {
+                if let trap = tile.prop as? Trap {
+                    trap.activateTrap(character: currentCharacter)
+                }
+            } else {
                 deselectCharacter()
             }
         } else if self.mode == .attack && tile.character != nil {
@@ -198,13 +228,13 @@ class GameManager {
     }
     
     func enemyTurn() {
-        for enemie in 0...self.enemies.count - 1 {
-            enemieMove(enemy: self.enemies[enemie])
+        for enemy in enemies {
+            enemyMove(enemy: enemy)
         }
     }
     
-    func enemieMove(enemy: Enemy) {
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: ({_ in
+    func enemyMove(enemy: Enemy) {
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: ({_ in
             enemy.findAGoal()
             if !enemy.breadcrumbs.isEmpty {
                 for tile in 0...enemy.breadcrumbs.count - 1 {
@@ -212,6 +242,19 @@ class GameManager {
                 }
                 enemy.breadcrumbs.removeAll()
             }
+            
+            if !enemy.isExausted {
+                guard let objectiveTile: Tile = enemy.objective else { fatalError("404 - ObjectiveTile not founded in GameManger code!") }
+                if objectiveTile.character != nil {
+                    guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
+                    _ = enemy.basicAttack(target: player)
+                }
+                if let _ = objectiveTile.prop as? Objective {
+                    guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("404 - Player not founded in GameManger code!") }
+                    _ = enemy.basicAttack(target: objective)
+                }
+            }
+            self.beginTurn()
         }))
         
     }
