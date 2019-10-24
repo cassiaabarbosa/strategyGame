@@ -20,8 +20,8 @@ class Trap: Element {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func activeTrap(toTile: Tile?) {
-        //colide com um actor
-        
+    func activateTrap(character: Actor) {
+        character.stun(turns: 2)
+        self.removeFromParent()
     }
 }

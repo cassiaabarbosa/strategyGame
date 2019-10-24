@@ -96,9 +96,8 @@ class Actor: SKSpriteNode {
             } else if tile!.prop as? Mountain != nil {
                 character.takeDamage(damage: 1)
             } else if let trap = tile!.prop as? Trap {
-                character.stun(turns: 2)
                 character.move(tile: tile!)
-                trap.removeFromParent()
+                trap.activateTrap(character: character)
             } else if tile!.prop as? Objective != nil {
                 character.takeDamage(damage: 1)
             } else {

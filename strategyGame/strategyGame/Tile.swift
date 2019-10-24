@@ -42,6 +42,9 @@ class Tile: SKSpriteNode {
         if prop as? Hole != nil {
             return false
         }
+        if prop as? Objective != nil {
+            return false
+        }
         if self.isOcupied {
             return false
         }
