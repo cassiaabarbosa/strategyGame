@@ -9,10 +9,10 @@
 import Foundation
 import SpriteKit
 
-class HeavyEnemy: Actor {
+class HeavyEnemy: Enemy {
     
     init(tile: Tile) {
-        super.init(name: "Heavy", movement: 3, damage: 1, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "OysterVolcano"), tile: tile)
+        super.init(name: "Heavy", movement: 3, damage: 1, health: 4, attackRange: 1, sprite: SKTexture(imageNamed: "00_cassias"), tile: tile)
     }
     
     required init?(coder aDecoder: NSCoder) {

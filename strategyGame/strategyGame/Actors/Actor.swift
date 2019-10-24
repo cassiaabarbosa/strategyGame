@@ -87,7 +87,7 @@ class Actor: SKSpriteNode {
             if tile == nil { return }
             if tile!.isEmpty {
                 character.move(tile: tile!)
-            } else if let _ = tile!.prop as? Hole  {
+            } else if let _ = tile!.prop as? Hole {
                 character.removeFromParent()
             } else if let _ = tile!.prop as? Mountain {
                 character.takeDamage(damage: 1)
