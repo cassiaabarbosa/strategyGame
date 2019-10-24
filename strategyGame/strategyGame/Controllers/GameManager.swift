@@ -122,6 +122,7 @@ class GameManager {
     func touchTile(tile: Tile) { //função que mostra qual tile foi clicado
         func selectCharacter(character: Actor) {
             Button.unpressAll()
+            Button.showAll()
             grid?.removeHighlights()
             currentCharacter = character
             self.mode = .move
@@ -129,6 +130,7 @@ class GameManager {
         
         func deselectCharacter() {
             Button.unpressAll()
+            Button.hideAll()
             grid?.removeHighlights()
             self.currentCharacter = nil
         }
