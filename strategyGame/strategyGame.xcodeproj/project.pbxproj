@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06418353235FC0FB00A998EC /* agitada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 06418352235FC0FB00A998EC /* agitada.mp3 */; };
+		06418355235FC28B00A998EC /* calma.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 06418354235FC28B00A998EC /* calma.mp3 */; };
+		065B6E342360F38600A3683A /* camera-shutter-click-01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E2D2360F38500A3683A /* camera-shutter-click-01.mp3 */; };
+		065B6E352360F38600A3683A /* glassBreaking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E2E2360F38500A3683A /* glassBreaking.mp3 */; };
+		065B6E362360F38600A3683A /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E2F2360F38500A3683A /* win.mp3 */; };
+		065B6E372360F38600A3683A /* cair-buraco.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E302360F38500A3683A /* cair-buraco.mp3 */; };
+		065B6E382360F38600A3683A /* cano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E312360F38500A3683A /* cano.mp3 */; };
+		065B6E392360F38600A3683A /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E322360F38500A3683A /* gameOver.mp3 */; };
+		065B6E3A2360F38600A3683A /* glassBreak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 065B6E332360F38600A3683A /* glassBreak.mp3 */; };
 		4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B42360DD4E00568AD3 /* Objective.swift */; };
 		4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B62360E53F00568AD3 /* Enemy.swift */; };
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
@@ -51,6 +60,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06418352235FC0FB00A998EC /* agitada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = agitada.mp3; sourceTree = "<group>"; };
+		06418354235FC28B00A998EC /* calma.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = calma.mp3; sourceTree = "<group>"; };
+		065B6E2D2360F38500A3683A /* camera-shutter-click-01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "camera-shutter-click-01.mp3"; sourceTree = "<group>"; };
+		065B6E2E2360F38500A3683A /* glassBreaking.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = glassBreaking.mp3; sourceTree = "<group>"; };
+		065B6E2F2360F38500A3683A /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		065B6E302360F38500A3683A /* cair-buraco.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "cair-buraco.mp3"; sourceTree = "<group>"; };
+		065B6E312360F38500A3683A /* cano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cano.mp3; sourceTree = "<group>"; };
+		065B6E322360F38500A3683A /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
+		065B6E332360F38600A3683A /* glassBreak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = glassBreak.mp3; sourceTree = "<group>"; };
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
 		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -107,12 +125,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4F15F6A6235F898700E242FA /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				4F15F698235A398F00E242FA /* Pathfinding.swift */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		0641834F235F9ABF00A998EC /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				065B6E302360F38500A3683A /* cair-buraco.mp3 */,
+				065B6E2D2360F38500A3683A /* camera-shutter-click-01.mp3 */,
+				065B6E312360F38500A3683A /* cano.mp3 */,
+				065B6E322360F38500A3683A /* gameOver.mp3 */,
+				065B6E332360F38600A3683A /* glassBreak.mp3 */,
+				065B6E2E2360F38500A3683A /* glassBreaking.mp3 */,
+				065B6E2F2360F38500A3683A /* win.mp3 */,
+				06418352235FC0FB00A998EC /* agitada.mp3 */,
+				06418354235FC28B00A998EC /* calma.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		8C205407235A4CE9004F73E3 /* UI */ = {
@@ -202,7 +235,7 @@
 			children = (
 				CB9D6C73234E6BF7000FA87E /* strategyGame */,
 				CB9D6C72234E6BF7000FA87E /* Products */,
-				4F15F6A6235F898700E242FA /* Recovered References */,
+				0641834F235F9ABF00A998EC /* Sounds */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,16 +329,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065B6E392360F38600A3683A /* gameOver.mp3 in Resources */,
+				065B6E352360F38600A3683A /* glassBreaking.mp3 in Resources */,
+				065B6E372360F38600A3683A /* cair-buraco.mp3 in Resources */,
 				8C87DBD82358F8D9001FB9DF /* BackgroundShader.fsh in Resources */,
+				06418353235FC0FB00A998EC /* agitada.mp3 in Resources */,
 				CB9D6C80234E6BF7000FA87E /* Main.storyboard in Resources */,
 				8C87DBD22358D392001FB9DF /* HighlightShader.fsh in Resources */,
 				CB9D6C77234E6BF7000FA87E /* GameScene.sks in Resources */,
 				CBFB83762360C3E600650E48 /* SpecialAttackHighlightShader.fsh in Resources */,
 				CB9D6C82234E6BFA000FA87E /* Assets.xcassets in Resources */,
 				CB9D6C85234E6BFA000FA87E /* LaunchScreen.storyboard in Resources */,
+				06418355235FC28B00A998EC /* calma.mp3 in Resources */,
 				CB9D6C79234E6BF7000FA87E /* Actions.sks in Resources */,
+				065B6E382360F38600A3683A /* cano.mp3 in Resources */,
+				065B6E342360F38600A3683A /* camera-shutter-click-01.mp3 in Resources */,
+				065B6E3A2360F38600A3683A /* glassBreak.mp3 in Resources */,
 				8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */,
 				8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */,
+				065B6E362360F38600A3683A /* win.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
