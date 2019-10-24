@@ -16,7 +16,6 @@ class HUD: SKShapeNode {
     var spAttackBtn: SpecialAttackButton
     
     init(rect: CGRect) {
-        let buttonScale: CGFloat = 1.6
         upperScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 770), size: CGSize(width: 414, height: 140)))
         lowerScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 414, height: 210)))
         endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 107*buttonScale, height: 39*buttonScale), text: "End Turn")

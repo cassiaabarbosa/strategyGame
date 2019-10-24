@@ -10,6 +10,8 @@
 		4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B42360DD4E00568AD3 /* Objective.swift */; };
 		4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B62360E53F00568AD3 /* Enemy.swift */; };
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
+		79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */; };
+		79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D82360EC8B00095A54 /* PlayButton.swift */; };
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
@@ -49,10 +51,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
+		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
 		4F0664B42360DD4E00568AD3 /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
 		4F0664B62360E53F00568AD3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		4F15F698235A398F00E242FA /* Pathfinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pathfinding.swift; sourceTree = "<group>"; };
-		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		8C02075023565849009A8659 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				8C205405235A4C97004F73E3 /* AttackButton.swift */,
 				8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */,
 				79C5E662235F6E0C00C42DA9 /* HUD.swift */,
+				79F8F4D82360EC8B00095A54 /* PlayButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				CB9D6C7C234E6BF7000FA87E /* GameViewController.swift */,
 				CB9D6C7A234E6BF7000FA87E /* GameScene.swift */,
 				CBDBB1BE235639B3004F7AC1 /* GameManager.swift */,
+				79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -331,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */,
 				8C871C2E235FA63600353C40 /* Pathfinding.swift in Sources */,
 				CBA49FA4235B373A005E9C9C /* Trap.swift in Sources */,
 				8C87DBD02358CBD9001FB9DF /* Grid.swift in Sources */,
@@ -349,6 +356,7 @@
 				8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */,
 				8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */,
 				8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */,
+				79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */,
 				CBA1A11E235BAF1100B61536 /* Hole.swift in Sources */,
 				CBDBB1B7235637B3004F7AC1 /* SprinterEnemy.swift in Sources */,
 				CB9D6C7D234E6BF7000FA87E /* GameViewController.swift in Sources */,
