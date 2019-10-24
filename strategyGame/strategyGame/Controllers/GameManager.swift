@@ -100,6 +100,14 @@ class GameManager {
         grid.addChild(mountain)
         mountains.append(mountain)
         
+        let mountain1 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain1)
+        mountains.append(mountain1)
+        
+        let mountain2 = Mountain(tile: grid!.randomEmptyTile())
+        grid.addChild(mountain2)
+        mountains.append(mountain2)
+        
         let hole = Hole(tile: grid!.randomEmptyTile())
         grid.addChild(hole)
         holes.append(hole)
