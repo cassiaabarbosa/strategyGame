@@ -175,7 +175,11 @@ class GameManager {
         if tile.character == currentCharacter {
             deselectCharacter()
         } else if tile.character == nil && self.mode == .move {
-            if !currentCharacter.makeValidMove(tile: tile) {
+            if currentCharacter.makeValidMove(tile: tile) {
+                if let trap = tile.prop as? Trap {
+                    trap.activateTrap(character: currentCharacter)
+                }
+            } else {
                 deselectCharacter()
             }
         } else if self.mode == .attack && tile.character != nil {
