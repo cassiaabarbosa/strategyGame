@@ -36,9 +36,9 @@ class HUD: SKShapeNode {
         self.lowerScrnArea.addChild(endTurnBtn)
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
-        Button.hideAll()
+        Button.hideAttackButtons()
         for i in (0..<GameManager.shared.players.count) {
-            self.healthBarList.append(HealthBar(rect: CGRect(origin: GameManager.shared.players[i].position, size: CGSize(width: 107, height: 39)), text: "\(GameManager.shared.players[i].health)"))
+            self.healthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: GameManager.shared.players[i].position.x - 50, y: GameManager.shared.players[i].position.y + 650), size: CGSize(width: 107, height: 39)), text: "\(GameManager.shared.players[i].health)"))
             
             self.gridScreenArea.addChild(self.healthBarList[i])
         }
