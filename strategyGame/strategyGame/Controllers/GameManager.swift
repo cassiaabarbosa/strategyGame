@@ -102,11 +102,10 @@ class GameManager {
     }
     
     func endTurn() {
-        
-        // enemies move
-        // ...
+        Button.unpressAll()
+        grid?.removeHighlights()
+        self.currentCharacter = nil
         enemyTurn()
-        beginTurn()
     }
     
     private func beginTurn() {
@@ -210,6 +209,7 @@ class GameManager {
                 }
                 enemy.breadcrumbs.removeAll()
             }
+            self.beginTurn()
         }))
         
     }
