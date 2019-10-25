@@ -99,7 +99,7 @@ class Actor: SKSpriteNode {
             if tile!.isEmpty {
                 character.move(tile: tile!)
             } else if tile!.prop as? Hole != nil {
-                character.removeFromParent()
+                character.die()
             } else if tile!.prop as? Mountain != nil {
                 character.takeDamage(damage: 1)
             } else if let trap = tile!.prop as? Trap {
