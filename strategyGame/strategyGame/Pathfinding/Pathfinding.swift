@@ -25,9 +25,15 @@ class Pathfinding {
         while ct.weight != destinationTile.weight {
             let neighbors: [Tile] = grid.getMovableTiles(currenTile: ct)
             ct = findNextBreadcrumb(currentTile: ct, neighbors: neighbors, tilesMatrix: tilesMatrix)
-            self.path.append(ct)
+            for tile in 0..< path.count {
+                if path[tile].weight == ct.weight {
+                    path.remove(at: tile)
+                }
+            }
+            if !path.contains(ct) {
+                self.path.append(ct)
+            }
         }
-        
         return self.path
     }
     
@@ -102,6 +108,7 @@ class Pathfinding {
         allPaths.sort(by: ({ $0.count < $1.count }))
         nearestGoal = allPaths[0]
         
+        // Verifica se o nearestGoal representa um player ou um tile objetivo, se for um player e existir um array no allPaths que possui o mesmo tamnho e representa um tile objetivo, ele dá a preferencia para esse tile.
         for objectives in 0...allPaths.count - 1 where allPaths[objectives].count == nearestGoal.count {
             if (nearestGoal[0].character != nil && allPaths[objectives][0].character == nil) {
                 nearestGoal = allPaths[objectives]

@@ -99,8 +99,8 @@ class Actor: SKSpriteNode {
             if tile!.isEmpty {
                 character.move(tile: tile!)
             } else if tile!.prop as? Hole != nil {
+                character.die()
                 GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
-                character.removeFromParent()
             } else if tile!.prop as? Mountain != nil {
                 character.takeDamage(damage: 1)
             } else if let trap = tile!.prop as? Trap {
