@@ -11,9 +11,14 @@ import SpriteKit
 class MainMenuGameScene: SKScene {
     
     var background: Background?
+    var titleLabel: SKLabelNode
     var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "Play")
     
     override init(size: CGSize) {
+        titleLabel = SKLabelNode(text: "All Bobs must die!")
+        titleLabel.position = CGPoint(x: 207, y: 500)
+        titleLabel.fontSize = 54
+        titleLabel.fontColor = .black
         super.init(size: size)
     }
     
@@ -21,6 +26,7 @@ class MainMenuGameScene: SKScene {
         self.background = Background(view: view)
         addChild(background!)
         addChild(playButton)
+        addChild(titleLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
