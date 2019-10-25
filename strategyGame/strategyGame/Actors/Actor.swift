@@ -96,8 +96,11 @@ class Actor: SKSpriteNode {
         }
         func push(character: Actor, to tile: Tile?) {
             if tile == nil { return }
-            if tile!.isEmpty {
+            if tile!.isWalkable {
                 character.move(tile: tile!)
+            } else if tile!.character != nil {
+                character.takeDamage(damage: 1)
+                tile!.character?.takeDamage(damage: 1)
             } else if tile!.prop as? Hole != nil {
                 character.removeFromParent()
             } else if tile!.prop as? Mountain != nil {
