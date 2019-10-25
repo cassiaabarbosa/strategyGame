@@ -25,7 +25,7 @@ class Pathfinding {
         while ct.weight != destinationTile.weight {
             let neighbors: [Tile] = grid.getMovableTiles(currenTile: ct)
             ct = findNextBreadcrumb(currentTile: ct, neighbors: neighbors, tilesMatrix: tilesMatrix)
-            for tile in 0..< path.count {
+            for tile in 0 ..< path.count {
                 if path[tile].weight == ct.weight {
                     path.remove(at: tile)
                 }
