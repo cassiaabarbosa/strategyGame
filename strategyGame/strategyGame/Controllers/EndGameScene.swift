@@ -16,8 +16,9 @@ class EndGameScene: SKScene {
     
     init(size: CGSize, resultText: String) {
         resultLabel = SKLabelNode(text: resultText)
-        resultLabel.position = CGPoint(x: 120, y: 500)
-        resultLabel.fontSize = 40
+        resultLabel.position = CGPoint(x: 207, y: 500)
+        resultLabel.fontSize = 60
+        resultLabel.fontColor = .black
         super.init(size: size)
     }
     
@@ -25,6 +26,7 @@ class EndGameScene: SKScene {
         self.background = Background(view: view)
         addChild(background!)
         addChild(playAgainButton)
+        addChild(resultLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {

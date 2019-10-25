@@ -56,6 +56,7 @@ class Actor: SKSpriteNode {
         if (self.health <= 0) {
             self.die()
         }
+        HUD.updateHealthBars()
     }
     
     private func die() {
