@@ -6,6 +6,14 @@ class GameScene: SKScene {
     var grid: Grid?
     var background: Background?
     var hud: HUD?
+    var backgroundMusic: SKAudioNode!
+    var quackSound: SKAudioNode!
+    var glassBreak: SKAudioNode!
+    var cairBuracoSound: SKAudioNode!
+    var canoSound: SKAudioNode!
+    var cameraSound: SKAudioNode!
+    var setTrapSound: SKAudioNode!
+    var hitWallSound: SKAudioNode!
     
     var templateSceneString: String = """
 000000\
@@ -37,12 +45,14 @@ class GameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
+        loadSounds()
+        playMusic()
         AnimationHandler.shared.awake()
         self.background = Background(view: view)
         addChild(background!)
         self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
         addChild(grid!)
-        GameManager.shared.awake(grid: grid!)
+        GameManager.shared.awake(grid: grid!, scene: self)
         hud = HUD(rect: view.frame)
         addChild(hud!)
     }
@@ -95,6 +105,57 @@ class GameScene: SKScene {
             view.showsNodeCount = false
         } else {
             fatalError("No SKView for viewController")
+        }
+    }
+    
+    func playMusic() {
+        if let musicURL = Bundle.main.url(forResource: "agitada", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
+        }
+    }
+    
+    func loadSounds() {
+        if let quackURL = Bundle.main.url(forResource: "quack", withExtension: "wav") {
+            self.quackSound = SKAudioNode(url: quackURL)
+            self.quackSound.autoplayLooped = false
+            addChild(quackSound)
+        }
+        
+        if let glassURL = Bundle.main.url(forResource: "glassBreaking", withExtension: "mp3") {
+            self.glassBreak = SKAudioNode(url: glassURL)
+            self.glassBreak.autoplayLooped = false
+            addChild(glassBreak)
+        }
+        
+        if let cairBuracoURL = Bundle.main.url(forResource: "cair-buraco", withExtension: "mp3") {
+            self.cairBuracoSound = SKAudioNode(url: cairBuracoURL)
+            self.cairBuracoSound.autoplayLooped = false
+            addChild(cairBuracoSound)
+        }
+        
+        if let canoURL = Bundle.main.url(forResource: "cano", withExtension: "mp3") {
+            self.canoSound = SKAudioNode(url: canoURL)
+            self.canoSound.autoplayLooped = false
+            addChild(canoSound)
+        }
+        
+        if let cameraURL = Bundle.main.url(forResource: "camera-shutter-click-01", withExtension: "mp3") {
+            self.cameraSound = SKAudioNode(url: cameraURL)
+            self.cameraSound.autoplayLooped = false
+            addChild(cameraSound)
+        }
+        
+        if let trapURL = Bundle.main.url(forResource: "setTrap", withExtension: "mp3") {
+            self.setTrapSound = SKAudioNode(url: trapURL)
+            self.setTrapSound.autoplayLooped = false
+            addChild(setTrapSound)
+        }
+        
+        if let hitWallURL = Bundle.main.url(forResource: "HitWall", withExtension: "mp3") {
+            self.hitWallSound = SKAudioNode(url: hitWallURL)
+            self.hitWallSound.autoplayLooped = false
+            addChild(hitWallSound)
         }
     }
 }
