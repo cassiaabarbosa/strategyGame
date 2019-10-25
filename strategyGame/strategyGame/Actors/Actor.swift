@@ -60,12 +60,13 @@ class Actor: SKSpriteNode {
     }
     
     private func die() {
-        self.removeFromParent()
         if let enemySelf = self as? Enemy {
             GameManager.shared.enemies.remove(at: GameManager.shared.enemies.firstIndex(of: enemySelf)!)
         } else {
-            GameManager.shared.players.remove(at: GameManager.shared.players.firstIndex(of: self)!)
+            GameManager.shared.players.remove(at: GameManager.shared.players.firstIndex(of: self as Actor)!)
         }
+        self.tile.character = nil
+        self.removeFromParent()
     }
     
     func move(tile: Tile) {

@@ -32,6 +32,7 @@ class Objective: Element {
     
     func destroy() {
         self.removeFromParent()
+        self.tile.prop = nil
     }
     
     required init?(coder aDecoder: NSCoder) {
