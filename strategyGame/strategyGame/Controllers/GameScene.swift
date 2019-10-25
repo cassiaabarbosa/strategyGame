@@ -65,9 +65,36 @@ class GameScene: SKScene {
                         button.unpress()
                     } else {
                         button.press()
+                        
+                        if GameManager.shared.players.isEmpty || GameManager.shared.enemies.isEmpty {
+                            loadEndGameScene()
+                        }
                     }
                 }
             }
+        }
+    }
+    
+    func loadEndGameScene() {
+        if let view: SKView = self.view {
+            // Load the SKScene from 'GameScene.sks'
+            var scene: SKScene
+            if GameManager.shared.enemies.isEmpty {
+                scene = EndGameScene(size: view.bounds.size, resultText: "Victory!")
+            } else {
+                scene = EndGameScene(size: view.bounds.size, resultText: "You Lose...")
+            }
+                // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFill
+                
+                // Present the scene
+            view.presentScene(scene)
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = true
+            view.showsNodeCount = true
+        } else {
+            fatalError("No SKView for viewController")
         }
     }
 }

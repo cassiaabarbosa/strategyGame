@@ -156,7 +156,7 @@ class GameManager {
         
         func deselectCharacter() {
             Button.unpressAll()
-            Button.hideAll()
+            Button.hideAttackButtons()
             grid?.removeHighlights()
             self.currentCharacter = nil
         }
