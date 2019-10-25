@@ -11,16 +11,17 @@ import SpriteKit
 class MainMenuGameScene: SKScene {
     
     var background: Background?
-    var titleLabel: SKLabelNode
+    var titleTex = SKTexture(imageNamed: "title")
+    var title: SKSpriteNode
     var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "Play")
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
     
     override init(size: CGSize) {
-        titleLabel = SKLabelNode(text: "All Bobs must die!")
-        titleLabel.position = CGPoint(x: 207, y: 500)
-        titleLabel.fontSize = 54
-        titleLabel.fontColor = .black
+        title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
+        
+        title.position = CGPoint(x: 207, y: 500)
+        
         super.init(size: size)
     }
     
@@ -29,7 +30,7 @@ class MainMenuGameScene: SKScene {
         self.playMusic()
         addChild(background!)
         addChild(playButton)
-        addChild(titleLabel)
+        addChild(title)
     }
     
     required init?(coder aDecoder: NSCoder) {
