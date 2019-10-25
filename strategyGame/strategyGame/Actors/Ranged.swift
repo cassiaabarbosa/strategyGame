@@ -27,6 +27,7 @@ class Ranged: Actor {
             return false
         }
         guard GameManager.shared.grid != nil else { return false }
+        GameManager.shared.scene.cameraSound.run(SKAction.play())
         target.takeDamage(damage: self.damage)
         isExausted = true
         return true

@@ -19,6 +19,7 @@ class GameManager {
     }
     
     static let shared: GameManager = GameManager()
+    var scene: GameScene!
     var enemies: [Enemy] = [Enemy]()
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
@@ -69,7 +70,8 @@ class GameManager {
         mode = .clear
     }
     
-    func awake(grid: Grid) {
+    func awake(grid: Grid, scene: GameScene) {
+        self.scene = scene
         self.grid = grid
         setActorsOnGrid()
         setElementsOnGrid()
