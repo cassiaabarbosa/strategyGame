@@ -19,10 +19,12 @@ class HUD: SKShapeNode {
     var spAttackBtn: SpecialAttackButton
     static var playerHealthBarList: [HealthBar] = []
     static var enemyHealthBarList: [HealthBar] = []
+    static var objectiveHealthBarList: [HealthBar] = []
     
     init(rect: CGRect) {
         HUD.playerHealthBarList.removeAll()
         HUD.enemyHealthBarList.removeAll()
+        HUD.objectiveHealthBarList.removeAll()
         
         upperScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 770), size: CGSize(width: 414, height: 140)))
         gridScreenArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 210), size: CGSize(width: 414, height: 560)))
@@ -64,6 +66,14 @@ class HUD: SKShapeNode {
 
             GameManager.shared.enemies[i].addChild(HUD.enemyHealthBarList[i])
         }
+        
+        for i in (0..<GameManager.shared.objectives.count) {
+            HUD.objectiveHealthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: 10, y: -33), size: CGSize(width: 39*healthBarScale, height: 39*healthBarScale)), text: "\(GameManager.shared.objectives[i].hp)"))
+            
+            HUD.objectiveHealthBarList[i].zPosition = 1.0
+            
+            GameManager.shared.objectives[i].addChild(HUD.objectiveHealthBarList[i])
+        }
     }
     
     static func updateHealthBars() {
@@ -73,6 +83,10 @@ class HUD: SKShapeNode {
         
         for i in (0..<GameManager.shared.enemies.count) {
             HUD.enemyHealthBarList[i].label.text = "\(GameManager.shared.enemies[i].health)"
+        }
+        
+        for i in (0..<GameManager.shared.objectives.count) {
+            HUD.objectiveHealthBarList[i].label.text = "\(GameManager.shared.objectives[i].hp)"
         }
     }
     
