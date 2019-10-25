@@ -23,5 +23,6 @@ class Trap: Element {
     func activateTrap(character: Actor) {
         character.stun(turns: 2)
         self.removeFromParent()
+        self.tile.prop = nil
     }
 }
