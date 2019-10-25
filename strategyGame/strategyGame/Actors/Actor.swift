@@ -100,6 +100,7 @@ class Actor: SKSpriteNode {
                 character.move(tile: tile!)
             } else if tile!.prop as? Hole != nil {
                 character.die()
+                GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
             } else if tile!.prop as? Mountain != nil {
                 character.takeDamage(damage: 1)
             } else if let trap = tile!.prop as? Trap {
@@ -123,6 +124,12 @@ class Actor: SKSpriteNode {
             push(character: target, to: grid.getRightTile(tile: target.tile))
         default:
             return false
+        }
+        if self as? Melee != nil {
+            GameManager.shared.scene.canoSound.run(SKAction.play())
+        }
+        if self as? Trapper != nil {
+            GameManager.shared.scene.quackSound.run(SKAction.play())
         }
         target.takeDamage(damage: self.damage)
         isExausted = true

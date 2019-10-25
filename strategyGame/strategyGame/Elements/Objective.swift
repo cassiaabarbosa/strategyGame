@@ -8,7 +8,7 @@ enum ObjectiveType {
 
 class Objective: Element {
 
-    private var hp: Int = 3
+    public private(set) var hp: Int = 3
     
     init(tile: Tile, type: ObjectiveType) {
         switch type {

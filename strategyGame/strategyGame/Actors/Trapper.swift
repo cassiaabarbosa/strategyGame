@@ -25,6 +25,7 @@ class Trapper: Actor {
     
     override func specialAttack(toTile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
+        GameManager.shared.scene.setTrapSound.run(SKAction.play())
         if (toTile.isSpecialHighlighted == true) {
             if (trapNumber > 0) {
                 trapNumber -= 1
