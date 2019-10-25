@@ -13,6 +13,7 @@ class EndGameScene: SKScene {
     var background: Background?
     var resultLabel: SKLabelNode
     var playAgainButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "Play again")
+    var backgroundMusic: SKAudioNode!
     
     init(size: CGSize, resultText: String) {
         resultLabel = SKLabelNode(text: resultText)
@@ -27,6 +28,7 @@ class EndGameScene: SKScene {
         addChild(background!)
         addChild(playAgainButton)
         addChild(resultLabel)
+        playMusic()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,6 +67,22 @@ class EndGameScene: SKScene {
             view.showsNodeCount = false
         } else {
             fatalError("No SKView for viewController")
+        }
+    }
+    
+    func playMusic() {
+        if resultLabel.text == "Victory!" {
+            if let musicURL = Bundle.main.url(forResource: "win", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                backgroundMusic.autoplayLooped = false
+                addChild(backgroundMusic)
+            }
+        } else {
+            if let musicURL = Bundle.main.url(forResource: "terceiraTrilha", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                backgroundMusic.autoplayLooped = false
+                addChild(backgroundMusic)
+            }
         }
     }
 }

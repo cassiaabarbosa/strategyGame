@@ -13,6 +13,8 @@ class MainMenuGameScene: SKScene {
     var background: Background?
     var titleLabel: SKLabelNode
     var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "Play")
+    var player: SKAudioNode = SKAudioNode()
+    var backgroundMusic: SKAudioNode!
     
     override init(size: CGSize) {
         titleLabel = SKLabelNode(text: "All Bobs must die!")
@@ -24,6 +26,7 @@ class MainMenuGameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.background = Background(view: view)
+        self.playMusic()
         addChild(background!)
         addChild(playButton)
         addChild(titleLabel)
@@ -65,6 +68,13 @@ class MainMenuGameScene: SKScene {
             view.showsNodeCount = false
         } else {
             fatalError("No SKView for viewController")
+        }
+    }
+    
+    func playMusic() {
+        if let musicURL = Bundle.main.url(forResource: "calma", withExtension: "mp3") {
+            backgroundMusic = SKAudioNode(url: musicURL)
+            addChild(backgroundMusic)
         }
     }
 }
