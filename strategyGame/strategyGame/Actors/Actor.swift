@@ -61,9 +61,17 @@ class Actor: SKSpriteNode {
     
     private func die() {
         if let enemySelf = self as? Enemy {
-            GameManager.shared.enemies.remove(at: GameManager.shared.enemies.firstIndex(of: enemySelf)!)
+            if let index = GameManager.shared.enemies.firstIndex(of: enemySelf) {
+                GameManager.shared.enemies.remove(at: index)
+            } else {
+                print("Actor::die(): index of enemy returned nil")
+            }
         } else {
-            GameManager.shared.players.remove(at: GameManager.shared.players.firstIndex(of: self as Actor)!)
+            if let index = GameManager.shared.players.firstIndex(of: self) {
+                GameManager.shared.players.remove(at: index)
+            } else {
+                print("Actor::die(): index of player returned nil")
+            }
         }
         self.tile.character = nil
         self.removeFromParent()

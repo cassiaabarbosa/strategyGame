@@ -31,6 +31,11 @@ class Objective: Element {
     }
     
     func destroy() {
+        if let index = GameManager.shared.objectives.firstIndex(of: self) {
+            GameManager.shared.objectives.remove(at: index)
+        } else {
+            print("Objective::destroy(): index of objective returned nil")
+        }
         self.removeFromParent()
         self.tile.prop = nil
     }
