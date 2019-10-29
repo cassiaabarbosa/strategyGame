@@ -20,12 +20,40 @@ class GameManager {
     
     static let shared: GameManager = GameManager()
     var scene: GameScene!
-    var enemies: [Enemy] = [Enemy]()
-    var players: [Actor] = [Actor]()
-    var mountains: [Mountain] = [Mountain]()
-    var holes: [Hole] = [Hole]()
+    var enemies: [Enemy] = [Enemy]() {
+        willSet {
+            if enemies.count < newValue.count {
+                grid.addChild(newValue.last!)
+            }
+        }
+    }
+    var players: [Actor] = [Actor]() {
+        willSet {
+            if players.count < newValue.count {
+                grid.addChild(newValue.last!)
+            }
+        }
+    }
+    var mountains: [Mountain] = [Mountain]() {
+        willSet {
+            if mountains.count < newValue.count {
+                grid.addChild(newValue.last!)
+            }
+        }
+    }
+    
+    var holes: [Hole] = [Hole]() {
+        willSet {
+            if holes.count < newValue.count {
+                grid.addChild(newValue.last!)
+            }
+        }
+    }
     var objectives: [Objective] = [Objective]() {
         willSet {
+            if objectives.count < newValue.count {
+                grid.addChild(newValue.last!)
+            }
             if newValue.isEmpty {
                 print("GAME OVER")
             }
@@ -73,73 +101,10 @@ class GameManager {
     func awake(grid: Grid, scene: GameScene) {
         self.scene = scene
         self.grid = grid
-        setActorsOnGrid()
-        setElementsOnGrid()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setActorsOnGrid() {
-        let melee = Melee(tile: grid.getTile(col: 1, row: 5)!)
-        grid.addChild(melee)
-        players.append(melee)
-        
-        let ranged = Ranged(tile: grid.getTile(col: 2, row: 6)!)
-        grid.addChild(ranged)
-        players.append(ranged)
-    
-        let trapper = Trapper(tile: grid.getTile(col: 4, row: 4)!)
-        grid.addChild(trapper)
-        players.append(trapper)
-        
-        let sprinter = SprinterEmeny(tile: grid.getTile(col: 2, row: 0)!)
-        grid.addChild(sprinter)
-        enemies.append(sprinter)
-        
-        let heavy = HeavyEnemy(tile: grid.getTile(col: 1, row: 2)!)
-        grid.addChild(heavy)
-        enemies.append(heavy)
-    }
-    
-    private func setElementsOnGrid() {
-        let mountain = Mountain(tile: grid.getTile(col: 0, row: 3)!)
-        grid.addChild(mountain)
-        mountains.append(mountain)
-        
-        let mountain1 = Mountain(tile: grid.getTile(col: 3, row: 3)!)
-        grid.addChild(mountain1)
-        mountains.append(mountain1)
-        
-        let mountain2 = Mountain(tile: grid.getTile(col: 4, row: 1)!)
-        grid.addChild(mountain2)
-        mountains.append(mountain2)
-        
-        let mountain3 = Mountain(tile: grid.getTile(col: 0, row: 5)!)
-        grid.addChild(mountain3)
-        mountains.append(mountain3)
-        
-        let hole = Hole(tile: grid.getTile(col: 1, row: 4)!)
-        grid.addChild(hole)
-        holes.append(hole)
-        
-        let hole1 = Hole(tile: grid.getTile(col: 3, row: 6)!)
-        grid.addChild(hole1)
-        holes.append(hole1)
-        
-        let hole2 = Hole(tile: grid.getTile(col: 4, row: 5)!)
-        grid.addChild(hole2)
-        holes.append(hole2)
-        
-        let sun = Objective(tile: grid.getTile(col: 5, row: 3)!, type: .sun)
-        grid.addChild(sun)
-        objectives.append(sun)
-        
-        let moon = Objective(tile: grid.getTile(col: 1, row: 6)!, type: .moon)
-        grid.addChild(moon)
-        objectives.append(moon)
     }
     
     func endTurn() {

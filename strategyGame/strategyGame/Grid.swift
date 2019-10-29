@@ -8,15 +8,14 @@ class Grid: SKNode {
     let tileSize: CGSize
     var tileSet: String?
     
-    init(position: CGPoint, width: Int, height: Int, tileSize: CGSize, tileSet: String) {
+    init(position: CGPoint, width: Int, height: Int, tileSize: CGSize) {
         self.gridAspect = (width, height)
         self.tileSize = tileSize
         super.init()
         self.position = position
-        drawGrid(tileSet: tileSet)
     }
     
-    private func drawGrid(tileSet: String) {
+    func drawGrid(tileSet: String) {
         let charArray: [String.Element] = Array(tileSet)
         let amout: Int = gridAspect.0 * gridAspect.1
         for id in 0..<amout {

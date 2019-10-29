@@ -16,28 +16,14 @@ class GameScene: SKScene {
     var hitWallSound: SKAudioNode!
     
     var templateSceneString: String = """
-000000\
-111111\
-228222\
-333303\
-444444\
-555255\
-666666\
-777077
-"""
-    var templateSceneString2: String = """
-00000\
-11111\
-22222\
-33303\
-44444\
-55555\
-61666\
-77777\
-88388\
-99999\
-00030\
-11111
+.vm...\
+h...c.\
+......\
+..mm..\
+.M.v..\
+.h..m.\
+..T.R.\
+mm....
 """
     
     override init(size: CGSize) {
@@ -50,9 +36,10 @@ class GameScene: SKScene {
         AnimationHandler.shared.awake()
         self.background = Background(view: view)
         addChild(background!)
-        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70), tileSet: templateSceneString)
+        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70))
         addChild(grid!)
         GameManager.shared.awake(grid: grid!, scene: self)
+        grid?.drawGrid(tileSet: templateSceneString)
         hud = HUD(rect: view.frame)
         addChild(hud!)
     }
