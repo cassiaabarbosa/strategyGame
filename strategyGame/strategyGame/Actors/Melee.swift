@@ -130,6 +130,7 @@ class Melee: Actor {
                     fatalError("Melee::showSpecialAttackOptions() exausted switch")
                 }
             }
+            if lastTile == self.tile { continue }
             grid.ableTiles.append(lastTile)
         }
         for t in grid.ableTiles {
