@@ -15,6 +15,16 @@ class Enemy: Actor {
     var objective: Tile?
     var canAttack: Bool = false
     
+    func basicAttack(target: Objective) -> Bool{
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return false
+        }
+        target.takeDamage()
+        isExausted = true
+        return true
+    }
+    
     func findAGoal() {
         guard let grid: Grid = GameManager.shared.grid else { fatalError("404 - Grid not founded in SprinterEnemy archive!") }
         guard let tileMatrix: [[Tile]] = grid.getAllNeightborsTilesInGroup(tile: self.tile) as? [[Tile]] else { fatalError("404 - TaleMatrix not founded in SprinterEnemy code!") }

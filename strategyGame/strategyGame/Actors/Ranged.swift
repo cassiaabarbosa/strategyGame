@@ -21,18 +21,6 @@ class Ranged: Actor {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func basicAttack(target: Actor) -> Bool {
-        if self.isExausted {
-            print("\(self.name!) is exausted")
-            return false
-        }
-        guard GameManager.shared.grid != nil else { return false }
-        GameManager.shared.scene.cameraSound.run(SKAction.play())
-        target.takeDamage(damage: self.damage)
-        isExausted = true
-        return true
-    }
-    
     override func showAttackOptions() {
         if self.isExausted {
             print("\(self.name!) is exausted")
@@ -48,4 +36,41 @@ class Ranged: Actor {
            t.shader = Tile.attackHighlightShader
         }
     }
+    
+    override func basicAttack(target: Actor) -> Bool {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return false
+        }
+        guard GameManager.shared.grid != nil else { return false }
+        GameManager.shared.scene.cameraSound.run(SKAction.play())
+        target.takeDamage(damage: self.damage)
+        isExausted = true
+        return true
+    }
+    
+    override func showSpecialAttackOptions() {
+        if self.isExausted {
+            print("\(self.name!) is exausted")
+            return
+        }
+        guard let grid = GameManager.shared.grid else { return }
+        grid.removeHighlights()
+        let tiles = grid.getTilesAround(tile: self.tile, distance: 1)
+        for t in tiles {
+            if t.isEmpty && !t.isOcupied {
+                grid.ableTiles.append(t)
+            }
+        }
+        for t in grid.ableTiles {
+            t.isSpecialHighlighted = true
+        }
+    }
+    
+    override func specialAttack(toTile: Tile) {
+        guard let grid = GameManager.shared.grid else { return }
+        
+        self.isExausted = true
+    }
+    
 }

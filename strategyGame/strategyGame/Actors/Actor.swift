@@ -59,7 +59,7 @@ class Actor: SKSpriteNode {
         HUD.updateHealthBars()
     }
     
-    private func die() {
+    func die() {
         if let enemySelf = self as? Enemy {
             if let index = GameManager.shared.enemies.firstIndex(of: enemySelf) {
                 GameManager.shared.enemies.remove(at: index)
@@ -77,88 +77,6 @@ class Actor: SKSpriteNode {
         self.removeFromParent()
     }
     
-    func move(tile: Tile) {
-        self.tile.character = nil
-        self.position = tile.position
-        self.tile = tile
-        self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
-    }
-    
-    func makeValidMove(tile: Tile?) -> Bool {
-        guard let grid = GameManager.shared.grid else { return false }
-        if tile == nil { return false }
-        if !(grid.ableTiles.contains(tile!)) { return false }
-        grid.removeHighlights()
-        self.move(tile: tile!)
-        return true
-    }
-    
-    // TO-DO:
-    // esse método está aqui por conveniência.
-    // Coloque nas subclasses quando for implementar os ataques especificos de cada uma
-    // fazer com overload, deixando o método em Actor vazio: func basicAttack() {}
-    func basicAttack(target: Actor) -> Bool {
-        if self.isExausted {
-            print("\(self.name!) is exausted")
-            return false
-        }
-        func push(character: Actor, to tile: Tile?) {
-            if tile == nil { return }
-            if tile!.isWalkable {
-                character.move(tile: tile!)
-            } else if tile!.character != nil {
-                character.takeDamage(damage: 1)
-                tile!.character?.takeDamage(damage: 1)
-            } else if tile!.prop as? Hole != nil {
-                character.die()
-                GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
-            } else if tile!.prop as? Mountain != nil {
-                character.takeDamage(damage: 1)
-            } else if let trap = tile!.prop as? Trap {
-                character.move(tile: tile!)
-                trap.activateTrap(character: character)
-            } else if tile!.prop as? Objective != nil {
-                character.takeDamage(damage: 1)
-            } else {
-                print("Actor::push(): prop didn't conform to any Element")
-            }
-        }
-        guard let grid = GameManager.shared.grid else { return false }
-        switch target.tile {
-        case grid.getUpTile(tile: self.tile):
-            push(character: target, to: grid.getUpTile(tile: target.tile))
-        case grid.getDownTile(tile: self.tile):
-            push(character: target, to: grid.getDownTile(tile: target.tile))
-        case grid.getLeftTile(tile: self.tile):
-            push(character: target, to: grid.getLeftTile(tile: target.tile))
-        case grid.getRightTile(tile: self.tile):
-            push(character: target, to: grid.getRightTile(tile: target.tile))
-        default:
-            return false
-        }
-        if self as? Melee != nil {
-            GameManager.shared.scene.canoSound.run(SKAction.play())
-        }
-        if self as? Trapper != nil {
-            GameManager.shared.scene.quackSound.run(SKAction.play())
-        }
-        target.takeDamage(damage: self.damage)
-        isExausted = true
-        return true
-    }
-    
-    func basicAttack(target: Objective) -> Bool{
-        if self.isExausted {
-            print("\(self.name!) is exausted")
-            return false
-        }
-        target.takeDamage()
-        isExausted = true
-        return true
-    }
-    
-    func specialAttack(toTile: Tile) {}
-    
     func showMoveOptions() {
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
@@ -171,40 +89,30 @@ class Actor: SKSpriteNode {
            t.shader = Tile.highlightShader
         }
     }
-       
-    func showAttackOptions() {
-        if self.isExausted {
-            print("\(self.name!) is exausted")
-            return
-        }
-        guard let grid = GameManager.shared.grid else { return }
-        grid.removeHighlights()
-        let tiles = grid.getTilesAround(tile: self.tile, distance: 1)
-        for t in tiles {
-            grid.ableTiles.append(t)
-        }
-        for t in grid.ableTiles {
-           t.shader = Tile.attackHighlightShader
-        }
+    
+    func move(tile: Tile) {
+        self.tile.character = nil
+        self.position = tile.position
+        self.tile = tile
+        self.movesLeft = 0 // TO-DO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func showSpecialAttackOptions() {
-        if self.isExausted {
-            print("\(self.name!) is exausted")
-            return
-        }
-        guard let grid = GameManager.shared.grid else { return }
+    func makeValidMove(tile: Tile?) -> Bool {
+        guard let grid = GameManager.shared.grid else { return false }
+        if tile == nil { return false }
+        if !(grid.ableTiles.contains(tile!)) { return false }
         grid.removeHighlights()
-        let tiles = grid.getTilesAround(tile: self.tile, distance: 1)
-        for t in tiles {
-            if t.isEmpty && !t.isOcupied {
-                grid.ableTiles.append(t)
-            }
-        }
-        for t in grid.ableTiles {
-            t.isSpecialHighlighted = true
-        }
+        self.move(tile: tile!)
+        return true
     }
+    
+    func basicAttack(target: Actor) -> Bool { return false }
+    
+    func specialAttack(toTile: Tile) {}
+       
+    func showAttackOptions() {}
+    
+    func showSpecialAttackOptions() {}
     
     func stun(turns: Int) {
         movesLeft = 0

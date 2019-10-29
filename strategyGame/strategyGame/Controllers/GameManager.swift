@@ -161,13 +161,13 @@ class GameManager {
             } else {
                 deselectCharacter()
             }
-        } else if self.mode == .attack && tile.character != nil {
+        } else if self.mode == .attack && grid.ableTiles.contains(tile) {
             if currentCharacter.basicAttack(target: tile.character!) {
                 deselectCharacter()
             } else {
                 selectCharacter(character: tile.character!) // nao funciona para monstros
             }
-        } else if self.mode == .specialAttack && tile.character == nil {
+        } else if self.mode == .specialAttack && grid.ableTiles.contains(tile) {
             currentCharacter.specialAttack(toTile: tile)
             self.currentCharacter = nil
             grid?.removeHighlights()

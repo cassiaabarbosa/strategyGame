@@ -181,12 +181,13 @@ class Grid: SKNode {
         return neighborsAreas
     }
     
-    func getStraightDistance(from tile1: Tile, to tile2: Tile) -> UInt? {
+    func getDirection(from tile1: Tile, to tile2: Tile) -> Int? {
+        // 0: up, 1: down, 2: left, 3: right
         if tile1.coord.col != tile2.coord.col && tile1.coord.row != tile2.coord.row { return nil }
         if tile1.coord.col == tile2.coord.col {
-            return Int.Magnitude(tile1.coord.col - tile2.coord.col)
+            return tile1.coord.row - tile2.coord.row > 0 ? 0 : 1
         } else {
-            return Int.Magnitude(tile1.coord.row - tile2.coord.row)
+            return tile1.coord.col - tile2.coord.col > 0 ? 2 : 3
         }
     }
     
