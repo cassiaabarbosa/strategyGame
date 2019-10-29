@@ -31,7 +31,7 @@ class GameManager {
             }
         }
     }
-    var grid: Grid! // has to be garanteed because of awake()
+    var grid: Grid! // has to be guaranteed because of awake()
     var currentCharacter: Actor? {
         didSet {
             if oldValue == nil { return }
