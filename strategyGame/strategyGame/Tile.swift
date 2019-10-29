@@ -78,6 +78,47 @@ class Tile: SKSpriteNode {
         super.init(texture: SKTexture(imageNamed: "Tile"), color: .white, size: CGSize(width: rectSide, height: rectSide))
         self.position = CGPoint(x: CGFloat(col) * rectSide + rectSide/2, y: CGFloat(row) * -rectSide + rectSide/2)
         self.zPosition = -5
+        
+        switch type {
+        case "M":
+            let melee = Melee(tile: self)
+            self.character = melee
+            GameManager.shared.players.append(melee)
+        case "R":
+            let ranged = Ranged(tile: self)
+            self.character = ranged
+            GameManager.shared.players.append(ranged)
+        case "T":
+            let trapper = Trapper(tile: self)
+            self.character = trapper
+            GameManager.shared.players.append(trapper)
+        case "c":
+            let heavy = HeavyEnemy(tile: self)
+            self.character = heavy
+            GameManager.shared.enemies.append(heavy)
+        case "v":
+            let sprinter = SprinterEmeny(tile: self)
+            self.character = sprinter
+            GameManager.shared.enemies.append(sprinter)
+        case "m":
+            let mountain = Mountain(tile: self)
+            self.prop = mountain
+            GameManager.shared.mountains.append(mountain)
+        case "h":
+            let hole = Hole(tile: self)
+            self.prop = hole
+            GameManager.shared.holes.append(hole)
+        case "s":
+            let sun = Objective(tile: self, type: .sun)
+            self.prop = sun
+            GameManager.shared.objectives.append(sun)
+        case "l":
+            let moon = Objective(tile: self, type: .moon)
+            self.prop = moon
+            GameManager.shared.objectives.append(moon)
+        default:
+            self.prop = nil
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
