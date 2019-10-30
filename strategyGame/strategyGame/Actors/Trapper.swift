@@ -25,7 +25,6 @@ class Trapper: Actor {
     
     override func showAttackOptions() {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return
         }
         guard let grid = GameManager.shared.grid else { return }
@@ -41,7 +40,6 @@ class Trapper: Actor {
     
     override func basicAttack(target: Actor) -> Bool {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return false
         }
         func push(character: Actor, to tile: Tile?) {
@@ -62,7 +60,7 @@ class Trapper: Actor {
             } else if tile!.prop as? Objective != nil {
                 character.takeDamage(damage: 1)
             } else {
-                print("Actor::push(): prop didn't conform to any Element")
+                print("Trapper::push(): prop didn't conform to any Element")
             }
         }
         guard let grid = GameManager.shared.grid else { return false }
@@ -86,7 +84,6 @@ class Trapper: Actor {
     
     override func showSpecialAttackOptions() {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return
         }
         guard let grid = GameManager.shared.grid else { return }

@@ -19,7 +19,6 @@ class Melee: Actor {
     
     override func showAttackOptions() {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return
         }
         guard let grid = GameManager.shared.grid else { return }
@@ -35,7 +34,6 @@ class Melee: Actor {
     
     override func basicAttack(target: Actor) -> Bool {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return false
         }
         func push(character: Actor, to tile: Tile?) {
@@ -80,7 +78,6 @@ class Melee: Actor {
     
     override func showSpecialAttackOptions() {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return
         }
         guard let grid = GameManager.shared.grid else { return }
@@ -140,7 +137,6 @@ class Melee: Actor {
     
     override func specialAttack(toTile: Tile) {
         if self.isExausted {
-            print("\(self.name!) is exausted")
             return
         }
         func push(character: Actor, to tile: Tile?) {
@@ -161,7 +157,7 @@ class Melee: Actor {
             } else if tile!.prop as? Objective != nil {
                 character.takeDamage(damage: 1)
             } else {
-                print("Actor::push(): prop didn't conform to any Element")
+                print("Melee::push(): prop didn't conform to any Element")
             }
         }
         guard let grid = GameManager.shared.grid else { return }
