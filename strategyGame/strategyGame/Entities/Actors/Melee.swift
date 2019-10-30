@@ -135,7 +135,7 @@ class Melee: Actor {
         }
     }
     
-    override func specialAttack(toTile: Tile) {
+    override func specialAttack(tile: Tile) {
         if self.isExausted {
             return
         }
@@ -161,11 +161,11 @@ class Melee: Actor {
             }
         }
         guard let grid = GameManager.shared.grid else { return }
-        if toTile.isWalkable {
-            move(tile: toTile)
-        } else if let target = toTile.character {
+        if tile.isWalkable {
+            move(tile: tile)
+        } else if let target = tile.character {
             // attacking a character
-            switch grid.getDirection(from: self.tile, to: toTile) {
+            switch grid.getDirection(from: self.tile, to: tile) {
             case 0: // up
                 move(tile: grid.getDownTile(tile: target.tile)!)
                 push(character: target, to: grid.getUpTile(tile: target.tile))

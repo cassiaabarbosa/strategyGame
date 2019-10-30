@@ -11,7 +11,7 @@ class Tile: SKSpriteNode {
     
     let id: Int
     var character: Actor?
-    var prop: Element?
+    var prop: Entity?
     var weight: Int = 1000
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")

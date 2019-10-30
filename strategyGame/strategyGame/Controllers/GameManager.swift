@@ -107,6 +107,14 @@ class GameManager {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func addSelf(_ : Entity) {
+        
+    }
+    
+    func removeSelf(_ : Entity) {
+        
+    }
+    
     func endTurn() {
         Button.unpressAll()
         grid?.removeHighlights()
@@ -124,58 +132,61 @@ class GameManager {
         }
     }
     
-    func touchTile(tile: Tile) { //função que mostra qual tile foi clicado
+    func touchTile(tile: Tile) {
         func selectCharacter(character: Actor) {
             Button.unpressAll()
             Button.showAll()
             grid?.removeHighlights()
             currentCharacter = character
-            self.mode = .move
+            if character.movesLeft == 0 {
+                self.mode = .attack
+            } else {
+                self.mode = .move
+            }
         }
         
         func deselectCharacter() {
             Button.unpressAll()
             Button.hideAttackButtons()
-            grid?.removeHighlights()
+            mode = .clear
             self.currentCharacter = nil
         }
         
-        guard let currentCharacter = self.currentCharacter else {
-            if let char = tile.character {
-                selectCharacter(character: char)
-            }
-            return
-        }
-        // verificar se o tile atacado está nos ableTiles
-        // se não, desselecionar personagem
-        // switch case (.mode)
-        // se .attack: ataca o tile e o tile passa o ataque para o que for que estiver em cima dele
-        // se nao tiver nada em cima do tile, o personagem não ataca/ não fica exausto
-        if tile.character == currentCharacter {
-            deselectCharacter()
-        } else if tile.character == nil && self.mode == .move {
-            if currentCharacter.makeValidMove(tile: tile) {
-                if let trap = tile.prop as? Trap {
-                    trap.activateTrap(character: currentCharacter)
+        // se .clear, selecionar tile...
+        if mode == .clear {
+            if tile.character != nil {
+                if tile.character is Enemy {
+                    return
+                } else {
+                    // se tile tiver personagem -> selectCharacter, .move, return
+                    if tile.character is Enemy { return }
+                    selectCharacter(character: tile.character!)
                 }
-            } else {
-                deselectCharacter()
             }
-        } else if self.mode == .attack && grid.ableTiles.contains(tile) {
-            if currentCharacter.basicAttack(target: tile.character!) {
-                deselectCharacter()
-            } else {
-                selectCharacter(character: tile.character!) // nao funciona para monstros
-            }
-        } else if self.mode == .specialAttack && grid.ableTiles.contains(tile) {
-            currentCharacter.specialAttack(toTile: tile)
-            self.currentCharacter = nil
-            grid?.removeHighlights()
-        } else if tile.character != nil {
-            selectCharacter(character: tile.character!)
-        } else {
-            deselectCharacter()
         }
+        // .move, .attack e .specialAttack dependem de grid.ableTiles, logo...
+        else if grid.ableTiles.contains(tile) {
+            if mode == .move {
+                self.currentCharacter?.move(tile: tile)
+                mode = .attack
+            } else if mode == .attack {
+                if let target = tile.character {
+                    self.currentCharacter?.basicAttack(target: target) // make this take on tile and remove if let
+                    deselectCharacter()
+                }
+            } else if mode == .specialAttack {
+                self.currentCharacter?.specialAttack(tile: tile)
+                deselectCharacter()
+            }
+        } else {
+            if let character = tile.character {
+                if tile.character is Enemy { return }
+                selectCharacter(character: character)
+            } else {
+                deselectCharacter()
+            }
+        }
+        // activate trap in move()
     }
     
     func OnAttackButtonPress() {

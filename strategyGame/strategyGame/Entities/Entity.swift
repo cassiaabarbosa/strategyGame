@@ -9,19 +9,17 @@
 import Foundation
 import SpriteKit
 
-class Element: SKSpriteNode {
+class Entity: SKSpriteNode {
     
     var coord: Coord {
         return tile.coord
     }
     var sprite: SKTexture
-    public private(set) var qntdTurnStunned: Int
-    public private(set) var tile: Tile
+    public internal(set) var tile: Tile
 
-    init(name: String, sprite: SKTexture, tile: Tile, qntdTurnStunned: Int) {
+    init(name: String, sprite: SKTexture, tile: Tile) {
         self.sprite = sprite
         self.tile = tile
-        self.qntdTurnStunned = qntdTurnStunned
         super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
         self.name = name
         self.position = tile.position

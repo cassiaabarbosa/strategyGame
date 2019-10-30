@@ -9,10 +9,10 @@
 import Foundation
 import SpriteKit
 
-class Hole: Element {
+class Hole: Entity {
     
     init(tile: Tile) {
-        super.init(name: "Hole", sprite: SKTexture(imageNamed: "00_hole"), tile: tile, qntdTurnStunned: 1)
+        super.init(name: "Hole", sprite: SKTexture(imageNamed: "00_hole"), tile: tile)
             let animation = SKAction.animate(with: AnimationHandler.shared.holeFrames, timePerFrame: 1/TimeInterval(12))
             self.run(SKAction.repeatForever(animation))
     }

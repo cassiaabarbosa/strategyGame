@@ -99,14 +99,14 @@ class Trapper: Actor {
         }
     }
     
-    override func specialAttack(toTile: Tile) {
+    override func specialAttack(tile: Tile) {
         guard let grid = GameManager.shared.grid else { return }
         GameManager.shared.scene.setTrapSound.run(SKAction.play())
-        if (toTile.isSpecialHighlighted == true) {
+        if (tile.isSpecialHighlighted == true) {
             if (trapNumber > 0) {
                 trapNumber -= 1
-                let trap = Trap(tile: grid.tiles[toTile.id])
-                toTile.prop = trap
+                let trap = Trap(tile: grid.tiles[tile.id])
+                tile.prop = trap
                 grid.addChild(trap)
 
             }

@@ -9,22 +9,13 @@
 import Foundation
 import SpriteKit
 
-class Actor: SKSpriteNode {
+class Actor: Entity {
     
-    var coord: Coord {
-        return tile.coord
-    }
-    var sprite: SKTexture
     public private(set) var movement: Int
     public private(set) var movesLeft: Int
     public private(set) var damage: Int
     public private(set) var health: Int
     public private(set) var attackRange: Int
-    public private(set) var tile: Tile {
-        didSet {
-            tile.character = self
-        }
-    }
     internal var isExausted: Bool = false
     var breadcrumbs: [Tile] = [Tile]()
     private var stunned: Int = 0
@@ -34,13 +25,10 @@ class Actor: SKSpriteNode {
     init(name: String, movement: Int, damage: Int, health: Int, attackRange: Int, sprite: SKTexture, tile: Tile) {
         self.movement = movement
         self.movesLeft = movement
-        self.sprite = sprite
         self.damage = damage
         self.health = health
         self.attackRange = attackRange
-        self.tile = tile
-        super.init(texture: sprite, color: UIColor.clear, size: sprite.size())
-        self.name = name
+        super.init(name: name, sprite: sprite, tile: tile)
         self.position = tile.position
         self.size = tile.size
         self.isUserInteractionEnabled = false
@@ -94,6 +82,7 @@ class Actor: SKSpriteNode {
         self.tile.character = nil
         self.position = tile.position
         self.tile = tile
+        tile.character = self
         self.movesLeft = 0 // TO-DO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
@@ -108,7 +97,7 @@ class Actor: SKSpriteNode {
     
     func basicAttack(target: Actor) -> Bool { return false }
     
-    func specialAttack(toTile: Tile) {}
+    func specialAttack(tile: Tile) {}
        
     func showAttackOptions() {}
     

@@ -9,10 +9,10 @@
 import Foundation
 import SpriteKit
 
-class Mountain: Element {
+class Mountain: Entity {
     
     init(tile: Tile) {
-        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "00_mountain"), tile: tile, qntdTurnStunned: 1)
+        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "00_mountain"), tile: tile)
         let animation = SKAction.animate(with: AnimationHandler.shared.mountainFrames, timePerFrame: 1/TimeInterval(18))
         self.run(SKAction.repeatForever(animation))
         self.zPosition = 2

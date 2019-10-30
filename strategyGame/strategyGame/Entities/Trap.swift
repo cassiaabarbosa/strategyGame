@@ -9,10 +9,10 @@
 import Foundation
 import SpriteKit
 
-class Trap: Element {
+class Trap: Entity {
     
     init(tile: Tile) {
-        super.init(name: "Trap", sprite: SKTexture(imageNamed: "trap"), tile: tile, qntdTurnStunned: 1)
+        super.init(name: "Trap", sprite: SKTexture(imageNamed: "trap"), tile: tile)
         self.scale(to: CGSize(width: 55, height: 55))
     }
     

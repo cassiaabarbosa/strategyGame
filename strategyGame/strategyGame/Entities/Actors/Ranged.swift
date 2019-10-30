@@ -63,7 +63,7 @@ class Ranged: Actor {
         }
     }
     
-    override func specialAttack(toTile: Tile) {
+    override func specialAttack(tile: Tile) {
         if self.isExausted {
             return
         }
@@ -90,20 +90,20 @@ class Ranged: Actor {
         }
         guard let grid = GameManager.shared.grid else { return }
         // damage target
-        if let target = toTile.character {
+        if let target = tile.character {
             target.takeDamage(damage: self.damage)
         }
         // push adjacent tiles
-        if let upTarget = grid.getUpTile(tile: toTile)?.character {
+        if let upTarget = grid.getUpTile(tile: tile)?.character {
             push(character: upTarget, to: grid.getUpTile(tile: upTarget.tile))
         }
-        if let downTarget = grid.getDownTile(tile: toTile)?.character {
+        if let downTarget = grid.getDownTile(tile: tile)?.character {
             push(character: downTarget, to: grid.getDownTile(tile: downTarget.tile))
         }
-        if let leftTarget = grid.getLeftTile(tile: toTile)?.character {
+        if let leftTarget = grid.getLeftTile(tile: tile)?.character {
             push(character: leftTarget, to: grid.getLeftTile(tile: leftTarget.tile))
         }
-        if let rightTarget = grid.getRightTile(tile: toTile)?.character {
+        if let rightTarget = grid.getRightTile(tile: tile)?.character {
             push(character: rightTarget, to: grid.getRightTile(tile: rightTarget.tile))
         }
         grid.removeHighlights()

@@ -6,18 +6,18 @@ enum ObjectiveType {
     case moon
 }
 
-class Objective: Element {
+class Objective: Entity {
 
     public private(set) var hp: Int = 3
     
     init(tile: Tile, type: ObjectiveType) {
         switch type {
         case .sun:
-            super.init(name: "Sun", sprite: SKTexture(imageNamed: "00_sun"), tile: tile, qntdTurnStunned: 0)
+            super.init(name: "Sun", sprite: SKTexture(imageNamed: "00_sun"), tile: tile)
             let animation = SKAction.animate(with: AnimationHandler.shared.sunFrames, timePerFrame: 1/TimeInterval(12))
             self.run(SKAction.repeatForever(animation))
         case .moon:
-            super.init(name: "Moon", sprite: SKTexture(imageNamed: "00_moons"), tile: tile, qntdTurnStunned: 0)
+            super.init(name: "Moon", sprite: SKTexture(imageNamed: "00_moons"), tile: tile)
             let animation = SKAction.animate(with: AnimationHandler.shared.moonFrames, timePerFrame: 1/TimeInterval(8))
             self.run(SKAction.repeatForever(animation))
         }
