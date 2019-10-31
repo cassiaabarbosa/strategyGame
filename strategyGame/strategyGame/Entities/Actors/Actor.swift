@@ -54,7 +54,7 @@ class Actor: Entity, Pushable {
     func showMoveOptions() {
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
-        if self.movesLeft == 0 { return }
+        if self.movesLeft == 0 || self.isExausted { return }
         let tiles = grid.getReachableTiles(fromTile: self.tile, moves: movesLeft)
         for t in tiles {
             grid.ableTiles.append(t)

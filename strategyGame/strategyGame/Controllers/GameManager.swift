@@ -80,6 +80,7 @@ class GameManager {
             } else {
                 players.append(actor)
             }
+            entity.tile.character = entity as? Actor
         } else {
             if let mountain = entity as? Mountain {
                 mountains.append(mountain)
@@ -88,6 +89,7 @@ class GameManager {
             } else if let objective = entity as? Objective {
                 objectives.append(objective)
             }
+            entity.tile.prop = entity
         }
         grid.addChild(entity)
     }
@@ -150,20 +152,16 @@ class GameManager {
             self.currentCharacter = nil
         }
         
-        // se .clear, selecionar tile...
         if mode == .clear {
             if tile.character != nil {
                 if tile.character is Enemy {
                     return
                 } else {
-                    // se tile tiver personagem -> selectCharacter, .move, return
                     if tile.character is Enemy { return }
                     selectCharacter(character: tile.character!)
                 }
             }
-        }
-        // .move, .attack e .specialAttack dependem de grid.ableTiles, logo...
-        else if grid.ableTiles.contains(tile) {
+        } else if grid.ableTiles.contains(tile) {
             if mode == .move {
                 self.currentCharacter?.walk(tile: tile)
                 mode = .attack
