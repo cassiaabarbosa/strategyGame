@@ -182,11 +182,11 @@ class GameManager {
         }
     }
     
-    func OnAttackButtonPress() {
+    func onAttackButtonPress() {
         self.mode = .attack
     }
     
-    func OnAttackButtonUnpress() {
+    func onAttackButtonUnpress() {
         if self.currentCharacter == nil {
             self.mode = .clear
         } else {
@@ -194,11 +194,11 @@ class GameManager {
         }
     }
     
-    func OnSpecialAttackButtonPress() {
+    func onSpecialAttackButtonPress() {
         self.mode = .specialAttack
     }
     
-    func OnSpecialAttackButtonUnpress() {
+    func onSpecialAttackButtonUnpress() {
         if self.currentCharacter == nil {
             self.mode = .clear
         } else {
@@ -206,7 +206,7 @@ class GameManager {
         }
     }
     
-    func OnEndTurnButtonPress() {
+    func onEndTurnButtonPress() {
         endTurn()
     }
     

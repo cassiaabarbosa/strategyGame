@@ -116,10 +116,6 @@ class Tile: SKSpriteNode {
         }
     }
     
-    func enterTile(entity: Entity) {
-        
-    }
-    
     func push(direction: Int) {
         let character = self.character
         let trap = self.prop as? Trap

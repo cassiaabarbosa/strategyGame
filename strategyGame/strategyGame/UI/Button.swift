@@ -41,8 +41,8 @@ class Button: SKSpriteNode {
         for i in (0..<Button.buttonList.count) {
             Button.buttonList[i].pressed = false
         }
-        GameManager.shared.OnAttackButtonUnpress()
-        GameManager.shared.OnSpecialAttackButtonUnpress()
+        GameManager.shared.onAttackButtonUnpress()
+        GameManager.shared.onSpecialAttackButtonUnpress()
     }
     
     static func showAll() {

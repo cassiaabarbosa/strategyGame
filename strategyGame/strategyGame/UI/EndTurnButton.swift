@@ -7,7 +7,7 @@ class EndTurnButton: Button {
     }
     
     override func press() {
-        GameManager.shared.OnEndTurnButtonPress()
+        GameManager.shared.onEndTurnButtonPress()
         
         self.pressed = true
         _ = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (_) in

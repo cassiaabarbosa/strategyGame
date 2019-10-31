@@ -30,6 +30,7 @@ class Actor: Entity, Pushable {
         self.attackRange = attackRange
         super.init(name: name, sprite: sprite, tile: tile)
         self.position = tile.position
+        self.zPosition = 10
         self.size = tile.size
         self.isUserInteractionEnabled = false
         tile.character = self
@@ -76,25 +77,31 @@ class Actor: Entity, Pushable {
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func push(to target: Tile, from sender: Tile) {
-        if target.isWalkable {
-            self.move(tile: target)
-        } else if target.character != nil {
+    private func enterTile(entering: Tile, from sender: Tile) {
+        if entering.isWalkable {
+            self.move(tile: entering)
+        } else if entering.character != nil {
             self.takeDamage(damage: 1)
-            target.character?.takeDamage(damage: 1)
-        } else if target.prop is Hole {
-            self.die()
+            entering.character?.takeDamage(damage: 1)
+            self.push(to: sender, from: entering)
+        } else if entering.prop is Hole {
+            self.move(tile: entering)
             GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
-        } else if target.prop is Mountain {
+            self.run(SKAction.scale(by: 0.2, duration: 2))
+            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
+                self.die()
+            }
+        } else if entering.prop is Mountain || entering.prop is Objective {
             self.takeDamage(damage: 1)
-        } else if let trap = target.prop as? Trap {
-            self.move(tile: target)
+             self.push(to: sender, from: entering)
+        } else if let trap = entering.prop as? Trap {
+            self.move(tile: entering)
             trap.activateTrap(character: self)
-        } else if target.prop is Objective {
-            self.takeDamage(damage: 1)
-        } else {
-            print("Actor::push(): Target tile was not especified")
         }
+    }
+    
+    func push(to target: Tile, from sender: Tile) {
+        self.enterTile(entering: target, from: sender)
     }
     
     func basicAttack(tile: Tile) {}
