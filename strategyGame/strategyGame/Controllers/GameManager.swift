@@ -20,45 +20,11 @@ class GameManager {
     
     static let shared: GameManager = GameManager()
     var scene: GameScene!
-    var enemies: [Enemy] = [Enemy]() {
-        willSet {
-            if enemies.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var players: [Actor] = [Actor]() {
-        willSet {
-            if players.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var mountains: [Mountain] = [Mountain]() {
-        willSet {
-            if mountains.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    
-    var holes: [Hole] = [Hole]() {
-        willSet {
-            if holes.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var objectives: [Objective] = [Objective]() {
-        willSet {
-            if objectives.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-            if newValue.isEmpty {
-                print("GAME OVER")
-            }
-        }
-    }
+    var enemies: [Enemy] = [Enemy]()
+    var players: [Actor] = [Actor]()
+    var mountains: [Mountain] = [Mountain]()
+    var holes: [Hole] = [Hole]()
+    var objectives: [Objective] = [Objective]()
     var grid: Grid! // has to be guaranteed because of awake()
     var currentCharacter: Actor? {
         didSet {
@@ -107,12 +73,44 @@ class GameManager {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addSelf(_ : Entity) {
-        
+    func addSelf(_ entity: Entity) {
+        if let actor = entity as? Actor {
+            if let enemy = entity as? Enemy {
+                enemies.append(enemy)
+            } else {
+                players.append(actor)
+            }
+        } else {
+            if let mountain = entity as? Mountain {
+                mountains.append(mountain)
+            } else if let hole = entity as? Hole {
+                holes.append(hole)
+            } else if let objective = entity as? Objective {
+                objectives.append(objective)
+            }
+        }
+        grid.addChild(entity)
     }
     
-    func removeSelf(_ : Entity) {
-        
+    func removeSelf(_ entity: Entity) {
+        if let actor = entity as? Actor {
+            if let enemy = entity as? Enemy {
+                enemies.remove(at: enemies.firstIndex(of: enemy)!)
+            } else {
+                players.remove(at: players.firstIndex(of: actor)!)
+            }
+            actor.tile.character = nil
+        } else {
+            if let mountain = entity as? Mountain {
+                mountains.remove(at: mountains.firstIndex(of: mountain)!)
+            } else if let hole = entity as? Hole {
+                holes.remove(at: holes.firstIndex(of: hole)!)
+            } else if let objective = entity as? Objective {
+               objectives.remove(at: objectives.firstIndex(of: objective)!)
+            }
+            entity.tile.prop = nil
+        }
+        entity.removeFromParent()
     }
     
     func endTurn() {
@@ -167,13 +165,11 @@ class GameManager {
         // .move, .attack e .specialAttack dependem de grid.ableTiles, logo...
         else if grid.ableTiles.contains(tile) {
             if mode == .move {
-                self.currentCharacter?.move(tile: tile)
+                self.currentCharacter?.walk(tile: tile)
                 mode = .attack
             } else if mode == .attack {
-                if let target = tile.character {
-                    self.currentCharacter?.basicAttack(target: target) // make this take on tile and remove if let
-                    deselectCharacter()
-                }
+                self.currentCharacter?.basicAttack(tile: tile)
+                deselectCharacter()
             } else if mode == .specialAttack {
                 self.currentCharacter?.specialAttack(tile: tile)
                 deselectCharacter()
@@ -186,7 +182,6 @@ class GameManager {
                 deselectCharacter()
             }
         }
-        // activate trap in move()
     }
     
     func OnAttackButtonPress() {
@@ -228,7 +223,7 @@ class GameManager {
             enemy.findAGoal()
             if !enemy.breadcrumbs.isEmpty {
                 for tile in 0...enemy.breadcrumbs.count - 1 {
-                    enemy.move(tile: enemy.breadcrumbs[tile])
+                    enemy.walk(tile: enemy.breadcrumbs[tile])
                 }
                 enemy.breadcrumbs.removeAll()
             }
@@ -237,7 +232,7 @@ class GameManager {
                 guard let objectiveTile: Tile = enemy.objective else { fatalError("404 - ObjectiveTile not founded in GameManger code!") }
                 if objectiveTile.character != nil {
                     guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
-                    _ = enemy.basicAttack(target: player)
+                    _ = enemy.basicAttack(tile: player.tile)
                 }
                 if let _ = objectiveTile.prop as? Objective {
                     guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("404 - Player not founded in GameManger code!") }
@@ -246,6 +241,5 @@ class GameManager {
             }
             self.beginTurn()
         }))
-        
     }
 }

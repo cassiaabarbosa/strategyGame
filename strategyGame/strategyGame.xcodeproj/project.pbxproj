@@ -32,6 +32,7 @@
 		8C205404235A1590004F73E3 /* AttackHighlightShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */; };
 		8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205405235A4C97004F73E3 /* AttackButton.swift */; };
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
+		8C4816C4236A359C0073072B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4816C3236A359C0073072B /* Protocols.swift */; };
 		8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C871C29235F824200353C40 /* ExaustedShader.fsh */; };
 		8C871C2E235FA63600353C40 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */; };
@@ -95,6 +96,7 @@
 		8C205403235A1590004F73E3 /* AttackHighlightShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = AttackHighlightShader.fsh; sourceTree = "<group>"; };
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C205408235A54B5004F73E3 /* AnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHandler.swift; sourceTree = "<group>"; };
+		8C4816C3236A359C0073072B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		8C871C29235F824200353C40 /* ExaustedShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ExaustedShader.fsh; sourceTree = "<group>"; };
 		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
@@ -142,6 +144,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C0DCCB8236A1D4F0008573C /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				CBA49FA3235B373A005E9C9C /* Trap.swift */,
+				4F0664B42360DD4E00568AD3 /* Objective.swift */,
+				CBA1A11D235BAF1100B61536 /* Hole.swift */,
+				CBA1A11B235BAEFC00B61536 /* Mountain.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		8C1CAC8523621BED007B7A6A /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,12 +261,9 @@
 		CB63D4B3235BA23D00E57A8D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				8C87DBDB2359E030001FB9DF /* Actors */,
 				CB63D4B1235BA04D00E57A8D /* Entity.swift */,
-				CBA49FA3235B373A005E9C9C /* Trap.swift */,
-				4F0664B42360DD4E00568AD3 /* Objective.swift */,
-				CBA1A11D235BAF1100B61536 /* Hole.swift */,
-				CBA1A11B235BAEFC00B61536 /* Mountain.swift */,
+				8C0DCCB8236A1D4F0008573C /* Objects */,
+				8C87DBDB2359E030001FB9DF /* Actors */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -280,6 +290,7 @@
 			children = (
 				8C87DBDC2359E23F001FB9DF /* Controllers */,
 				CB63D4B3235BA23D00E57A8D /* Entities */,
+				8C4816C3236A359C0073072B /* Protocols.swift */,
 				8C205408235A54B5004F73E3 /* AnimationHandler.swift */,
 				8C02075023565849009A8659 /* Grid.swift */,
 				8C87DBCE2358CBC9001FB9DF /* Tile.swift */,
@@ -441,6 +452,7 @@
 				8C87DBD62358F7DF001FB9DF /* Background.swift in Sources */,
 				CB9D6C75234E6BF7000FA87E /* AppDelegate.swift in Sources */,
 				CBDBB1B52356374B004F7AC1 /* HeavyEnemy.swift in Sources */,
+				8C4816C4236A359C0073072B /* Protocols.swift in Sources */,
 				CBDBB1B9235637D1004F7AC1 /* Melee.swift in Sources */,
 				8C205406235A4C97004F73E3 /* AttackButton.swift in Sources */,
 				CBDBB1BF235639B3004F7AC1 /* GameManager.swift in Sources */,

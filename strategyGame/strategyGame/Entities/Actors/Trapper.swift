@@ -24,9 +24,7 @@ class Trapper: Actor {
     }
     
     override func showAttackOptions() {
-        if self.isExausted {
-            return
-        }
+        if self.isExausted { return }
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
         let tiles = grid.getTilesAround(tile: self.tile, distance: 2)
@@ -38,54 +36,30 @@ class Trapper: Actor {
         }
     }
     
-    override func basicAttack(target: Actor) -> Bool {
-        if self.isExausted {
-            return false
-        }
-        func push(character: Actor, to tile: Tile?) {
-            if tile == nil { return }
-            if tile!.isWalkable {
-                character.move(tile: tile!)
-            } else if tile!.character != nil {
-                character.takeDamage(damage: 1)
-                tile!.character?.takeDamage(damage: 1)
-            } else if tile!.prop as? Hole != nil {
-                character.die()
-                GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
-            } else if tile!.prop as? Mountain != nil {
-                character.takeDamage(damage: 1)
-            } else if let trap = tile!.prop as? Trap {
-                character.move(tile: tile!)
-                trap.activateTrap(character: character)
-            } else if tile!.prop as? Objective != nil {
-                character.takeDamage(damage: 1)
-            } else {
-                print("Trapper::push(): prop didn't conform to any Element")
-            }
-        }
-        guard let grid = GameManager.shared.grid else { return false }
-        switch target.tile {
-        case grid.getUpTile(tile: self.tile):
-            push(character: target, to: grid.getUpTile(tile: target.tile))
-        case grid.getDownTile(tile: self.tile):
-            push(character: target, to: grid.getDownTile(tile: target.tile))
-        case grid.getLeftTile(tile: self.tile):
-            push(character: target, to: grid.getLeftTile(tile: target.tile))
-        case grid.getRightTile(tile: self.tile):
-            push(character: target, to: grid.getRightTile(tile: target.tile))
-        default:
-            return false
-        }
+    // attack should be verified in showAttackOptions(). if it highlights it is clickable
+    override func basicAttack(tile: Tile) {
         GameManager.shared.scene.quackSound.run(SKAction.play())
-        target.takeDamage(damage: self.damage)
+        tile.character?.takeDamage(damage: self.damage)
+        
+        guard let grid = GameManager.shared.grid else { return }
+        switch grid.getDirection(from: self.tile, to: tile) {
+        case 0:
+            tile.push(direction: 0)
+        case 1:
+            tile.push(direction: 1)
+        case 2:
+            tile.push(direction: 2)
+        case 3:
+            tile.push(direction: 3)
+        default:
+            print("Trapper::basicAttack(): switch exausted!")
+            return
+        }
         isExausted = true
-        return true
     }
     
     override func showSpecialAttackOptions() {
-        if self.isExausted {
-            return
-        }
+        if self.isExausted { return }
         guard let grid = GameManager.shared.grid else { return }
         grid.removeHighlights()
         let tiles = grid.getTilesAround(tile: self.tile, distance: 1)

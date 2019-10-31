@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class Actor: Entity {
+class Actor: Entity, Pushable {
     
     public private(set) var movement: Int
     public private(set) var movesLeft: Int
@@ -47,22 +47,8 @@ class Actor: Entity {
         HUD.updateHealthBars()
     }
     
-    func die() {
-        if let enemySelf = self as? Enemy {
-            if let index = GameManager.shared.enemies.firstIndex(of: enemySelf) {
-                GameManager.shared.enemies.remove(at: index)
-            } else {
-                print("Actor::die(): index of enemy returned nil")
-            }
-        } else {
-            if let index = GameManager.shared.players.firstIndex(of: self) {
-                GameManager.shared.players.remove(at: index)
-            } else {
-                print("Actor::die(): index of player returned nil")
-            }
-        }
-        self.tile.character = nil
-        self.removeFromParent()
+    private func die() {
+        GameManager.shared.removeSelf(self)
     }
     
     func showMoveOptions() {
@@ -78,24 +64,40 @@ class Actor: Entity {
         }
     }
     
-    func move(tile: Tile) {
+    private func move(tile: Tile) {
         self.tile.character = nil
         self.position = tile.position
         self.tile = tile
         tile.character = self
-        self.movesLeft = 0 // TO-DO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func makeValidMove(tile: Tile?) -> Bool {
-        guard let grid = GameManager.shared.grid else { return false }
-        if tile == nil { return false }
-        if !(grid.ableTiles.contains(tile!)) { return false }
-        grid.removeHighlights()
-        self.move(tile: tile!)
-        return true
+    func walk(tile: Tile) {
+        move(tile: tile)
+        self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func basicAttack(target: Actor) -> Bool { return false }
+    func push(to target: Tile, from sender: Tile) {
+        if target.isWalkable {
+            self.move(tile: target)
+        } else if target.character != nil {
+            self.takeDamage(damage: 1)
+            target.character?.takeDamage(damage: 1)
+        } else if target.prop is Hole {
+            self.die()
+            GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
+        } else if target.prop is Mountain {
+            self.takeDamage(damage: 1)
+        } else if let trap = target.prop as? Trap {
+            self.move(tile: target)
+            trap.activateTrap(character: self)
+        } else if target.prop is Objective {
+            self.takeDamage(damage: 1)
+        } else {
+            print("Actor::push(): Target tile was not especified")
+        }
+    }
+    
+    func basicAttack(tile: Tile) {}
     
     func specialAttack(tile: Tile) {}
        
