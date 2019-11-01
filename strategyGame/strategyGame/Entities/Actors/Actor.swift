@@ -77,37 +77,68 @@ class Actor: Entity, Pushable {
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    private func enterTile(entering: Tile, from sender: Tile) {
-        if entering.isWalkable {
-            self.move(tile: entering)
-        } else if entering.character != nil {
-            self.takeDamage(damage: 1)
-            entering.character?.takeDamage(damage: 1)
-            self.push(to: sender, from: entering)
-        } else if entering.prop is Hole {
-            self.move(tile: entering)
-            GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
-            self.run(SKAction.scale(by: 0.2, duration: 2))
-            Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (_) in
-                self.die()
+    func push(to target: Tile, from sender: Tile) {
+        
+        func pushAnimation(completion: @escaping () -> Void) {
+            let pushDuration = 0.5
+            self.run(SKAction.move(to: target.position, duration: pushDuration))
+            Timer.scheduledTimer(withTimeInterval: pushDuration, repeats: false) { (_) in
+                completion()
             }
-        } else if entering.prop is Mountain || entering.prop is Objective {
-            self.takeDamage(damage: 1)
-             self.push(to: sender, from: entering)
-        } else if let trap = entering.prop as? Trap {
-            self.move(tile: entering)
+        }
+        
+        func pushInteruptionAnimation(onHit: @escaping () -> Void, completion: @escaping () -> Void) {
+            let interuption = 0.2
+            self.run(SKAction.move(to: CGPoint.average(target.position, sender.position), duration: interuption))
+            Timer.scheduledTimer(withTimeInterval: interuption, repeats: false) { (_) in
+                onHit()
+                self.run(SKAction.move(to: sender.position, duration: interuption))
+                Timer.scheduledTimer(withTimeInterval: interuption, repeats: false) { (_) in
+                    completion()
+                }
+            }
+        }
+        
+        func fallInHoleAnimation(completion: @escaping () -> Void) {
+            let fallInHoleDuration = 1.2
+            self.run(SKAction.scale(by: 0.2, duration: fallInHoleDuration))
+            Timer.scheduledTimer(withTimeInterval: fallInHoleDuration, repeats: false) { (_) in
+                completion()
+            }
+        }
+        
+        if target.isWalkable {
+            pushAnimation {
+                self.move(tile: target)
+            }
+        } else if target.character != nil {
+            pushInteruptionAnimation(onHit: {
+                self.takeDamage(damage: 1)
+                target.character?.takeDamage(damage: 1)
+            }, completion: {})
+        } else if target.prop is Hole {
+            pushAnimation {
+                self.move(tile: target)
+                GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
+                fallInHoleAnimation {
+                    self.die()
+                }
+            }
+        } else if target.prop is Mountain || target.prop is Objective {
+            pushInteruptionAnimation(onHit: {
+                self.takeDamage(damage: 1)
+            }, completion: {})
+        } else if let trap = target.prop as? Trap {
+            self.move(tile: target)
             trap.activateTrap(character: self)
         }
-    }
-    
-    func push(to target: Tile, from sender: Tile) {
-        self.enterTile(entering: target, from: sender)
+
     }
     
     func basicAttack(tile: Tile) {}
     
     func specialAttack(tile: Tile) {}
-       
+    
     func showAttackOptions() {}
     
     func showSpecialAttackOptions() {}
@@ -126,5 +157,14 @@ class Actor: Entity, Pushable {
             self.movesLeft = movement
             self.isExausted = false
         }
+    }
+}
+
+extension CGPoint {
+    
+    static func average(_ point1: CGPoint, _ point2: CGPoint) -> CGPoint {
+        let xAvg = (point1.x + point2.x)/2
+        let yAvg = (point1.y + point2.y)/2
+        return CGPoint(x: xAvg, y: yAvg)
     }
 }
