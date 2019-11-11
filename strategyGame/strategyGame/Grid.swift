@@ -126,24 +126,66 @@ class Grid: SKNode {
     func getNeightborsTiles(tile: Tile) -> [Tile?] {
         var neighbors: [Tile?] = [Tile?]()
         
-        neighbors.append(getUpTile(tile: tile))
-        neighbors.append(getUpRightTile(tile: tile))
-        neighbors.append(getRightTile(tile: tile))
-        neighbors.append(getDownRightTile(tile: tile))
-        neighbors.append(getDownTile(tile: tile))
-        neighbors.append(getDownLeftTile(tile: tile))
-        neighbors.append(getLeftTile(tile: tile))
-        neighbors.append(getUpLeftTile(tile: tile))
+        if let up: Tile = getUpTile(tile: tile) {
+            if !up.hasObstacle {
+                neighbors.append(up)
+            }
+        }
+        
+        if let right: Tile = getRightTile(tile: tile) {
+            if !right.hasObstacle {
+                neighbors.append(right)
+            }
+        }
+        
+        if let down: Tile = getDownTile(tile: tile) {
+            if !down.hasObstacle {
+                neighbors.append(down)
+            }
+        }
+        
+        if let left: Tile = getLeftTile(tile: tile) {
+            if !left.hasObstacle {
+                neighbors.append(left)
+            }
+        }
+//        neighbors.append(getUpTile(tile: tile))
+//        neighbors.append(getRightTile(tile: tile))
+//        neighbors.append(getDownTile(tile: tile))
+//        neighbors.append(getLeftTile(tile: tile))
         neighbors.removeAll(where: { $0 == nil })
         return neighbors
     }
     
     func getMovableTiles(currenTile: Tile) -> [Tile] {
         var movableTiles: [Tile?] = [Tile?]()
-        movableTiles.append(getUpTile(tile: currenTile))
-        movableTiles.append(getRightTile(tile: currenTile))
-        movableTiles.append(getDownTile(tile: currenTile))
-        movableTiles.append(getLeftTile(tile: currenTile))
+        if let up: Tile = getUpTile(tile: currenTile) {
+            if up.weight <= 100 {
+                movableTiles.append(up)
+            }
+        }
+        
+        if let right: Tile = getRightTile(tile: currenTile) {
+            if right.weight <= 100 {
+                movableTiles.append(right)
+            }
+        }
+        
+        if let down: Tile = getDownTile(tile: currenTile) {
+            if down.weight <= 100 {
+                movableTiles.append(down)
+            }
+        }
+        
+        if let left: Tile = getLeftTile(tile: currenTile) {
+            if left.weight <= 100 {
+                movableTiles.append(left)
+            }
+        }
+//        movableTiles.append(getUpTile(tile: currenTile))
+//        movableTiles.append(getRightTile(tile: currenTile))
+//        movableTiles.append(getDownTile(tile: currenTile))
+//        movableTiles.append(getLeftTile(tile: currenTile))
         movableTiles.removeAll(where: { $0 == nil })
         guard let movableNeighbors: [Tile] = movableTiles as? [Tile] else { fatalError("404 - Movable Tiles not founded") }
         
@@ -161,9 +203,9 @@ class Grid: SKNode {
         neighborsAreas.append(neighbors)
         
         while true {
-            for index in 0...neighbors.count - 1 {
+            for index in 0 ..< neighbors.count {
                 let aux = getNeightborsTiles(tile: neighbors[index]!)
-                for adjacentTile in 0...aux.count - 1 {
+                for adjacentTile in 0 ..< aux.count {
                     if !allTiles.contains(aux[adjacentTile]) {
                         allTiles.append(aux[adjacentTile])
                         neighborsTiles.append(aux[adjacentTile])
