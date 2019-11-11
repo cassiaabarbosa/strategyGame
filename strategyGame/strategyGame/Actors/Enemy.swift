@@ -19,6 +19,10 @@ class Enemy: Actor {
         guard let grid: Grid = GameManager.shared.grid else { fatalError("404 - Grid not founded in SprinterEnemy archive!") }
         guard let tileMatrix: [[Tile]] = grid.getAllNeightborsTilesInGroup(tile: self.tile) as? [[Tile]] else { fatalError("404 - TaleMatrix not founded in SprinterEnemy code!") }
         pathfinded = Pathfinding.shared.getNearestGoal(currentTile: self.tile, tilesMatrix: tileMatrix)
+        var aux = [Int]()
+        for tile in pathfinded {
+            aux.append(tile.id)
+        }
         setWay()
     }
     
@@ -35,6 +39,7 @@ class Enemy: Actor {
                 }
             }
         }
+        
         self.isExausted = pathfinded.count == 0 ? false : true
     }
 }

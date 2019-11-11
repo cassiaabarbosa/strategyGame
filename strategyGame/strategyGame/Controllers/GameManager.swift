@@ -114,7 +114,7 @@ class GameManager {
         enemyTurn()
     }
     
-    private func beginTurn() {
+    func beginTurn() {
         for p in players {
             p.beginTurn()
         }
@@ -207,34 +207,9 @@ class GameManager {
     }
     
     func enemyTurn() {
-        for enemy in enemies {
-            enemyMove(enemy: enemy)
-        }
-    }
-    
-    func enemyMove(enemy: Enemy) {
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: ({_ in
-            enemy.findAGoal()
-            if !enemy.breadcrumbs.isEmpty {
-                for tile in 0...enemy.breadcrumbs.count - 1 {
-                    enemy.move(tile: enemy.breadcrumbs[tile])
-                }
-                enemy.breadcrumbs.removeAll()
-            }
-            
-            if !enemy.isExausted {
-                guard let objectiveTile: Tile = enemy.objective else { fatalError("404 - ObjectiveTile not founded in GameManger code!") }
-                if objectiveTile.character != nil {
-                    guard let player: Actor = objectiveTile.character else { fatalError("404 - Player not founded in GameManger code!") }
-                    _ = enemy.basicAttack(target: player)
-                }
-                if let _ = objectiveTile.prop as? Objective {
-                    guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("404 - Player not founded in GameManger code!") }
-                    _ = enemy.basicAttack(target: objective)
-                }
-            }
-            self.beginTurn()
-        }))
-        
+//        for enemy in enemies {
+//            MachineController.shared.enemyMove(enemy: enemy)
+//        }
+        MachineController.shared.enemyMove(enemies: enemies)
     }
 }

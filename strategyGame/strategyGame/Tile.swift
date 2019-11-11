@@ -17,6 +17,20 @@ class Tile: SKSpriteNode {
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
     static let specialAttackHighlightShader: SKShader = SKShader(fileNamed: "SpecialAttackHighlightShader.fsh")
     public private(set) var coord: Coord
+    var hasObstacle: Bool {
+        if prop as? Mountain != nil {
+            return true
+        }
+        
+        if prop as? Hole != nil {
+            return true
+        }
+        
+        if character as? Enemy != nil {
+            return true
+        }
+        return false
+    }
     var isOcupied: Bool {
         if character == nil {
             return false

@@ -34,7 +34,7 @@
 		8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C205408235A54B5004F73E3 /* AnimationHandler.swift */; };
 		8C871C2A235F824200353C40 /* ExaustedShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C871C29235F824200353C40 /* ExaustedShader.fsh */; };
 		8C871C2E235FA63600353C40 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */; };
+		8C87DBCB2358CBB1001FB9DF /* MachineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC82358CBB1001FB9DF /* MachineController.swift */; };
 		8C87DBCC2358CBB1001FB9DF /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBC92358CBB1001FB9DF /* StateMachine.swift */; };
 		8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBCA2358CBB1001FB9DF /* Actor.swift */; };
 		8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBCE2358CBC9001FB9DF /* Tile.swift */; };
@@ -96,7 +96,7 @@
 		8C205405235A4C97004F73E3 /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		8C205408235A54B5004F73E3 /* AnimationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHandler.swift; sourceTree = "<group>"; };
 		8C871C29235F824200353C40 /* ExaustedShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = ExaustedShader.fsh; sourceTree = "<group>"; };
-		8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineControlled.swift; sourceTree = "<group>"; };
+		8C87DBC82358CBB1001FB9DF /* MachineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineController.swift; sourceTree = "<group>"; };
 		8C87DBC92358CBB1001FB9DF /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		8C87DBCA2358CBB1001FB9DF /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		8C87DBCE2358CBC9001FB9DF /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
@@ -190,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				8C1CACA023621C4B007B7A6A /* Pathfinding.swift */,
-				8C87DBC82358CBB1001FB9DF /* MachineControlled.swift */,
 			);
 			path = Pathfinding;
 			sourceTree = "<group>";
@@ -241,6 +240,7 @@
 				CBDBB1BE235639B3004F7AC1 /* GameManager.swift */,
 				79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */,
 				79F8F4E923623C7400095A54 /* EndGameScene.swift */,
+				8C87DBC82358CBB1001FB9DF /* MachineController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 				8CC91D3C235E2AA900A3C9C7 /* EndTurnButton.swift in Sources */,
 				8C87DBCD2358CBB1001FB9DF /* Actor.swift in Sources */,
 				CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */,
-				8C87DBCB2358CBB1001FB9DF /* MachineControlled.swift in Sources */,
+				8C87DBCB2358CBB1001FB9DF /* MachineController.swift in Sources */,
 				8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */,
 				8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */,
 				8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */,
@@ -590,6 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PVKHG959FC;
+				DEVELOPMENT_TEAM = 93JG72P729;
 				INFOPLIST_FILE = strategyGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -608,6 +609,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PVKHG959FC;
+				DEVELOPMENT_TEAM = 93JG72P729;
 				INFOPLIST_FILE = strategyGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
