@@ -147,7 +147,7 @@ class Actor: SKSpriteNode {
         return true
     }
     
-    func basicAttack(target: Objective) -> Bool{
+    func basicAttack(target: Objective) -> Bool {
         if self.isExausted {
             print("\(self.name!) is exausted")
             return false

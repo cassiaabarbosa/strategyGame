@@ -16,15 +16,26 @@ class GameScene: SKScene {
     var hitWallSound: SKAudioNode!
     
     var templateSceneString: String = """
-.vm...\
-h...c.\
-......\
-..mm..\
-.M.v..\
-.h..m.\
-..T.R.\
-mm....
+..v...\
+....m.\
+.c....\
+m..m.s\
+.h..T.\
+mM..h.\
+.lRh..\
+......
 """
+    
+//    var templateSceneString: String = """
+//    .vm...\
+//    h...c.\
+//    ......\
+//    ..mm..\
+//    .M.v..\
+//    .h..m.\
+//    ..T.R.\
+//    mm....
+//    """
     
     override init(size: CGSize) {
         super.init(size: size)
