@@ -27,14 +27,17 @@ class Trap: Entity, Pushable {
         tile.prop = self
     }
     
-    func push(to target: Tile, from sender: Tile) {
+    func push(to target: Tile, from sender: Tile, completion: @escaping () -> Void) {
         if target.isWalkable {
             self.move(tile: target)
+            completion()
         } else if target.character != nil {
             self.activateTrap(character: target.character!)
+            completion()
         } else if target.prop is Hole {
             GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
             GameManager.shared.removeSelf(self)
+            completion()
         }
     }
     

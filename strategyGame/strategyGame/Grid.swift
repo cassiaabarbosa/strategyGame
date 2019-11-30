@@ -123,8 +123,13 @@ class Grid: SKNode {
         return getTile(col: downTile.coord.col + 1, row: downTile.coord.row)
     }
     
+    // Comment(Alex) - typo in func name
     func getNeightborsTiles(tile: Tile) -> [Tile?] {
-        var neighbors: [Tile?] = [Tile?]()
+        // Comment(Alex):
+        // Prefer this...
+        var neighbors = [Tile?]()
+        // Instead of
+        // var neighbors: [Tile?]() = [Tile?]()
         
         if let up: Tile = getUpTile(tile: tile) {
             if !up.hasObstacle {
@@ -149,16 +154,20 @@ class Grid: SKNode {
                 neighbors.append(left)
             }
         }
-//        neighbors.append(getUpTile(tile: tile))
-//        neighbors.append(getRightTile(tile: tile))
-//        neighbors.append(getDownTile(tile: tile))
-//        neighbors.append(getLeftTile(tile: tile))
+        
+        // Comment(Alex):
+        // this line is unnecessary because we never append a nil value
         neighbors.removeAll(where: { $0 == nil })
+        // Comment(Alex):
+        // Return type should be [Tile]?
+        // neighbours*
         return neighbors
     }
     
     func getMovableTiles(currenTile: Tile) -> [Tile] {
         var movableTiles: [Tile?] = [Tile?]()
+        // Comment(Alex):
+        // this should use getTilesAround() method
         if let up: Tile = getUpTile(tile: currenTile) {
             if up.weight <= 100 {
                 movableTiles.append(up)
@@ -182,21 +191,28 @@ class Grid: SKNode {
                 movableTiles.append(left)
             }
         }
-//        movableTiles.append(getUpTile(tile: currenTile))
-//        movableTiles.append(getRightTile(tile: currenTile))
-//        movableTiles.append(getDownTile(tile: currenTile))
-//        movableTiles.append(getLeftTile(tile: currenTile))
+        
+        // Comment(Alex):
+        // this line is unnecessary because we never append a nil value
         movableTiles.removeAll(where: { $0 == nil })
+        
+        // Comment(Alex):
+        // guard let fatalError is similar to force unwrapping, but is more verbose
         guard let movableNeighbors: [Tile] = movableTiles as? [Tile] else { fatalError("404 - Movable Tiles not founded") }
         
         return movableNeighbors
     }
     
+    // Coment(Alex) - typo in func name
+    // what is a group?
     func getAllNeightborsTilesInGroup(tile: Tile) -> [[Tile?]] {
-        var neighbors: [Tile?] = [Tile?]()
-        var neighborsAreas: [[Tile?]] = [[Tile?]]()
-        var neighborsTiles: [Tile?] = [Tile?]()
-        var allTiles: [Tile?] = [Tile?]()
+        // Comment(Alex):
+        // these shouldn't be optional
+        // poor variable naming
+        var neighbors = [Tile?]()
+        var neighborsAreas = [[Tile?]]()
+        var neighborsTiles = [Tile?]()
+        var allTiles = [Tile?]()
         
         neighbors = getNeightborsTiles(tile: tile)
         allTiles = neighbors
@@ -206,6 +222,7 @@ class Grid: SKNode {
             for index in 0 ..< neighbors.count {
                 let aux = getNeightborsTiles(tile: neighbors[index]!)
                 for adjacentTile in 0 ..< aux.count {
+                    // Comment(Alex) - make allTiles a Set and use union instead
                     if !allTiles.contains(aux[adjacentTile]) {
                         allTiles.append(aux[adjacentTile])
                         neighborsTiles.append(aux[adjacentTile])

@@ -97,18 +97,23 @@ class GameManager {
     func removeSelf(_ entity: Entity) {
         if let actor = entity as? Actor {
             if let enemy = entity as? Enemy {
-                enemies.remove(at: enemies.firstIndex(of: enemy)!)
+                guard let index = enemies.firstIndex(of: enemy) else { fatalError("removeSelf(): enemy index returned nil") }
+                enemies.remove(at: index)
             } else {
-                players.remove(at: players.firstIndex(of: actor)!)
+                guard let index = players.firstIndex(of: actor) else { fatalError("removeSelf(): player index returned nil") }
+                players.remove(at: index)
             }
             actor.tile.character = nil
         } else {
             if let mountain = entity as? Mountain {
-                mountains.remove(at: mountains.firstIndex(of: mountain)!)
+                guard let index = mountains.firstIndex(of: mountain) else { fatalError("removeSelf(): mountain index returned nil") }
+                mountains.remove(at: index)
             } else if let hole = entity as? Hole {
-                holes.remove(at: holes.firstIndex(of: hole)!)
+                guard let index = holes.firstIndex(of: hole) else { fatalError("removeSelf(): hole index returned nil") }
+                holes.remove(at: index)
             } else if let objective = entity as? Objective {
-               objectives.remove(at: objectives.firstIndex(of: objective)!)
+                guard let index = objectives.firstIndex(of: objective) else { fatalError("removeSelf(): hole index returned nil") }
+               objectives.remove(at: index)
             }
             entity.tile.prop = nil
         }
@@ -116,6 +121,10 @@ class GameManager {
     }
     
     func endTurn() {
+        if players.isEmpty || enemies.isEmpty {
+            scene.loadEndGameScene()
+            return
+        }
         Button.unpressAll()
         grid?.removeHighlights()
         self.currentCharacter = nil
@@ -166,10 +175,10 @@ class GameManager {
                 self.currentCharacter?.walk(tile: tile)
                 mode = .attack
             } else if mode == .attack {
-                self.currentCharacter?.basicAttack(tile: tile)
+                self.currentCharacter?.basicAttack(tile: tile, completion: {})
                 deselectCharacter()
             } else if mode == .specialAttack {
-                self.currentCharacter?.specialAttack(tile: tile)
+                self.currentCharacter?.specialAttack(tile: tile, completion: {})
                 deselectCharacter()
             }
         } else {
@@ -211,9 +220,6 @@ class GameManager {
     }
     
     func enemyTurn() {
-//        for enemy in enemies {
-//            MachineController.shared.enemyMove(enemy: enemy)
-//        }
         MachineController.shared.enemyMove(enemies: enemies)
     }
 }

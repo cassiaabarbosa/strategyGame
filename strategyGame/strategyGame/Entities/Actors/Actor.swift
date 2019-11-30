@@ -77,7 +77,7 @@ class Actor: Entity, Pushable {
         self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
     }
     
-    func push(to target: Tile, from sender: Tile) {
+    func push(to target: Tile, from sender: Tile, completion: @escaping () -> Void) {
         
         func pushAnimation(completion: @escaping () -> Void) {
             let pushDuration = 0.5
@@ -110,34 +110,40 @@ class Actor: Entity, Pushable {
         if target.isWalkable {
             pushAnimation {
                 self.move(tile: target)
+                completion()
             }
         } else if target.character != nil {
             pushInteruptionAnimation(onHit: {
                 self.takeDamage(damage: 1)
                 target.character?.takeDamage(damage: 1)
-            }, completion: {})
+            }, completion: {
+                completion()
+            })
         } else if target.prop is Hole {
             pushAnimation {
                 self.move(tile: target)
                 GameManager.shared.scene.cairBuracoSound.run(SKAction.play())
                 fallInHoleAnimation {
                     self.die()
+                    completion()
                 }
             }
         } else if target.prop is Mountain || target.prop is Objective {
             pushInteruptionAnimation(onHit: {
                 self.takeDamage(damage: 1)
-            }, completion: {})
+            }, completion: {
+                completion()
+            })
         } else if let trap = target.prop as? Trap {
             self.move(tile: target)
             trap.activateTrap(character: self)
+            completion()
         }
-
     }
     
-    func basicAttack(tile: Tile) {}
+    func basicAttack(tile: Tile, completion: @escaping () -> Void) {}
     
-    func specialAttack(tile: Tile) {}
+    func specialAttack(tile: Tile, completion: @escaping () -> Void) {}
     
     func showAttackOptions() {}
     

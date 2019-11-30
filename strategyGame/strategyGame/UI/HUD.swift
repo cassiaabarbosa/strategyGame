@@ -68,7 +68,7 @@ class HUD: SKShapeNode {
         }
         
         for i in (0..<GameManager.shared.objectives.count) {
-            HUD.objectiveHealthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: 10, y: -33), size: CGSize(width: 39*healthBarScale, height: 39*healthBarScale)), text: "\(GameManager.shared.objectives[i].hp)"))
+            HUD.objectiveHealthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: 10, y: -33), size: CGSize(width: 39*healthBarScale, height: 39*healthBarScale)), text: "\(GameManager.shared.objectives[i].health)"))
             
             HUD.objectiveHealthBarList[i].zPosition = 1.0
             
@@ -86,7 +86,7 @@ class HUD: SKShapeNode {
         }
         
         for i in (0..<GameManager.shared.objectives.count) {
-            HUD.objectiveHealthBarList[i].label.text = "\(GameManager.shared.objectives[i].hp)"
+            HUD.objectiveHealthBarList[i].label.text = "\(GameManager.shared.objectives[i].health)"
         }
     }
     

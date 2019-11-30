@@ -130,7 +130,7 @@ class Tile: SKSpriteNode {
         }
     }
     
-    func push(direction: Int) {
+    func push(direction: Int, completion: @escaping () -> Void) {
         let character = self.character
         let trap = self.prop as? Trap
         
@@ -150,8 +150,12 @@ class Tile: SKSpriteNode {
             return
         }
         if tile != nil {
-            character?.push(to: tile!, from: self)
-            trap?.push(to: tile!, from: self)
+            character?.push(to: tile!, from: self, completion: {
+                completion()
+            })
+            trap?.push(to: tile!, from: self, completion: {
+                completion()
+            })
         }
     }
     

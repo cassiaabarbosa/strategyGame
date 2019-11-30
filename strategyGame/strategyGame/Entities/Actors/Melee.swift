@@ -30,20 +30,28 @@ class Melee: Actor {
         }
     }
     
-    override func basicAttack(tile: Tile) {
+    override func basicAttack(tile: Tile, completion: @escaping () -> Void) {
         GameManager.shared.scene.canoSound.run(SKAction.play())
         tile.character?.takeDamage(damage: self.damage)
         
         guard let grid = GameManager.shared.grid else { return }
         switch grid.getDirection(from: self.tile, to: tile) {
         case 0:
-            tile.push(direction: 0)
+            tile.push(direction: 0, completion: {
+                completion()
+            })
         case 1:
-            tile.push(direction: 1)
+            tile.push(direction: 1, completion: {
+                completion()
+            })
         case 2:
-            tile.push(direction: 2)
+            tile.push(direction: 2, completion: {
+                completion()
+            })
         case 3:
-            tile.push(direction: 3)
+            tile.push(direction: 3, completion: {
+                completion()
+            })
         default:
             print("Melee::basicAttack(): switch exausted!")
             return
@@ -108,29 +116,38 @@ class Melee: Actor {
         }
     }
     
-    override func specialAttack(tile: Tile) {
+    override func specialAttack(tile: Tile, completion: @escaping () -> Void) {
         guard let grid = GameManager.shared.grid else { return }
         if tile.isWalkable {
             walk(tile: tile)
         } else if let target = tile.character {
             // attacking a character
+            target.takeDamage(damage: self.damage)
+            
             switch grid.getDirection(from: self.tile, to: tile) {
             case 0: // up
                 walk(tile: grid.getDownTile(tile: target.tile)!)
-                tile.push(direction: 0)
+                tile.push(direction: 0, completion: {
+                    completion()
+                })
             case 1: // down
                 walk(tile: grid.getUpTile(tile: target.tile)!)
-                tile.push(direction: 1)
+                tile.push(direction: 1, completion: {
+                    completion()
+                })
             case 2: // left
                 walk(tile: grid.getRightTile(tile: target.tile)!)
-                tile.push(direction: 2)
+                tile.push(direction: 2, completion: {
+                    completion()
+                })
             case 3: // right
                 walk(tile: grid.getLeftTile(tile: target.tile)!)
-                tile.push(direction: 3)
+                tile.push(direction: 3, completion: {
+                    completion()
+                })
             default:
                 return
             }
-            target.takeDamage(damage: self.damage)
         }
         grid.removeHighlights()
         isExausted = true

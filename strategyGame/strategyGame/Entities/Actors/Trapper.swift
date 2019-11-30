@@ -37,20 +37,28 @@ class Trapper: Actor {
     }
     
     // attack should be verified in showAttackOptions(). if it highlights it is clickable
-    override func basicAttack(tile: Tile) {
+    override func basicAttack(tile: Tile, completion: @escaping () -> Void) {
         GameManager.shared.scene.quackSound.run(SKAction.play())
         tile.character?.takeDamage(damage: self.damage)
         
         guard let grid = GameManager.shared.grid else { return }
         switch grid.getDirection(from: self.tile, to: tile) {
         case 0:
-            tile.push(direction: 0)
+            tile.push(direction: 0, completion: {
+                completion()
+            })
         case 1:
-            tile.push(direction: 1)
+            tile.push(direction: 1, completion: {
+                completion()
+            })
         case 2:
-            tile.push(direction: 2)
+            tile.push(direction: 2, completion: {
+                completion()
+            })
         case 3:
-            tile.push(direction: 3)
+            tile.push(direction: 3, completion: {
+                completion()
+            })
         default:
             print("Trapper::basicAttack(): switch exausted!")
             return
@@ -73,7 +81,7 @@ class Trapper: Actor {
         }
     }
     
-    override func specialAttack(tile: Tile) {
+    override func specialAttack(tile: Tile, completion: @escaping () -> Void) {
         guard let grid = GameManager.shared.grid else { return }
         GameManager.shared.scene.setTrapSound.run(SKAction.play())
         if (tile.isSpecialHighlighted == true) {
@@ -82,9 +90,9 @@ class Trapper: Actor {
                 let trap = Trap(tile: grid.tiles[tile.id])
                 tile.prop = trap
                 grid.addChild(trap)
-
             }
         }
         self.isExausted = true
+        completion()
     }
 }

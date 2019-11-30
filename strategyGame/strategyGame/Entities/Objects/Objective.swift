@@ -8,7 +8,7 @@ enum ObjectiveType {
 
 class Objective: Entity {
 
-    public private(set) var hp: Int = 3
+    public private(set) var health: Int = 3
     
     init(tile: Tile, type: ObjectiveType) {
         switch type {
@@ -24,20 +24,15 @@ class Objective: Entity {
     }
     
     func takeDamage() {
-        self.hp -= 1
-        if hp == 0 {
+        self.health -= 1
+        if health == 0 {
             self.destroy()
         }
+        HUD.updateHealthBars()
     }
     
     func destroy() {
-        if let index = GameManager.shared.objectives.firstIndex(of: self) {
-            GameManager.shared.objectives.remove(at: index)
-        } else {
-            print("Objective::destroy(): index of objective returned nil")
-        }
-        self.removeFromParent()
-        self.tile.prop = nil
+        GameManager.shared.removeSelf(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

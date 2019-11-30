@@ -34,11 +34,12 @@ class Ranged: Actor {
         }
     }
     
-    override func basicAttack(tile: Tile) {
+    override func basicAttack(tile: Tile, completion: @escaping () -> Void) {
         guard GameManager.shared.grid != nil else { return }
         GameManager.shared.scene.cameraSound.run(SKAction.play())
         tile.character?.takeDamage(damage: self.damage)
         isExausted = true
+        completion()
         return
     }
     
@@ -56,7 +57,7 @@ class Ranged: Actor {
         }
     }
     
-    override func specialAttack(tile: Tile) {
+    override func specialAttack(tile: Tile, completion: @escaping () -> Void) {
         guard let grid = GameManager.shared.grid else { return }
         // damage target
         if let target = tile.character {
@@ -64,16 +65,24 @@ class Ranged: Actor {
         }
         // push adjacent tiles
         if let upTile = grid.getUpTile(tile: tile) {
-            upTile.push(direction: 0)
+            upTile.push(direction: 0, completion: {
+                completion()
+            })
         }
         if let downTile = grid.getDownTile(tile: tile) {
-            downTile.push(direction: 1)
+            downTile.push(direction: 1, completion: {
+                completion()
+            })
         }
         if let leftTile = grid.getLeftTile(tile: tile) {
-            leftTile.push(direction: 2)
+            leftTile.push(direction: 2, completion: {
+                completion()
+            })
         }
         if let rightTile = grid.getRightTile(tile: tile) {
-            rightTile.push(direction: 3)
+            rightTile.push(direction: 3, completion: {
+                completion()
+            })
         }
         grid.removeHighlights()
         isExausted = true

@@ -74,9 +74,9 @@ mM..h.\
                     } else {
                         button.press()
                         
-                        if GameManager.shared.players.isEmpty || GameManager.shared.enemies.isEmpty {
-                            loadEndGameScene()
-                        }
+//                        if GameManager.shared.players.isEmpty || GameManager.shared.enemies.isEmpty {
+//                            loadEndGameScene()
+//                        }
                     }
                 }
             }
