@@ -220,6 +220,8 @@ class GameManager {
     }
     
     func enemyTurn() {
-        MachineController.shared.enemyMove(enemies: enemies)
+        MachineController.shared.enemyMove(enemies: enemies, completion: {
+            self.beginTurn()
+        })
     }
 }

@@ -20,6 +20,7 @@ class Enemy: Actor {
         tile.character?.takeDamage(damage: self.damage)
         if let objective = tile.prop as? Objective {
             objective.takeDamage()
+            completion()
         }
         guard let grid = GameManager.shared.grid else { return }
         switch grid.getDirection(from: self.tile, to: tile) {

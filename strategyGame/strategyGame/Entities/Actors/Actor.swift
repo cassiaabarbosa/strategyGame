@@ -74,7 +74,7 @@ class Actor: Entity, Pushable {
     
     func walk(tile: Tile) {
         move(tile: tile)
-        self.movesLeft = 0 // TODO: substituir quando implementado o pathfinding (ir decrementando até chegar em zero)
+        self.movesLeft = 0 // TODO: ir decrementando até chegar em zero
     }
     
     func push(to target: Tile, from sender: Tile, completion: @escaping () -> Void) {

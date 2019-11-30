@@ -195,9 +195,7 @@ class Grid: SKNode {
         // Comment(Alex):
         // this line is unnecessary because we never append a nil value
         movableTiles.removeAll(where: { $0 == nil })
-        
-        // Comment(Alex):
-        // guard let fatalError is similar to force unwrapping, but is more verbose
+    
         guard let movableNeighbors: [Tile] = movableTiles as? [Tile] else { fatalError("404 - Movable Tiles not founded") }
         
         return movableNeighbors

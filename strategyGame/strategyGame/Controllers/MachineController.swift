@@ -13,7 +13,7 @@ class MachineController {
     
     static let shared: MachineController = MachineController()
     
-    func enemyMove(enemies: [Enemy]) {
+    func enemyMove(enemies: [Enemy], completion: @escaping () -> Void) {
         func moveEnemy(_ enemy: Enemy, completion: @escaping () -> Void) {
             print(enemy.name)
             enemy.findAGoal()
@@ -31,30 +31,39 @@ class MachineController {
                     _ = enemy.basicAttack(tile: player.tile, completion: {
                         completion()
                     })
-                }
-                else if let _: Objective = objectiveTile.prop as? Objective {
+                } else if let _: Objective = objectiveTile.prop as? Objective {
                     guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("MachineController::enemyMove(): objective not found!") }
                     _ = enemy.basicAttack(tile: objective.tile, completion: {
                         completion()
                     })
+                } else {
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in
+                        completion()
+                    }
+                }
+            } else {
+                Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in
+                    completion()
                 }
             }
         }
         
-        func enemyTurnRecursively(enemies: [Enemy], index: Int, maxIndex: Int) {
-            if index > maxIndex {
-                GameManager.shared.beginTurn()
+        func enemyTurnRecursively(enemies: [Enemy], index: Int) {
+            if index == enemies.count {
+                print("exiting recursion: index\(index) = enemies.count\(enemies.count)")
+                completion()
                 return
             }
             moveEnemy(enemies[index]) {
-                enemyTurnRecursively(enemies: enemies, index: index + 1, maxIndex: maxIndex)
+                enemyTurnRecursively(enemies: enemies, index: index + 1)
             }
+            print("recursion: enemies.count: \(enemies.count), index: \(index)")
         }
         
         if enemies.count == 0 {
             fatalError("MachineController::enemyMove(): enemy array found empty!")
         }
         
-        enemyTurnRecursively(enemies: enemies, index: 0, maxIndex: enemies.count - 1)
+        enemyTurnRecursively(enemies: enemies, index: 0)
     }
 }
