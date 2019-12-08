@@ -11,7 +11,7 @@ class Tile: SKSpriteNode {
     
     let id: Int
     var character: Actor?
-    var prop: Element?
+    var prop: Entity?
     var weight: Int = 1000
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
@@ -93,45 +93,69 @@ class Tile: SKSpriteNode {
         self.position = CGPoint(x: CGFloat(col) * rectSide + rectSide/2, y: CGFloat(row) * -rectSide + rectSide/2)
         self.zPosition = -5
         
+        var entity = Entity(name: "empty", sprite: SKTexture(), tile: self)
         switch type {
         case "M":
-            let melee = Melee(tile: self)
-            self.character = melee
-            GameManager.shared.players.append(melee)
+            entity = Melee(tile: self)
+            self.character = entity as? Actor
         case "R":
-            let ranged = Ranged(tile: self)
-            self.character = ranged
-            GameManager.shared.players.append(ranged)
+            entity = Ranged(tile: self)
+            self.character = entity as? Actor
         case "T":
-            let trapper = Trapper(tile: self)
-            self.character = trapper
-            GameManager.shared.players.append(trapper)
+            entity = Trapper(tile: self)
+            self.character = entity as? Actor
         case "c":
-            let heavy = HeavyEnemy(tile: self)
-            self.character = heavy
-            GameManager.shared.enemies.append(heavy)
+            entity = HeavyEnemy(tile: self)
+            self.character = entity as? Actor
         case "v":
-            let sprinter = SprinterEmeny(tile: self)
-            self.character = sprinter
-            GameManager.shared.enemies.append(sprinter)
+            entity = SprinterEmeny(tile: self)
+            self.character = entity as? Actor
         case "m":
-            let mountain = Mountain(tile: self)
-            self.prop = mountain
-            GameManager.shared.mountains.append(mountain)
+            entity = Mountain(tile: self)
+            self.prop = entity
         case "h":
-            let hole = Hole(tile: self)
-            self.prop = hole
-            GameManager.shared.holes.append(hole)
+            entity = Hole(tile: self)
+            self.prop = entity
         case "s":
-            let sun = Objective(tile: self, type: .sun)
-            self.prop = sun
-            GameManager.shared.objectives.append(sun)
+            entity = Objective(tile: self, type: .sun)
+            self.prop = entity
         case "l":
-            let moon = Objective(tile: self, type: .moon)
-            self.prop = moon
-            GameManager.shared.objectives.append(moon)
+            entity = Objective(tile: self, type: .moon)
+            self.prop = entity
         default:
             self.prop = nil
+        }
+        if entity.name != "empty" {
+            GameManager.shared.addSelf(entity)
+        }
+    }
+    
+    func push(direction: Int, completion: @escaping () -> Void) {
+        let character = self.character
+        let trap = self.prop as? Trap
+        
+        guard let grid = GameManager.shared.grid else { return }
+        var tile: Tile?
+        switch(direction) {
+        case 0:
+            tile = grid.getUpTile(tile: self)
+        case 1:
+            tile = grid.getDownTile(tile: self)
+        case 2:
+            tile = grid.getLeftTile(tile: self)
+        case 3:
+            tile = grid.getRightTile(tile: self)
+        default:
+            print("Tile::push(): direction out of range")
+            return
+        }
+        if tile != nil {
+            character?.push(to: tile!, from: self, completion: {
+                completion()
+            })
+            trap?.push(to: tile!, from: self, completion: {
+                completion()
+            })
         }
     }
     

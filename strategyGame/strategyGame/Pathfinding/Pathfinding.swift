@@ -36,6 +36,8 @@ class Pathfinding {
         return self.path
     }
     
+    // Comment(Alex) - this is only called by generatePath()
+    // make part of generatePaths() or make local function
     func setWeights(destination: Tile) {
         var weight: Int = 0
         for group in 0 ..< (tilesMatrix.count) {
@@ -54,6 +56,8 @@ class Pathfinding {
         }
     }
     
+    // Comment(Alex) - this is only called by getNearestGoal()
+    // make part of getNearestGoal() or make local function
     func setWeightsForObjectives(tilesMatrix: [[Tile]]) -> [Tile] {
         var objectives: [Tile] = [Tile]()
         for group in 0 ..< (tilesMatrix.count) {
@@ -75,6 +79,8 @@ class Pathfinding {
         return objectives
     }
     
+    // Comment(Alex) - this is only called by generatePath()
+    // make part of generatePaths() or make local function
     func findNextBreadcrumb(currentTile: Tile, neighbors: [Tile]) -> Tile {
         var weights: [Tile] = [Tile]()
         
@@ -106,7 +112,7 @@ class Pathfinding {
                  break
             }
         }
-         nearestGoal = allPaths[0]
+        nearestGoal = allPaths[0]
         
         // Verifica se o nearestGoal representa um player ou um tile objetivo, se for um player e existir um array no allPaths que possui o mesmo tamnho e representa um tile objetivo, ele dá a preferencia para esse tile.
         for objectives in 0 ..< allPaths.count where allPaths[objectives].count == nearestGoal.count {
@@ -125,6 +131,8 @@ class Pathfinding {
         tilesMatrix.removeAll(where: { $0.count <= 0 })
     }
     
+    // Comment(Alex) - this is only called by getNearestGoal()
+    // make part of getNearestGoal() or make local function
     func checkNearestPath(nearestPath: [Tile]) -> Bool {
         var path = nearestPath
         path.removeLast()

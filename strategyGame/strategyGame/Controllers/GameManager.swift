@@ -20,45 +20,11 @@ class GameManager {
     
     static let shared: GameManager = GameManager()
     var scene: GameScene!
-    var enemies: [Enemy] = [Enemy]() {
-        willSet {
-            if enemies.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var players: [Actor] = [Actor]() {
-        willSet {
-            if players.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var mountains: [Mountain] = [Mountain]() {
-        willSet {
-            if mountains.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    
-    var holes: [Hole] = [Hole]() {
-        willSet {
-            if holes.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-        }
-    }
-    var objectives: [Objective] = [Objective]() {
-        willSet {
-            if objectives.count < newValue.count {
-                grid.addChild(newValue.last!)
-            }
-            if newValue.isEmpty {
-                print("GAME OVER")
-            }
-        }
-    }
+    var enemies: [Enemy] = [Enemy]()
+    var players: [Actor] = [Actor]()
+    var mountains: [Mountain] = [Mountain]()
+    var holes: [Hole] = [Hole]()
+    var objectives: [Objective] = [Objective]()
     var grid: Grid! // has to be guaranteed because of awake()
     var currentCharacter: Actor? {
         didSet {
@@ -107,7 +73,58 @@ class GameManager {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func addSelf(_ entity: Entity) {
+        if let actor = entity as? Actor {
+            if let enemy = entity as? Enemy {
+                enemies.append(enemy)
+            } else {
+                players.append(actor)
+            }
+            entity.tile.character = entity as? Actor
+        } else {
+            if let mountain = entity as? Mountain {
+                mountains.append(mountain)
+            } else if let hole = entity as? Hole {
+                holes.append(hole)
+            } else if let objective = entity as? Objective {
+                objectives.append(objective)
+            }
+            entity.tile.prop = entity
+        }
+        grid.addChild(entity)
+    }
+    
+    func removeSelf(_ entity: Entity) {
+        if let actor = entity as? Actor {
+            if let enemy = entity as? Enemy {
+                guard let index = enemies.firstIndex(of: enemy) else { fatalError("removeSelf(): enemy index returned nil") }
+                enemies.remove(at: index)
+            } else {
+                guard let index = players.firstIndex(of: actor) else { fatalError("removeSelf(): player index returned nil") }
+                players.remove(at: index)
+            }
+            actor.tile.character = nil
+        } else {
+            if let mountain = entity as? Mountain {
+                guard let index = mountains.firstIndex(of: mountain) else { fatalError("removeSelf(): mountain index returned nil") }
+                mountains.remove(at: index)
+            } else if let hole = entity as? Hole {
+                guard let index = holes.firstIndex(of: hole) else { fatalError("removeSelf(): hole index returned nil") }
+                holes.remove(at: index)
+            } else if let objective = entity as? Objective {
+                guard let index = objectives.firstIndex(of: objective) else { fatalError("removeSelf(): hole index returned nil") }
+               objectives.remove(at: index)
+            }
+            entity.tile.prop = nil
+        }
+        entity.removeFromParent()
+    }
+    
     func endTurn() {
+        if players.isEmpty || enemies.isEmpty {
+            scene.loadEndGameScene()
+            return
+        }
         Button.unpressAll()
         grid?.removeHighlights()
         self.currentCharacter = nil
@@ -124,65 +141,61 @@ class GameManager {
         }
     }
     
-    func touchTile(tile: Tile) { //função que mostra qual tile foi clicado
+    func touchTile(tile: Tile) {
         func selectCharacter(character: Actor) {
             Button.unpressAll()
             Button.showAll()
             grid?.removeHighlights()
             currentCharacter = character
-            self.mode = .move
+            if character.movesLeft == 0 {
+                self.mode = .attack
+            } else {
+                self.mode = .move
+            }
         }
         
         func deselectCharacter() {
             Button.unpressAll()
             Button.hideAttackButtons()
-            grid?.removeHighlights()
+            mode = .clear
             self.currentCharacter = nil
         }
         
-        guard let currentCharacter = self.currentCharacter else {
-            if let char = tile.character {
-                selectCharacter(character: char)
-            }
-            return
-        }
-        // verificar se o tile atacado está nos ableTiles
-        // se não, desselecionar personagem
-        // switch case (.mode)
-        // se .attack: ataca o tile e o tile passa o ataque para o que for que estiver em cima dele
-        // se nao tiver nada em cima do tile, o personagem não ataca/ não fica exausto
-        if tile.character == currentCharacter {
-            deselectCharacter()
-        } else if tile.character == nil && self.mode == .move {
-            if currentCharacter.makeValidMove(tile: tile) {
-                if let trap = tile.prop as? Trap {
-                    trap.activateTrap(character: currentCharacter)
+        if mode == .clear {
+            if tile.character != nil {
+                if tile.character is Enemy {
+                    return
+                } else {
+                    if tile.character is Enemy { return }
+                    selectCharacter(character: tile.character!)
                 }
-            } else {
+            }
+        } else if grid.ableTiles.contains(tile) {
+            if mode == .move {
+                self.currentCharacter?.walk(tile: tile)
+                mode = .attack
+            } else if mode == .attack {
+                self.currentCharacter?.basicAttack(tile: tile, completion: {})
+                deselectCharacter()
+            } else if mode == .specialAttack {
+                self.currentCharacter?.specialAttack(tile: tile, completion: {})
                 deselectCharacter()
             }
-        } else if self.mode == .attack && tile.character != nil {
-            if currentCharacter.basicAttack(target: tile.character!) {
-                deselectCharacter()
-            } else {
-                selectCharacter(character: tile.character!) // nao funciona para monstros
-            }
-        } else if self.mode == .specialAttack && tile.character == nil {
-            currentCharacter.specialAttack(toTile: tile)
-            self.currentCharacter = nil
-            grid?.removeHighlights()
-        } else if tile.character != nil {
-            selectCharacter(character: tile.character!)
         } else {
-            deselectCharacter()
+            if let character = tile.character {
+                if tile.character is Enemy { return }
+                selectCharacter(character: character)
+            } else {
+                deselectCharacter()
+            }
         }
     }
     
-    func OnAttackButtonPress() {
+    func onAttackButtonPress() {
         self.mode = .attack
     }
     
-    func OnAttackButtonUnpress() {
+    func onAttackButtonUnpress() {
         if self.currentCharacter == nil {
             self.mode = .clear
         } else {
@@ -190,11 +203,11 @@ class GameManager {
         }
     }
     
-    func OnSpecialAttackButtonPress() {
+    func onSpecialAttackButtonPress() {
         self.mode = .specialAttack
     }
     
-    func OnSpecialAttackButtonUnpress() {
+    func onSpecialAttackButtonUnpress() {
         if self.currentCharacter == nil {
             self.mode = .clear
         } else {
@@ -202,14 +215,13 @@ class GameManager {
         }
     }
     
-    func OnEndTurnButtonPress() {
+    func onEndTurnButtonPress() {
         endTurn()
     }
     
     func enemyTurn() {
-//        for enemy in enemies {
-//            MachineController.shared.enemyMove(enemy: enemy)
-//        }
-        MachineController.shared.enemyMove(enemies: enemies)
+        MachineController.shared.enemyMove(enemies: enemies, completion: {
+            self.beginTurn()
+        })
     }
 }
