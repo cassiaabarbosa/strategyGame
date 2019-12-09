@@ -17,6 +17,9 @@ class HUD: SKShapeNode {
     var endTurnBtn: EndTurnButton
     var attackBtn: AttackButton
     var spAttackBtn: SpecialAttackButton
+    var settingsBtn: GearButton
+    var levelName: SKLabelNode
+    var movementDescription: SKLabelNode
     static var playerHealthBarList: [HealthBar] = []
     static var enemyHealthBarList: [HealthBar] = []
     static var objectiveHealthBarList: [HealthBar] = []
@@ -32,22 +35,37 @@ class HUD: SKShapeNode {
         endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 107*buttonScale, height: 39*buttonScale), text: "End Turn")
         attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack")
         spAttackBtn = SpecialAttackButton(rect: CGRect(x: 225, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Special")
+        settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 50*buttonScale, height: 20*buttonScale), text: " ")
+        levelName = SKLabelNode(fontNamed: "Copperplate-Light")
+        levelName.text = "LevelName"
+        levelName.fontSize = 20
+        levelName.fontColor = SKColor.black
+        
+        movementDescription = SKLabelNode(fontNamed: "Helvetica")
+        movementDescription.text = "Click on a tile to select it. To move a character,click on them, then, click on one og the highlighted tiles to move to it."
+        movementDescription.fontSize = 20
+        movementDescription.fontColor = SKColor.black
         
         super.init()
         
         self.position = CGPoint(x: rect.minX, y: rect.minY)
         self.path = CGPath(rect: rect, transform: nil)
+        levelName.position = CGPoint(x: frame.midX, y: 800)
+        movementDescription.position = CGPoint(x: 20, y: 100)
         
         upperScrnArea.strokeColor = .clear
         gridScreenArea.strokeColor = .clear
         lowerScrnArea.strokeColor = .clear
         
+        self.upperScrnArea.addChild(settingsBtn)
         self.addChild(upperScrnArea)
         self.addChild(gridScreenArea)
         self.addChild(lowerScrnArea)
         self.lowerScrnArea.addChild(endTurnBtn)
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
+        self.upperScrnArea.addChild(levelName)
+        self.lowerScrnArea.addChild(movementDescription)
         
         Button.hideAttackButtons()
         

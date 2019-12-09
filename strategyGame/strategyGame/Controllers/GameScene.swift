@@ -73,6 +73,10 @@ mM..h.\
                         button.unpress()
                     } else {
                         button.press()
+                        
+                        if GameManager.shared.players.isEmpty || GameManager.shared.enemies.isEmpty {
+                            loadEndGameScene()
+                        }
                     }
                 }
             }
