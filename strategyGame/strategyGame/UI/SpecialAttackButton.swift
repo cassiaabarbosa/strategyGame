@@ -16,12 +16,12 @@ class SpecialAttackButton: Button {
     
     override func press() {
         Button.unpressAll()
-        GameManager.shared.OnSpecialAttackButtonPress()
+        GameManager.shared.onSpecialAttackButtonPress()
         self.pressed = true
     }
     
     override func unpress() {
-        GameManager.shared.OnSpecialAttackButtonUnpress()
+        GameManager.shared.onSpecialAttackButtonUnpress()
         self.pressed = false
     }
     

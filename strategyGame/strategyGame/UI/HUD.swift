@@ -17,7 +17,11 @@ class HUD: SKShapeNode {
     var endTurnBtn: EndTurnButton
     var attackBtn: AttackButton
     var spAttackBtn: SpecialAttackButton
+<<<<<<< HEAD
     var settingsBtn: SettingsButton
+=======
+    var settingsBtn: GearButton
+>>>>>>> develop
     var levelName: SKLabelNode
     var movementDescription: SKLabelNode
     static var playerHealthBarList: [HealthBar] = []
@@ -35,7 +39,11 @@ class HUD: SKShapeNode {
         endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 120*buttonScale, height: 39*buttonScale), text: "End Turn")
         attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack")
         spAttackBtn = SpecialAttackButton(rect: CGRect(x: 225, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Special")
+<<<<<<< HEAD
         settingsBtn = SettingsButton(rect: CGRect(x: 10, y: 800, width: 50*buttonScale, height: 20*buttonScale), text: "")
+=======
+        settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 50*buttonScale, height: 20*buttonScale), text: " ")
+>>>>>>> develop
         levelName = SKLabelNode(fontNamed: "Copperplate-Light")
         levelName.text = "LevelName"
         levelName.fontSize = 20
@@ -52,21 +60,31 @@ class HUD: SKShapeNode {
         self.path = CGPath(rect: rect, transform: nil)
         levelName.position = CGPoint(x: frame.midX, y: 800)
         movementDescription.position = CGPoint(x: 20, y: 100)
+<<<<<<< HEAD
         settingsBtn.texture = SKTexture(imageNamed: "SettingsButton")
+=======
+>>>>>>> develop
         
         upperScrnArea.strokeColor = .clear
         gridScreenArea.strokeColor = .clear
         lowerScrnArea.strokeColor = .clear
         
+        self.upperScrnArea.addChild(settingsBtn)
         self.addChild(upperScrnArea)
         self.addChild(gridScreenArea)
         self.addChild(lowerScrnArea)
         self.lowerScrnArea.addChild(endTurnBtn)
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
+<<<<<<< HEAD
         self.upperScrnArea.addChild(settingsBtn)
         self.upperScrnArea.addChild(levelName)
         self.lowerScrnArea.addChild(movementDescription)
+=======
+        self.upperScrnArea.addChild(levelName)
+        self.lowerScrnArea.addChild(movementDescription)
+        
+>>>>>>> develop
         Button.hideAttackButtons()
         
         for i in (0..<GameManager.shared.players.count) {
@@ -86,7 +104,7 @@ class HUD: SKShapeNode {
         }
         
         for i in (0..<GameManager.shared.objectives.count) {
-            HUD.objectiveHealthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: 10, y: -33), size: CGSize(width: 39*healthBarScale, height: 39*healthBarScale)), text: "\(GameManager.shared.objectives[i].hp)"))
+            HUD.objectiveHealthBarList.append(HealthBar(rect: CGRect(origin: CGPoint(x: 10, y: -33), size: CGSize(width: 39*healthBarScale, height: 39*healthBarScale)), text: "\(GameManager.shared.objectives[i].health)"))
             
             HUD.objectiveHealthBarList[i].zPosition = 1.0
             
@@ -104,7 +122,7 @@ class HUD: SKShapeNode {
         }
         
         for i in (0..<GameManager.shared.objectives.count) {
-            HUD.objectiveHealthBarList[i].label.text = "\(GameManager.shared.objectives[i].hp)"
+            HUD.objectiveHealthBarList[i].label.text = "\(GameManager.shared.objectives[i].health)"
         }
     }
     

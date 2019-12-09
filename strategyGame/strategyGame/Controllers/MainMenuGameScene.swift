@@ -18,7 +18,11 @@ class MainMenuGameScene: SKScene {
     var creditsButton: CreditsButton = CreditsButton(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale), text: "Credits")
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
+<<<<<<< HEAD
     var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
+=======
+     var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
+>>>>>>> develop
     
     override init(size: CGSize) {
         title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
@@ -39,6 +43,11 @@ class MainMenuGameScene: SKScene {
         addChild(settingsButton)
         addChild(creditsButton)
         addChild(title)
+<<<<<<< HEAD
+=======
+        addChild(settingsButton)
+        addChild(creditsButton)
+>>>>>>> develop
         addChild(modal)
     }
     
@@ -50,6 +59,7 @@ class MainMenuGameScene: SKScene {
         if let touch: UITouch = touches.first {
             let location: CGPoint = touch.location(in: self)
             let touchedNodes: [SKNode] = nodes(at: location)
+<<<<<<< HEAD
             for node in touchedNodes {
                 if let playButton: PlayButton = node as? PlayButton {
                     if playButton.pressed {
@@ -80,6 +90,37 @@ class MainMenuGameScene: SKScene {
                 }
             }
             
+=======
+              for node in touchedNodes {
+                    if let playButton: PlayButton = node as? PlayButton {
+                        if playButton.pressed {
+                            playButton.unpress()
+                        } else {
+                            playButton.press()
+                            loadGameScene()
+                        }
+                    }
+                    if let settingsButton: SettingsButton = node as? SettingsButton {
+                        if settingsButton.pressed {
+                            settingsButton.unpress()
+                        } else {
+                            settingsButton.press()
+                            loadModal()
+                            playButton.isHidden = true
+                            creditsButton.isHidden = true
+                            settingsButton.isHidden = true
+                        }
+                    }
+                    if let creditsButton: CreditsButton = node as? CreditsButton {
+                        if creditsButton.pressed {
+                            creditsButton.unpress()
+                        } else {
+                            creditsButton.press()
+                            loadCreditsGameScene()
+                        }
+                    }
+                }
+>>>>>>> develop
         }
     }
     
@@ -102,6 +143,7 @@ class MainMenuGameScene: SKScene {
     }
     
     func loadCreditsGameScene() {
+<<<<<<< HEAD
         if let view: SKView = self.view {
             let scene: SKScene = CreditsGameScene(size: view.bounds.size)
                 // Set the scale mode to scale to fit the window
@@ -121,6 +163,27 @@ class MainMenuGameScene: SKScene {
     func loadModal() {
         modal.isHidden = false
     }
+=======
+           if let view: SKView = self.view {
+               let scene: SKScene = CreditsGameScene(size: view.bounds.size)
+                   // Set the scale mode to scale to fit the window
+               scene.scaleMode = .aspectFill
+                   
+                   // Present the scene
+               view.presentScene(scene)
+               view.ignoresSiblingOrder = true
+               
+               view.showsFPS = false
+               view.showsNodeCount = false
+           } else {
+               fatalError("No SKView for viewController")
+           }
+       }
+       
+       func loadModal() {
+           modal.isHidden = false
+       }
+>>>>>>> develop
     
     func playMusic() {
         if let musicURL = Bundle.main.url(forResource: "calma", withExtension: "mp3") {
