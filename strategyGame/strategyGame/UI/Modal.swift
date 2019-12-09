@@ -10,7 +10,7 @@ import SpriteKit
 
 class Modal: SKSpriteNode {
     
-    var backgroundTex = SKTexture(imageNamed: "modal")
+    var backgroundTex = SKTexture(imageNamed: "Modal")
     var musicLabel: SKLabelNode
     var sfxLabel: SKLabelNode
     

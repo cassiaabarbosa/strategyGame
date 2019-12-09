@@ -2,8 +2,8 @@ import SpriteKit
 
 class Button: SKSpriteNode {
     
-    var buttonNormalTex = SKTexture(imageNamed: "button")
-    var buttonPressedTex = SKTexture(imageNamed: "buttonPressed")
+    var buttonNormalTex = SKTexture(imageNamed: "Button")
+    var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
     var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
     public internal(set) var pressed: Bool {
         didSet {

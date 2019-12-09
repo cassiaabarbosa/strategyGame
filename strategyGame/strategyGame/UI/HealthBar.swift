@@ -9,7 +9,7 @@
 import SpriteKit
 
 class HealthBar: SKSpriteNode {
-    var normalTex = SKTexture(imageNamed: "healthBar")
+    var normalTex = SKTexture(imageNamed: "HealthBar")
     
     var label: SKLabelNode
     
