@@ -2,13 +2,14 @@ import SpriteKit
 
 class Button: SKSpriteNode {
     
-    var buttonNormalTex = SKTexture(imageNamed: "ButtonNormal")
+    var buttonNormalTex = SKTexture(imageNamed: "Button")
     var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
     var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
     public internal(set) var pressed: Bool {
         didSet {
             self.texture = pressed ? buttonPressedTex : buttonNormalTex
             self.label.fontColor = pressed ? .white : .black
+            
         }
     }
     var label: SKLabelNode
@@ -23,6 +24,7 @@ class Button: SKSpriteNode {
         self.label.fontSize = self.label.text!.count < 10 ? 23*(rect.size.height/39) : 17.5*(rect.size.height/39)
         self.label.fontColor = .black
         self.label.zPosition = 1.0
+        self.label.fontName = "Copperplate-Bold"
         addChild(label)
         Button.buttonList.append(self)
     }
