@@ -13,7 +13,7 @@ class GearButton: Button {
     override init(rect: CGRect, text: String) {
         super.init(rect: rect, text: "")
         self.buttonNormalTex = SKTexture(imageNamed: "SettingsButton")
-        self.buttonPressedTex = SKTexture(imageNamed: "SettingsButtonUnpressed")
+        self.buttonPressedTex = SKTexture(imageNamed: "SettingsButtonPressed")
         self.texture = SKTexture(imageNamed: "SettingsButton")
     }
     

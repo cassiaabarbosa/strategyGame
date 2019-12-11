@@ -1,15 +1,7 @@
 //
-<<<<<<< HEAD
 //  CreditGameScene.swift
 //  strategyGame
-//
-//  Created by Cassia Aparecida Barbosa on 08/12/19.
-=======
-//  CreditsGameScene.swift
-//  strategyGame
-//
 //  Created by Cassia Aparecida Barbosa on 09/12/19.
->>>>>>> develop
 //  Copyright © 2019 teamStrategyGame. All rights reserved.
 //
 
@@ -18,7 +10,7 @@ import SpriteKit
 class CreditsGameScene: SKScene {
     
     var background: Background?
-    var backButton: BackButton = BackButton(rect: CGRect(x: 120, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "Back")
+    var backButton: BackButton = BackButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Back")
     
     let alexsCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
     let antoniosCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
@@ -38,15 +30,16 @@ class CreditsGameScene: SKScene {
         alexsCredits.fontColor = SKColor.black
         alexsCredits.position = CGPoint(x: frame.midX, y: 600)
         
+        antoniosCredits.text = "Antonio Luiz Basile"
+        antoniosCredits.fontSize = 20
+        antoniosCredits.fontColor = SKColor.black
+        antoniosCredits.position = CGPoint(x: frame.midX, y: 550)
+        
         artursCredits.text = "Artur Carneiro"
         artursCredits.fontSize = 20
         artursCredits.fontColor = SKColor.black
-        artursCredits.position = CGPoint(x: frame.midX, y: 550)
+        artursCredits.position = CGPoint(x: frame.midX, y: 500)
         
-        antoniosCredits.text = "Antonio Luz Basile"
-        antoniosCredits.fontSize = 20
-        antoniosCredits.fontColor = SKColor.black
-        antoniosCredits.position = CGPoint(x: frame.midX, y: 500)
         
         cassiasCredits.text = "Cassia Barbosa"
         cassiasCredits.fontSize = 20
