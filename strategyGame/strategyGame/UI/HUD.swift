@@ -33,7 +33,7 @@ class HUD: SKShapeNode {
         gridScreenArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 210), size: CGSize(width: 414, height: 560)))
         lowerScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 414, height: 210)))
         endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 120*buttonScale, height: 39*buttonScale), text: "End Turn")
-        attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack")
+        attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack!")
         spAttackBtn = SpecialAttackButton(rect: CGRect(x: 225, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Special")
         settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 50*buttonScale, height: 20*buttonScale), text: " ")
         levelName = SKLabelNode(fontNamed: "Copperplate-Light")
@@ -110,6 +110,6 @@ class HUD: SKShapeNode {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented yet.")
     }
 }
