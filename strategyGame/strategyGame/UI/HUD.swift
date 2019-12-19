@@ -52,7 +52,7 @@ class HUD: SKShapeNode {
         self.path = CGPath(rect: rect, transform: nil)
         levelName.position = CGPoint(x: frame.midX, y: 800)
         movementDescription.position = CGPoint(x: 20, y: 100)
-        settingsBtn.texture = SKTexture(imageNamed: "SettingsButton")
+        settingsBtn.texture = SKTexture(imageNamed: "settingsbutton")
 
         upperScrnArea.strokeColor = .clear
         gridScreenArea.strokeColor = .clear
