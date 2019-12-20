@@ -8,7 +8,7 @@ class Button: SKSpriteNode {
     public internal(set) var pressed: Bool {
         didSet {
             self.texture = pressed ? buttonPressedTex : buttonNormalTex
-            self.label.fontColor = pressed ? .white : .black
+            self.label.fontColor = #colorLiteral(red: 0.2803396583, green: 0.2141204476, blue: 0.1477846205, alpha: 1)
             
         }
     }
@@ -22,7 +22,7 @@ class Button: SKSpriteNode {
         self.position = CGPoint(x: rect.maxX - rect.width/2, y: rect.maxY - rect.height/2)
         self.label.position = CGPoint(x: 0, y: -10)
         self.label.fontSize = self.label.text!.count < 10 ? 23*(rect.size.height/39) : 17.5*(rect.size.height/39)
-        self.label.fontColor = .black
+        self.label.fontColor = #colorLiteral(red: 0.2803396583, green: 0.2141204476, blue: 0.1477846205, alpha: 1)
         self.label.zPosition = 1.0
         self.label.fontName = "Copperplate-Bold"
         addChild(label)
