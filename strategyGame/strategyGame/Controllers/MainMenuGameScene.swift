@@ -82,7 +82,6 @@ class MainMenuGameScene: SKScene {
         }
     }
             
-    
     func loadGameScene() {
         if let view: SKView = self.view {
             // Load the SKScene from 'GameScene.sks'
