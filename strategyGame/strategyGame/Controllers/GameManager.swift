@@ -20,12 +20,13 @@ class GameManager {
     
     static let shared: GameManager = GameManager()
     var scene: GameScene!
+    var pathfinding: Pathfinding?
     var enemies: [Enemy] = [Enemy]()
     var players: [Actor] = [Actor]()
     var mountains: [Mountain] = [Mountain]()
     var holes: [Hole] = [Hole]()
     var objectives: [Objective] = [Objective]()
-    var grid: Grid! // has to be guaranteed because of awake()
+    var grid: Grid?
     var currentCharacter: Actor? {
         didSet {
             if oldValue == nil { return }
@@ -67,6 +68,40 @@ class GameManager {
     func awake(grid: Grid, scene: GameScene) {
         self.scene = scene
         self.grid = grid
+        self.pathfinding = Pathfinding()
+    }
+    
+    func destroy() {
+        for p in self.players {
+            p.removeFromParent()
+        }
+        self.players.removeAll()
+        
+        for e in self.enemies {
+            e.removeFromParent()
+        }
+        self.enemies.removeAll()
+        
+        for m in self.mountains {
+            m.removeFromParent()
+        }
+        self.mountains.removeAll()
+        
+        for h in self.holes {
+            h.removeFromParent()
+        }
+        self.holes.removeAll()
+        
+        for o in self.objectives {
+            o.removeFromParent()
+        }
+        self.objectives.removeAll()
+        
+        currentCharacter = nil
+        grid = nil
+        pathfinding = nil
+        
+        print("GameManager destroy: \(self.players.count), \(self.enemies.count), \(self.mountains.count), \(self.holes.count), \(self.objectives.count)")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,7 +126,7 @@ class GameManager {
             }
             entity.tile.prop = entity
         }
-        grid.addChild(entity)
+        grid?.addChild(entity)
     }
     
     func removeSelf(_ entity: Entity) {
@@ -142,10 +177,11 @@ class GameManager {
     }
     
     func touchTile(tile: Tile) {
+        guard let grid = grid else { fatalError()}
         func selectCharacter(character: Actor) {
             Button.unpressAll()
             Button.showAll()
-            grid?.removeHighlights()
+            grid.removeHighlights()
             currentCharacter = character
             if character.movesLeft == 0 {
                 self.mode = .attack

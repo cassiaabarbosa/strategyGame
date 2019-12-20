@@ -10,8 +10,8 @@ import SpriteKit
 class Tile: SKSpriteNode {
     
     let id: Int
-    var character: Actor?
-    var prop: Entity?
+    weak var character: Actor?
+    weak var prop: Entity?
     var weight: Int = 1000
     static let highlightShader: SKShader = SKShader(fileNamed: "HighlightShader.fsh")
     static let attackHighlightShader: SKShader = SKShader(fileNamed: "AttackHighlightShader.fsh")
@@ -128,6 +128,10 @@ class Tile: SKSpriteNode {
         if entity.name != "empty" {
             GameManager.shared.addSelf(entity)
         }
+    }
+    
+    deinit {
+        print("deinit tile \(self.id)")
     }
     
     func push(direction: Int, completion: @escaping () -> Void) {

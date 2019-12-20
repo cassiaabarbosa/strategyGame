@@ -73,10 +73,6 @@ mM..h.\
                         button.unpress()
                     } else {
                         button.press()
-                        
-                        if GameManager.shared.players.isEmpty || GameManager.shared.enemies.isEmpty {
-                            loadEndGameScene()
-                        }
                     }
                 }
             }
@@ -92,6 +88,7 @@ mM..h.\
             } else {
                 scene = EndGameScene(size: view.bounds.size, resultText: "You Lose...")
             }
+            GameManager.shared.destroy()
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
                 

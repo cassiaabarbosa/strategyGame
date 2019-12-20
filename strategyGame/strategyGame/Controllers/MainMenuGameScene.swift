@@ -33,7 +33,7 @@ class MainMenuGameScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.background = Background(view: view)
-        //self.playMusic()
+//        self.playMusic()
         addChild(background!)
         addChild(playButton)
         addChild(settingsButton)

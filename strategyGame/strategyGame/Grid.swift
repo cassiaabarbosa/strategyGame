@@ -15,6 +15,10 @@ class Grid: SKNode {
         self.position = position
     }
     
+    deinit {
+        print("deinit grid")
+    }
+    
     func drawGrid(tileSet: String) {
         let charArray: [String.Element] = Array(tileSet)
         let amout: Int = gridAspect.0 * gridAspect.1

@@ -12,7 +12,7 @@ import SpriteKit
 class Enemy: Actor {
     
     var pathfinded: [Tile] = [Tile]()
-    var objective: Tile?
+    weak var objective: Tile?
     var canAttack: Bool = false
     
     override func basicAttack(tile: Tile, completion: @escaping () -> Void) {
@@ -50,9 +50,10 @@ class Enemy: Actor {
     // Comment(Alex) - findAGoal() also calls setWay
     // make everything only one method and rename findAGoal()
     func findAGoal() {
-        let grid: Grid = GameManager.shared.grid
+        guard let grid = GameManager.shared.grid else { fatalError() }
         guard let tileMatrix: [[Tile]] = grid.getAllNeightborsTilesInGroup(tile: self.tile) as? [[Tile]] else {fatalError("enemy tileMatrix nil")}
-        pathfinded = Pathfinding.shared.getNearestGoal(currentTile: self.tile, tilesMatrix: tileMatrix)
+        guard let pathfinding = GameManager.shared.pathfinding else { fatalError() }
+        pathfinded = pathfinding.getNearestGoal(currentTile: self.tile, tilesMatrix: tileMatrix)
         var aux = [Int]()
         for tile in pathfinded {
             aux.append(tile.id)

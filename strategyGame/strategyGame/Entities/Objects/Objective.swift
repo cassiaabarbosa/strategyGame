@@ -22,6 +22,9 @@ class Objective: Entity {
             self.run(SKAction.repeatForever(animation))
         }
     }
+    deinit {
+        print("deinit objective")
+    }
     
     func takeDamage() {
         self.health -= 1
