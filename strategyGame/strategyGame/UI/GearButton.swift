@@ -12,9 +12,9 @@ class GearButton: Button {
     
     override init(rect: CGRect, text: String) {
         super.init(rect: rect, text: "")
-        self.buttonNormalTex = SKTexture(imageNamed: "SettingsButton")
-        self.buttonPressedTex = SKTexture(imageNamed: "SettingsButtonUnpressed")
-        self.texture = SKTexture(imageNamed: "SettingsButton")
+        self.buttonNormalTex = SKTexture(imageNamed: "settingsbutton")
+        self.buttonPressedTex = SKTexture(imageNamed: "SettingsButtonPressed")
+        self.texture = SKTexture(imageNamed: "settingsbutton")
     }
     
     override func press() {

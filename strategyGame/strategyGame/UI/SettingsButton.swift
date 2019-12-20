@@ -1,12 +1,7 @@
 //
 //  SettingsButton.swift
 //  strategyGame
-//
-<<<<<<< HEAD
 //  Created by Cassia Aparecida Barbosa on 08/12/19.
-=======
-//  Created by Cassia Aparecida Barbosa on 09/12/19.
->>>>>>> develop
 //  Copyright © 2019 teamStrategyGame. All rights reserved.
 //
 
@@ -26,7 +21,3 @@ class SettingsButton: Button {
         fatalError("init(coder:) has not been implemented")
     }
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
