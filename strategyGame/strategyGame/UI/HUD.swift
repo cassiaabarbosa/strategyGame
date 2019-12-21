@@ -48,12 +48,12 @@ class HUD: SKShapeNode {
         
         levelName.position = CGPoint(x: frame.midX, y: 800)
         levelName.textLabel.fontName = "Helvetica-Bold"
-        levelName.textLabel.text = "LevelName"
+        levelName.textLabel.text = "The Arena"
         levelName.textLabel.preferredMaxLayoutWidth = 107
         
         movementDescription.position = CGPoint(x: 2*(frame.midX/3)+10, y: 145)
         movementDescription.textLabel.fontName = "Helvetica"
-        movementDescription.textLabel.text = "Click on a tile to select it. To move a character, click on them, then click on one of the highlighted tiles to move to it."
+        movementDescription.textLabel.text = "Touch a character to select them"
         movementDescription.textLabel.preferredMaxLayoutWidth = 250
         movementDescription.textLabel.position = CGPoint(x: movementDescription.textLabel.position.x, y: -40)
         movementDescription.textLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
@@ -61,7 +61,7 @@ class HUD: SKShapeNode {
         
         charName.position = CGPoint(x: 348, y: 175)
         charName.textLabel.fontName = "Helvetica"
-        charName.textLabel.text = "CharName"
+        charName.textLabel.text = ""
         charName.textLabel.preferredMaxLayoutWidth = 107
 
         upperScrnArea.strokeColor = .clear
