@@ -10,7 +10,7 @@ import SpriteKit
 
 class EndGameScene: SKScene {
     
-    var background: Background?
+    var background: SKSpriteNode?
     var resultLabel: SKLabelNode
     var playAgainButton: Button = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Continue")
     var backgroundMusic: SKAudioNode!
@@ -24,7 +24,10 @@ class EndGameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        self.background = Background(view: view)
+        self.background = SKSpriteNode(imageNamed: "Background")
+        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background?.zPosition = -10
         addChild(background!)
         addChild(playAgainButton)
         addChild(resultLabel)
