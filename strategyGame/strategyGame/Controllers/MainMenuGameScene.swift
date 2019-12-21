@@ -10,7 +10,7 @@ import SpriteKit
 
 class MainMenuGameScene: SKScene {
     
-    var background: Background?
+    var background: SKSpriteNode?
     var titleTex = SKTexture(imageNamed: "title")
     var title: SKSpriteNode
     var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale), text: "Play")
@@ -32,8 +32,11 @@ class MainMenuGameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        self.background = Background(view: view)
-//        self.playMusic()
+        self.background = SKSpriteNode(imageNamed: "Background")
+        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background?.zPosition = -10
+        self.playMusic()
         addChild(background!)
         addChild(playButton)
         addChild(settingsButton)

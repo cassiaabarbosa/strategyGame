@@ -9,7 +9,7 @@ import SpriteKit
 
 class CreditsGameScene: SKScene {
     
-    var background: Background?
+    var background: SKSpriteNode?
     var backButton: BackButton = BackButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Back")
     
     let alexsCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
@@ -24,7 +24,10 @@ class CreditsGameScene: SKScene {
        }
     
     override func didMove(to view: SKView) {
-        self.background = Background(view: view)
+        self.background = SKSpriteNode(imageNamed: "Background")
+        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background?.zPosition = -10
         alexsCredits.text = "Alex Nascimento"
         alexsCredits.fontSize = 20
         alexsCredits.fontColor = SKColor.black
@@ -39,7 +42,6 @@ class CreditsGameScene: SKScene {
         artursCredits.fontSize = 20
         artursCredits.fontColor = SKColor.black
         artursCredits.position = CGPoint(x: frame.midX, y: 500)
-        
         
         cassiasCredits.text = "Cassia Barbosa"
         cassiasCredits.fontSize = 20

@@ -18,8 +18,9 @@ class HUD: SKShapeNode {
     var attackBtn: AttackButton
     var spAttackBtn: SpecialAttackButton
     var settingsBtn: GearButton
-    var levelName: SKLabelNode
-    var movementDescription: SKLabelNode
+    var levelName: TextBox
+    var moveDescription: TextBox
+    var charName: TextBox
     static var playerHealthBarList: [HealthBar] = []
     static var enemyHealthBarList: [HealthBar] = []
     static var objectiveHealthBarList: [HealthBar] = []
@@ -32,27 +33,36 @@ class HUD: SKShapeNode {
         upperScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 770), size: CGSize(width: 414, height: 140)))
         gridScreenArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 210), size: CGSize(width: 414, height: 560)))
         lowerScrnArea = SKShapeNode(rect: CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 414, height: 210)))
-        endTurnBtn = EndTurnButton(rect: CGRect(x: 120, y: 50, width: 120*buttonScale, height: 39*buttonScale), text: "End Turn")
-        attackBtn = AttackButton(rect: CGRect(x: 15, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Attack!")
-        spAttackBtn = SpecialAttackButton(rect: CGRect(x: 225, y: 130, width: 107*buttonScale, height: 39*buttonScale), text: "Special")
-        settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 50*buttonScale, height: 20*buttonScale), text: " ")
-        levelName = SKLabelNode(fontNamed: "Copperplate-Light")
-        levelName.text = "LevelName"
-        levelName.fontSize = 20
-        levelName.fontColor = SKColor.black
-        
-        movementDescription = SKLabelNode(fontNamed: "Helvetica")
-        movementDescription.text = "Click on a tile to select it. To move a character,click on them, then, click on one og the highlighted tiles to move to it."
-        movementDescription.fontSize = 20
-        movementDescription.fontColor = SKColor.black
+        endTurnBtn = EndTurnButton(rect: CGRect(x: 300, y: 40, width: 60*buttonScale, height: 60*buttonScale), text: "End")
+        attackBtn = AttackButton(rect: CGRect(x: 15, y: 40, width: 107*buttonScale*0.75, height: 39*buttonScale*0.75), text: "Attack")
+        spAttackBtn = SpecialAttackButton(rect: CGRect(x: 155, y: 40, width: 107*buttonScale*0.75, height: 39*buttonScale*0.75), text: "Special")
+        settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 30*buttonScale, height: 30*buttonScale))
+        levelName = TextBox(rect: CGRect(x: rect.midX, y: 800, width: 107, height: 39))
+        moveDescription = TextBox(rect: CGRect(x: rect.midX, y: 100, width: 250, height: 100))
+        charName = TextBox(rect: CGRect(x: rect.midX, y: 100, width: 107, height: 39))
         
         super.init()
         
         self.position = CGPoint(x: rect.minX, y: rect.minY)
         self.path = CGPath(rect: rect, transform: nil)
+        
         levelName.position = CGPoint(x: frame.midX, y: 800)
-        movementDescription.position = CGPoint(x: 20, y: 100)
-        settingsBtn.texture = SKTexture(imageNamed: "settingsbutton")
+        levelName.textLabel.fontName = "Helvetica-Bold"
+        levelName.textLabel.text = "The Arena"
+        levelName.textLabel.preferredMaxLayoutWidth = 107
+        
+        moveDescription.position = CGPoint(x: 2*(frame.midX/3)+10, y: 145)
+        moveDescription.textLabel.fontName = "Helvetica"
+        moveDescription.textLabel.text = "Touch a character to select them. You can either move, attack or use a special attack with each character."
+        moveDescription.textLabel.preferredMaxLayoutWidth = 250
+        moveDescription.textLabel.position = CGPoint(x: moveDescription.textLabel.position.x, y: -40)
+        moveDescription.textLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
+        moveDescription.textLabel.numberOfLines = 4
+        
+        charName.position = CGPoint(x: 348, y: 175)
+        charName.textLabel.fontName = "Helvetica"
+        charName.textLabel.text = ""
+        charName.textLabel.preferredMaxLayoutWidth = 107
 
         upperScrnArea.strokeColor = .clear
         gridScreenArea.strokeColor = .clear
@@ -61,12 +71,13 @@ class HUD: SKShapeNode {
         self.addChild(upperScrnArea)
         self.addChild(gridScreenArea)
         self.addChild(lowerScrnArea)
+        self.upperScrnArea.addChild(settingsBtn)
+        self.upperScrnArea.addChild(levelName)
         self.lowerScrnArea.addChild(endTurnBtn)
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
-        self.upperScrnArea.addChild(settingsBtn)
-        self.lowerScrnArea.addChild(movementDescription)
-        self.upperScrnArea.addChild(levelName)
+        self.lowerScrnArea.addChild(charName)
+        self.lowerScrnArea.addChild(moveDescription)
         
         Button.hideAttackButtons()
         
@@ -93,6 +104,14 @@ class HUD: SKShapeNode {
             
             GameManager.shared.objectives[i].addChild(HUD.objectiveHealthBarList[i])
         }
+    }
+    
+    func updateCharName(name: String?) {
+        self.charName.textLabel.text = name
+    }
+    
+    func updateMoveDescription(moveDescription: String?) {
+        self.moveDescription.textLabel.text = moveDescription
     }
     
     static func updateHealthBars() {

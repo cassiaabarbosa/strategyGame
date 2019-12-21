@@ -10,7 +10,7 @@ import SpriteKit
 
 class GearButton: Button {
     
-    override init(rect: CGRect, text: String) {
+    init(rect: CGRect) {
         super.init(rect: rect, text: "")
         self.buttonNormalTex = SKTexture(imageNamed: "settingsbutton")
         self.buttonPressedTex = SKTexture(imageNamed: "SettingsButtonPressed")

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B42360DD4E00568AD3 /* Objective.swift */; };
 		4F0664B72360E53F00568AD3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0664B62360E53F00568AD3 /* Enemy.swift */; };
+		798E7AFC23AD597300509C24 /* TextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798E7AFB23AD597300509C24 /* TextBox.swift */; };
 		79C5E663235F6E0C00C42DA9 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C5E662235F6E0C00C42DA9 /* HUD.swift */; };
 		79F8F4D72360E43900095A54 /* MainMenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */; };
 		79F8F4D92360EC8B00095A54 /* PlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8F4D82360EC8B00095A54 /* PlayButton.swift */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		4F0664B42360DD4E00568AD3 /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
 		4F0664B62360E53F00568AD3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		798E7AFB23AD597300509C24 /* TextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBox.swift; sourceTree = "<group>"; };
 		79C5E662235F6E0C00C42DA9 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		79F8F4D62360E43900095A54 /* MainMenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuGameScene.swift; sourceTree = "<group>"; };
 		79F8F4D82360EC8B00095A54 /* PlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayButton.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				79F8F4D82360EC8B00095A54 /* PlayButton.swift */,
 				79F8F4E72362213900095A54 /* HealthBar.swift */,
 				CBEECD16239EBB8E00EAAC07 /* CreditsButton.swift */,
+				798E7AFB23AD597300509C24 /* TextBox.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				CBA1A11C235BAEFC00B61536 /* Mountain.swift in Sources */,
 				8C87DBCB2358CBB1001FB9DF /* MachineController.swift in Sources */,
 				8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */,
+				798E7AFC23AD597300509C24 /* TextBox.swift in Sources */,
 				8C205409235A54B5004F73E3 /* AnimationHandler.swift in Sources */,
 				CBEECD15239EBB7400EAAC07 /* Modal.swift in Sources */,
 				8C87DBCF2358CBCA001FB9DF /* Tile.swift in Sources */,

@@ -3,7 +3,12 @@ import SpriteKit
 class EndTurnButton: Button {
     
     override init(rect: CGRect, text: String) {
-        super.init(rect: rect, text: "End Turn")
+        super.init(rect: rect, text: "End")
+        self.buttonNormalTex = SKTexture(imageNamed: "SquareButton")
+        self.buttonPressedTex = SKTexture(imageNamed: "SquareButtonPressed")
+        self.texture = buttonNormalTex
+        self.label.position = CGPoint(x: 0, y: -10)
+        self.label.fontSize = self.label.text!.count < 10 ? 17*(rect.size.height/39) : 5*(rect.size.height/39)
     }
     
     override func press() {

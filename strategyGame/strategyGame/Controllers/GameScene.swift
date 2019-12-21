@@ -4,7 +4,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     var grid: Grid?
-    var background: Background?
+    var background: SKSpriteNode?
     var hud: HUD?
     var backgroundMusic: SKAudioNode!
     var quackSound: SKAudioNode!
@@ -45,7 +45,10 @@ mM..h.\
         loadSounds()
         playMusic()
         AnimationHandler.shared.awake()
-        self.background = Background(view: view)
+        self.background = SKSpriteNode(imageNamed: "Background")
+        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background?.zPosition = -10
         addChild(background!)
         self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70))
         addChild(grid!)
@@ -67,6 +70,7 @@ mM..h.\
             for node in touchedNodes {
                 if let tile: Tile = node as? Tile {
                     GameManager.shared.touchTile(tile: tile)
+                    hud?.updateCharName(name: tile.character?.name)
                     return
                 }
                 if let button: Button = node as? Button {
