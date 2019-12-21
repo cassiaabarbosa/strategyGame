@@ -69,6 +69,7 @@ mM..h.\
             for node in touchedNodes {
                 if let tile: Tile = node as? Tile {
                     GameManager.shared.touchTile(tile: tile)
+                    hud?.updateCharName(name: tile.character?.name)
                     return
                 }
                 if let button: Button = node as? Button {

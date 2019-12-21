@@ -19,7 +19,7 @@ class HUD: SKShapeNode {
     var spAttackBtn: SpecialAttackButton
     var settingsBtn: GearButton
     var levelName: TextBox
-    var movementDescription: TextBox
+    var moveDescription: TextBox
     var charName: TextBox
     static var playerHealthBarList: [HealthBar] = []
     static var enemyHealthBarList: [HealthBar] = []
@@ -38,7 +38,7 @@ class HUD: SKShapeNode {
         spAttackBtn = SpecialAttackButton(rect: CGRect(x: 155, y: 40, width: 107*buttonScale*0.75, height: 39*buttonScale*0.75), text: "Special")
         settingsBtn = GearButton(rect: CGRect(x: 10, y: 800, width: 30*buttonScale, height: 30*buttonScale))
         levelName = TextBox(rect: CGRect(x: rect.midX, y: 800, width: 107, height: 39))
-        movementDescription = TextBox(rect: CGRect(x: rect.midX, y: 100, width: 250, height: 100))
+        moveDescription = TextBox(rect: CGRect(x: rect.midX, y: 100, width: 250, height: 100))
         charName = TextBox(rect: CGRect(x: rect.midX, y: 100, width: 107, height: 39))
         
         super.init()
@@ -51,13 +51,13 @@ class HUD: SKShapeNode {
         levelName.textLabel.text = "The Arena"
         levelName.textLabel.preferredMaxLayoutWidth = 107
         
-        movementDescription.position = CGPoint(x: 2*(frame.midX/3)+10, y: 145)
-        movementDescription.textLabel.fontName = "Helvetica"
-        movementDescription.textLabel.text = "Touch a character to select them"
-        movementDescription.textLabel.preferredMaxLayoutWidth = 250
-        movementDescription.textLabel.position = CGPoint(x: movementDescription.textLabel.position.x, y: -40)
-        movementDescription.textLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
-        movementDescription.textLabel.numberOfLines = 4
+        moveDescription.position = CGPoint(x: 2*(frame.midX/3)+10, y: 145)
+        moveDescription.textLabel.fontName = "Helvetica"
+        moveDescription.textLabel.text = "Touch a character to select them. You can either move, attack or use a special attack with each character."
+        moveDescription.textLabel.preferredMaxLayoutWidth = 250
+        moveDescription.textLabel.position = CGPoint(x: moveDescription.textLabel.position.x, y: -40)
+        moveDescription.textLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
+        moveDescription.textLabel.numberOfLines = 4
         
         charName.position = CGPoint(x: 348, y: 175)
         charName.textLabel.fontName = "Helvetica"
@@ -77,7 +77,7 @@ class HUD: SKShapeNode {
         self.lowerScrnArea.addChild(attackBtn)
         self.lowerScrnArea.addChild(spAttackBtn)
         self.lowerScrnArea.addChild(charName)
-        self.lowerScrnArea.addChild(movementDescription)
+        self.lowerScrnArea.addChild(moveDescription)
         
         Button.hideAttackButtons()
         
@@ -104,6 +104,14 @@ class HUD: SKShapeNode {
             
             GameManager.shared.objectives[i].addChild(HUD.objectiveHealthBarList[i])
         }
+    }
+    
+    func updateCharName(name: String?) {
+        self.charName.textLabel.text = name
+    }
+    
+    func updateMoveDescription(moveDescription: String?) {
+        self.moveDescription.textLabel.text = moveDescription
     }
     
     static func updateHealthBars() {
