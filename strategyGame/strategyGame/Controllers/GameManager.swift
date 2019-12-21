@@ -19,6 +19,7 @@ class GameManager {
     }
     
     static let shared: GameManager = GameManager()
+    var animating: Bool = false
     var scene: GameScene!
     var pathfinding: Pathfinding?
     var enemies: [Enemy] = [Enemy]()
@@ -256,8 +257,11 @@ class GameManager {
     }
     
     func enemyTurn() {
+        animating = true
         MachineController.shared.enemyMove(enemies: enemies, completion: {
+            print("ended enemy move")
             self.beginTurn()
+            self.animating = false
         })
     }
 }

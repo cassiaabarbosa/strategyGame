@@ -89,7 +89,7 @@ class Tile: SKSpriteNode {
         self.isHighlighted = false
         self.isSpecialHighlighted = false
         self.coord = Coord(row, col)
-        super.init(texture: SKTexture(imageNamed: "Tile"), color: .white, size: CGSize(width: rectSide, height: rectSide))
+        super.init(texture: SKTexture(imageNamed: "tilePixel"), color: .white, size: CGSize(width: rectSide, height: rectSide))
         self.position = CGPoint(x: CGFloat(col) * rectSide + rectSide/2, y: CGFloat(row) * -rectSide + rectSide/2)
         self.zPosition = -5
         
@@ -117,10 +117,10 @@ class Tile: SKSpriteNode {
             entity = Hole(tile: self)
             self.prop = entity
         case "s":
-            entity = Objective(tile: self, type: .sun)
+            entity = Objective(tile: self)
             self.prop = entity
         case "l":
-            entity = Objective(tile: self, type: .moon)
+            entity = Objective(tile: self)
             self.prop = entity
         default:
             self.prop = nil
@@ -160,6 +160,8 @@ class Tile: SKSpriteNode {
             trap?.push(to: tile!, from: self, completion: {
                 completion()
             })
+        } else {
+            completion()
         }
     }
     

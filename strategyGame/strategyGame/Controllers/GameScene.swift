@@ -60,6 +60,7 @@ mM..h.\
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if GameManager.shared.animating { return }
         if let touch: UITouch = touches.first {
             let location: CGPoint = touch.location(in: self)
             let touchedNodes: [SKNode] = nodes(at: location)

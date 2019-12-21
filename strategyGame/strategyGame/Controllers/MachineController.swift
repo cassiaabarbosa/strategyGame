@@ -15,7 +15,7 @@ class MachineController {
     
     func enemyMove(enemies: [Enemy], completion: @escaping () -> Void) {
         func moveEnemy(_ enemy: Enemy, completion: @escaping () -> Void) {
-//            print(enemy.name)
+            print(enemy.name)
             enemy.findAGoal()
             if !enemy.breadcrumbs.isEmpty {
                 for tile in 0 ..< enemy.breadcrumbs.count {
