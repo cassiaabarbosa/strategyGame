@@ -50,7 +50,14 @@ mM..h.\
         self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
         self.background?.zPosition = -10
         addChild(background!)
-        self.grid = Grid(position: CGPoint(x: 0, y: 700), width: 6, height: 8, tileSize: CGSize(width: 70, height: 70))
+        let hCorrectionMultiplier = view.frame.height / 896
+        let wCorrectionMultiplier = view.frame.width / 414
+        var tileW = view.frame.width/6
+        if tileW * 8 > view.frame.height/2 {
+            tileW = view.frame.height * 0.07875
+        }
+        let gridW = tileW * 6
+        self.grid = Grid(position: CGPoint(x: frame.midX - gridW/2, y: 700 * hCorrectionMultiplier), width: 6, height: 8, tileSize: CGSize(width: tileW, height: tileW))
         addChild(grid!)
         GameManager.shared.awake(grid: grid!, scene: self)
         grid?.drawGrid(tileSet: templateSceneString)
@@ -63,7 +70,7 @@ mM..h.\
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if GameManager.shared.animating { return }
+//        if GameManager.shared.animating { return }
         if let touch: UITouch = touches.first {
             let location: CGPoint = touch.location(in: self)
             let touchedNodes: [SKNode] = nodes(at: location)
