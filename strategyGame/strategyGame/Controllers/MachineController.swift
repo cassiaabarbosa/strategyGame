@@ -50,14 +50,14 @@ class MachineController {
         
         func enemyTurnRecursively(enemies: [Enemy], index: Int) {
             if index == enemies.count {
-                print("exiting recursion: index\(index) = enemies.count\(enemies.count)")
+//                print("exiting recursion: index\(index) = enemies.count\(enemies.count)")
                 completion()
                 return
             }
             moveEnemy(enemies[index]) {
                 enemyTurnRecursively(enemies: enemies, index: index + 1)
             }
-            print("recursion: enemies.count: \(enemies.count), index: \(index)")
+//            print("recursion: enemies.count: \(enemies.count), index: \(index)")
         }
         
         if enemies.count == 0 {

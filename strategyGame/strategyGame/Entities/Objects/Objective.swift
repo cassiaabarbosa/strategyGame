@@ -1,26 +1,17 @@
 
 import SpriteKit
 
-enum ObjectiveType {
-    case sun
-    case moon
-}
-
 class Objective: Entity {
 
     public private(set) var health: Int = 3
     
-    init(tile: Tile, type: ObjectiveType) {
-        switch type {
-        case .sun:
-            super.init(name: "Sun", sprite: SKTexture(imageNamed: "00_sun"), tile: tile)
-            let animation = SKAction.animate(with: AnimationHandler.shared.sunFrames, timePerFrame: 1/TimeInterval(12))
+    init(tile: Tile) {
+            super.init(name: "Objective", sprite: SKTexture(imageNamed: "objcB0"), tile: tile)
+            let animation = SKAction.animate(with: AnimationHandler.shared.objectiveFrames, timePerFrame: 1/TimeInterval(12))
             self.run(SKAction.repeatForever(animation))
-        case .moon:
-            super.init(name: "Moon", sprite: SKTexture(imageNamed: "00_moons"), tile: tile)
-            let animation = SKAction.animate(with: AnimationHandler.shared.moonFrames, timePerFrame: 1/TimeInterval(8))
-            self.run(SKAction.repeatForever(animation))
-        }
+    }
+    deinit {
+        print("deinit objective")
     }
     
     func takeDamage() {
