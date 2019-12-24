@@ -6,6 +6,7 @@ class GameScene: SKScene {
     var grid: Grid?
     var background: SKSpriteNode?
     var hud: HUD?
+    var levelGen = LevelGenerator()
     var backgroundMusic: SKAudioNode!
     var quackSound: SKAudioNode!
     var glassBreak: SKAudioNode!
@@ -60,7 +61,7 @@ mM..h.\
         self.grid = Grid(position: CGPoint(x: frame.midX - gridW/2, y: 700 * hCorrectionMultiplier), width: 6, height: 8, tileSize: CGSize(width: tileW, height: tileW))
         addChild(grid!)
         GameManager.shared.awake(grid: grid!, scene: self)
-        grid?.drawGrid(tileSet: templateSceneString)
+        grid?.drawGrid(tileSet: levelGen.randomLevel())
         hud = HUD(rect: view.frame)
         addChild(hud!)
     }
