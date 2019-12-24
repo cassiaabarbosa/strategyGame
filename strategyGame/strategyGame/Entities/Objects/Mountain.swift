@@ -12,9 +12,7 @@ import SpriteKit
 class Mountain: Entity {
     
     init(tile: Tile) {
-        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "00_mountain"), tile: tile)
-        let animation = SKAction.animate(with: AnimationHandler.shared.mountainFrames, timePerFrame: 1/TimeInterval(18))
-        self.run(SKAction.repeatForever(animation))
+        super.init(name: "Mountain", sprite: SKTexture(imageNamed: "obstaclePixel"), tile: tile)
         self.zPosition = 2
     }
     
