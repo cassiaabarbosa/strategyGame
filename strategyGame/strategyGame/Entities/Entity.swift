@@ -25,7 +25,6 @@ class Entity: SKSpriteNode {
         self.position = tile.position
         self.size = tile.size
         self.isUserInteractionEnabled = false
-        tile.prop = self
     }
     
     required init?(coder aDecoder: NSCoder) {
