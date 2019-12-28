@@ -8,22 +8,30 @@
 
 import SpriteKit
 
+let buttonW: CGFloat = 120*CGFloat(buttonScale)
+let buttonH: CGFloat = 39*CGFloat(buttonScale)
+
 class MainMenuGameScene: SKScene {
     
     var background: SKSpriteNode?
     var titleTex = SKTexture(imageNamed: "title-1")
     var title: SKSpriteNode
-    var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale), text: "Play")
-    var settingsButton: SettingsButton = SettingsButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Settings")
-    var creditsButton: CreditsButton = CreditsButton(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale), text: "Credits")
+    var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 300, width: buttonW, height: buttonH), text: "Play")
+    var settingsButton: SettingsButton = SettingsButton(rect: CGRect(x: 120, y: 200, width: buttonW, height: buttonH), text: "Settings")
+    var creditsButton: CreditsButton = CreditsButton(rect: CGRect(x: 120, y: 100, width: buttonW, height: buttonH), text: "Credits")
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
     var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
     
     override init(size: CGSize) {
-        title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
+        let titleH: CGFloat = 294
+        let padding = size.height/16
+        title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: titleH))
+        title.position = CGPoint(x: size.width/2, y: size.height - titleH/2)
         
-        title.position = CGPoint(x: 207, y: 600)
+        playButton.position = CGPoint(x: size.width/2, y: size.height - titleH - padding*2)
+        settingsButton.position = CGPoint(x: size.width/2, y: playButton.position.y - buttonH - padding)
+        creditsButton.position = CGPoint(x: size.width/2, y: settingsButton.position.y - buttonH - padding)
         
         modal.position = CGPoint(x: 207, y: 100)
         modal.isHidden = true
