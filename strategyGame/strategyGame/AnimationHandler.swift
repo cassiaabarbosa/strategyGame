@@ -18,6 +18,8 @@ class AnimationHandler {
     var objectiveAtlas: SKTextureAtlas
     var objectiveFrames: [SKTexture]
     
+    public func awake() {}
+    
     private init() {
         self.meleeAtlas = SKTextureAtlas(named: "MeleeAtlas")
         self.meleeFrames = AnimationHandler.loadFrames(atlas: meleeAtlas)
@@ -35,8 +37,6 @@ class AnimationHandler {
         self.objectiveFrames = AnimationHandler.loadFrames(atlas: objectiveAtlas)
     }
     
-    func awake() {}
-    
     static func loadFrames(atlas: SKTextureAtlas) -> [SKTexture] {
         var frames = [SKTexture]()
         let names = atlas.textureNames.sorted()
@@ -49,5 +49,4 @@ class AnimationHandler {
 
         return frames
     }
-
 }

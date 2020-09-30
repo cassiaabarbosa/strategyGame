@@ -40,10 +40,6 @@ class Actor: Entity, Pushable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print("deinit \(self.name)")
-    }
-    
     func takeDamage(damage: Int) {
         self.health -= damage
         if (self.health <= 0) {

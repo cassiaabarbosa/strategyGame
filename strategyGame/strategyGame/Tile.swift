@@ -89,7 +89,7 @@ class Tile: SKSpriteNode {
         self.isHighlighted = false
         self.isSpecialHighlighted = false
         self.coord = Coord(row, col)
-        super.init(texture: SKTexture(imageNamed: "tilePixel"), color: .white, size: CGSize(width: rectSide, height: rectSide))
+        super.init(texture: SKTexture(imageNamed: "Tile"), color: .white, size: CGSize(width: rectSide, height: rectSide))
         self.position = CGPoint(x: CGFloat(col) * rectSide + rectSide/2, y: CGFloat(row) * -rectSide + rectSide/2)
         self.zPosition = -5
         

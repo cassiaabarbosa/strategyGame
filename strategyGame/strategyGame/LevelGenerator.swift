@@ -8,9 +8,8 @@
 
 import Foundation
 
-
 class LevelGenerator {
-    private var levelArrays: [String] = []
+    private var levels: [String] = []
     
     private let one: String = """
 .h....\
@@ -123,19 +122,19 @@ mM..h.\
     }
     
     public func randomLevel() -> String {
-        return levelArrays[Int.random(in: 0..<levelArrays.count)]
+        return levels[Int.random(in: 0..<levels.count)]
     }
     
     private func populateLevelArray() {
-        levelArrays.append(one)
-        levelArrays.append(two)
-        levelArrays.append(three)
-        levelArrays.append(four)
-        levelArrays.append(five)
-        levelArrays.append(six)
-        levelArrays.append(seven)
-        levelArrays.append(eight)
-        levelArrays.append(nine)
-        levelArrays.append(ten)
+        levels.append(one)
+        levels.append(two)
+        levels.append(three)
+        levels.append(four)
+        levels.append(five)
+        levels.append(six)
+        levels.append(seven)
+        levels.append(eight)
+        levels.append(nine)
+        levels.append(ten)
     }
 }

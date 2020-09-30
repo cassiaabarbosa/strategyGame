@@ -15,10 +15,8 @@ class MachineController {
     
     func enemyMove(enemies: [Enemy], completion: @escaping () -> Void) {
         func moveEnemy(_ enemy: Enemy, completion: @escaping () -> Void) {
-            print(enemy.name)
             enemy.findAGoal()
             if enemy.stunned > 0 {
-                print("\(enemy.name) is stunned")
                 enemy.stunned -= 1
                 completion()
                 return
@@ -34,12 +32,12 @@ class MachineController {
                 guard let objectiveTile: Tile = enemy.objective else { fatalError("MachineController::enemyMove(): objectiveTile not found!") }
                 if objectiveTile.character != nil {
                     guard let player: Actor = objectiveTile.character else { fatalError("MachineController::enemyMove(): player not found!") }
-                    _ = enemy.basicAttack(tile: player.tile, completion: {
+                    enemy.basicAttack(tile: player.tile, completion: {
                         completion()
                     })
                 } else if let _: Objective = objectiveTile.prop as? Objective {
                     guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("MachineController::enemyMove(): objective not found!") }
-                    _ = enemy.basicAttack(tile: objective.tile, completion: {
+                    enemy.basicAttack(tile: objective.tile, completion: {
                         completion()
                     })
                 } else {
