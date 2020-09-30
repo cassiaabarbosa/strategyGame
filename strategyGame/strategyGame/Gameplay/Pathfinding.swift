@@ -10,16 +10,9 @@ import Foundation
 
 class Pathfinding {
     
-    var currentLocation: Tile?
-    var destination: Tile?
     weak var grid: Grid? = GameManager.shared.grid
     var path: [Tile] = [Tile]()
-    var checkpoint: [Tile] = [Tile]()
     var tilesMatrix: [[Tile]] = [[Tile]]()
-    
-    deinit {
-        print("deinit pathfinding")
-    }
     
     func generatePath(currentTile: Tile, destinationTile: Tile) -> [Tile] {
         self.path.removeAll()

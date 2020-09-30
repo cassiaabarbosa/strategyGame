@@ -19,8 +19,6 @@ class Actor: Entity, Pushable {
     internal var isExausted: Bool = false
     var breadcrumbs: [Tile] = [Tile]()
     internal var stunned: Int = 0
-    var wholeNumberValue: Float?
-    var canMove: Bool = true
     
     init(name: String, movement: Int, damage: Int, health: Int, attackRange: Int, sprite: SKTexture, tile: Tile) {
         self.movement = movement

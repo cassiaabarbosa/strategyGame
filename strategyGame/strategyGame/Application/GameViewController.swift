@@ -6,7 +6,6 @@
 //  Copyright © 2019 teamStrategyGame. All rights reserved.
 //
 
-let buttonScale = 1.6
 
 import UIKit
 import SpriteKit
@@ -18,7 +17,6 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view: SKView = self.view as? SKView {
-            // Load the SKScene from 'GameScene.sks'
             let scene: SKScene = MainMenuGameScene(size: view.bounds.size)
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
@@ -52,7 +50,6 @@ class GameViewController: UIViewController {
     
     func loadGameScene() {
         if let view: SKView = self.view as? SKView {
-            // Load the SKScene from 'GameScene.sks'
             let scene: SKScene = GameScene(size: view.bounds.size)
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill

@@ -1,5 +1,7 @@
 import SpriteKit
 
+let buttonScale = 1.6
+
 class Button: SKSpriteNode {
     
     var buttonNormalTex = SKTexture(imageNamed: "button")
