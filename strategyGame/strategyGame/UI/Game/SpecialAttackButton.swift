@@ -10,8 +10,8 @@ import SpriteKit
 
 class SpecialAttackButton: Button {
     
-    override init(rect: CGRect, text: String) {
-        super.init(rect: rect, text: "Special")
+    override init(rect: CGRect, text: String, action: @escaping () -> Void) {
+        super.init(rect: rect, text: "Special", action: action)
         self.label.position = CGPoint(x: 0, y: -5)
     }
     

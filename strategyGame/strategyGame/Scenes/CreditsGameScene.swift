@@ -9,8 +9,7 @@ import SpriteKit
 
 class CreditsGameScene: SKScene {
     
-    var background: SKSpriteNode?
-    var backButton: BackButton = BackButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Back")
+    var background: SKSpriteNode
     
     let alexsCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
     let antoniosCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
@@ -19,15 +18,22 @@ class CreditsGameScene: SKScene {
     let edgarsCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
     let wolfgangsCredits = SKLabelNode(fontNamed: "Copperplate-Bold")
     
+    lazy var backButton = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale),
+                                 text: "Back",
+                                 action: { [weak self] in
+                                    self?.loadMainMenuGameScene()
+                                 })
+    
     override init(size: CGSize) {
-           super.init(size: size)
-       }
+        self.background = SKSpriteNode(imageNamed: "Background")
+        super.init(size: size)
+    }
     
     override func didMove(to view: SKView) {
-        self.background = SKSpriteNode(imageNamed: "Background")
-        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
-        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
-        self.background?.zPosition = -10
+        self.background.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background.zPosition = -10
+        
         alexsCredits.text = "Alex Nascimento"
         alexsCredits.fontSize = 20
         alexsCredits.fontColor = SKColor.black
@@ -58,7 +64,7 @@ class CreditsGameScene: SKScene {
         wolfgangsCredits.fontColor = SKColor.black
         wolfgangsCredits.position = CGPoint(x: frame.midX, y: 350)
         
-        addChild(background!)
+        addChild(background)
         addChild(backButton)
         addChild(alexsCredits)
         addChild(artursCredits)
@@ -69,33 +75,16 @@ class CreditsGameScene: SKScene {
     }
     
     required init?(coder aDecoder: NSCoder) {
-           fatalError("init(coder:) has not been implemented")
-       }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch: UITouch = touches.first {
-            let location: CGPoint = touch.location(in: self)
-            let touchedNodes: [SKNode] = nodes(at: location)
-            for node in touchedNodes {
-                if let button: Button = node as? Button {
-                    if button.pressed {
-                        button.unpress()
-                    } else {
-                        button.press()
-                        loadMainMenuGameScene()
-                    }
-                }
-            }
-        }
+        fatalError("init(coder:) has not been implemented")
     }
     
     func loadMainMenuGameScene() {
         if let view: SKView = self.view {
             let scene: SKScene = MainMenuGameScene(size: view.bounds.size)
-                // Set the scale mode to scale to fit the window
+            // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
-                
-                // Present the scene
+            
+            // Present the scene
             view.presentScene(scene)
             view.ignoresSiblingOrder = true
             

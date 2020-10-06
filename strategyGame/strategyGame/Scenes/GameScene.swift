@@ -6,7 +6,9 @@ class GameScene: SKScene {
     var grid: Grid!
     var hud: HUD!
     var levelGen = LevelGenerator()
+    
     var background: SKSpriteNode!
+    
     var backgroundMusic: SKAudioNode!
     var quackSound: SKAudioNode!
     var glassBreak: SKAudioNode!

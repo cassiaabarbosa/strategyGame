@@ -10,19 +10,34 @@ import SpriteKit
 
 class MainMenuGameScene: SKScene {
     
-    var background: SKSpriteNode?
-    var titleTex = SKTexture(imageNamed: "title-1")
+    var background: SKSpriteNode
+    var titleTex: SKTexture
     var title: SKSpriteNode
-    var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale), text: "Play")
-    var settingsButton: SettingsButton = SettingsButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Settings")
-    var creditsButton: CreditsButton = CreditsButton(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale), text: "Credits")
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
     var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
     
+    lazy var playButton = Button(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale),
+                                 text: "Play",
+                                 action: { [weak self] in
+                                    self?.loadGameScene()
+                                 })
+    
+    lazy var tutorialButton = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale),
+                                     text: "Tutorial",
+                                     action: {})
+    
+    lazy var creditsButton = Button(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale),
+                                    text: "Credits",
+                                    action: { [weak self] in
+                                        self?.loadCreditsScene()
+                                    })
+    
     override init(size: CGSize) {
+        background = SKSpriteNode(imageNamed: "Background")
+        titleTex = SKTexture(imageNamed: "title-1")
+        titleTex.filteringMode = .nearest
         title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
-        
         title.position = CGPoint(x: 207, y: 600)
         
         modal.position = CGPoint(x: 207, y: 100)
@@ -32,15 +47,13 @@ class MainMenuGameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        titleTex.filteringMode = .nearest
-        self.background = SKSpriteNode(imageNamed: "Background")
-        self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
-        self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)
-        self.background?.zPosition = -10
+        self.background.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background.zPosition = -10
         self.playMusic()
-        addChild(background!)
+        addChild(background)
         addChild(playButton)
-        addChild(settingsButton)
+        addChild(tutorialButton)
         addChild(creditsButton)
         addChild(title)
         addChild(modal)
@@ -50,41 +63,6 @@ class MainMenuGameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch: UITouch = touches.first {
-            let location: CGPoint = touch.location(in: self)
-            let touchedNodes: [SKNode] = nodes(at: location)
-            for node in touchedNodes {
-                if let playButton: PlayButton = node as? PlayButton {
-                    if playButton.pressed {
-                        playButton.unpress()
-                    } else {
-                        playButton.press()
-                        loadGameScene()
-                    }
-                }
-                if let settingsButton: SettingsButton = node as? SettingsButton {
-                    if settingsButton.pressed {
-                        settingsButton.unpress()
-                    } else {
-                        settingsButton.press()
-                        loadModal()
-                        playButton.isHidden = true
-                        creditsButton.isHidden = true
-                        settingsButton.isHidden = true
-                    }
-                }
-                if let creditsButton: CreditsButton = node as? CreditsButton {
-                    if creditsButton.pressed {
-                        creditsButton.unpress()
-                    } else {
-                        creditsButton.press()
-                        loadCreditsGameScene()
-                    }
-                }
-            }
-        }
-    }
             
     func loadGameScene() {
         if let view: SKView = self.view {
@@ -103,7 +81,7 @@ class MainMenuGameScene: SKScene {
         }
     }
     
-    func loadCreditsGameScene() {
+    func loadCreditsScene() {
         if let view: SKView = self.view {
             let scene: SKScene = CreditsGameScene(size: view.bounds.size)
                 // Set the scale mode to scale to fit the window

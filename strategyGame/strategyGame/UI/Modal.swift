@@ -14,9 +14,9 @@ class Modal: SKSpriteNode {
     var musicLabel: SKLabelNode
     var sfxLabel: SKLabelNode
     
-    var musicButton: AudioButton = AudioButton(rect: CGRect(x: 100, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "")
+    var musicButton: AudioButton = AudioButton(rect: CGRect(x: 100, y: 200, width: 107*buttonScale, height: 39*buttonScale), text: "", action: {})
     
-    var sfxButton: AudioButton = AudioButton(rect: CGRect(x: 100, y: 100, width: 107*buttonScale, height: 39*buttonScale), text: "")
+    var sfxButton: AudioButton = AudioButton(rect: CGRect(x: 100, y: 100, width: 107*buttonScale, height: 39*buttonScale), text: "", action: {})
     
     init(rect: CGRect) {
         self.sfxLabel = SKLabelNode(fontNamed: "Copperplate-Bold")

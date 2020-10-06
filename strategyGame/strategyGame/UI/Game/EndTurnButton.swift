@@ -2,8 +2,8 @@ import SpriteKit
 
 class EndTurnButton: Button {
     
-    override init(rect: CGRect, text: String) {
-        super.init(rect: rect, text: "End")
+    override init(rect: CGRect, text: String, action: @escaping () -> Void) {
+        super.init(rect: rect, text: "End", action: action)
         self.buttonNormalTex = SKTexture(imageNamed: "SquareButton")
         self.buttonPressedTex = SKTexture(imageNamed: "SquareButtonPressed")
         self.texture = buttonNormalTex

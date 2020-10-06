@@ -4,9 +4,14 @@ let buttonScale = 1.6
 
 class Button: SKSpriteNode {
     
-    var buttonNormalTex = SKTexture(imageNamed: "button")
-    var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
-    var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
+    static var buttonList: [Button] = []
+    
+    public var buttonNormalTex = SKTexture(imageNamed: "button")
+    public var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
+    public var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
+    public var label: SKLabelNode
+    public var action: () -> Void
+    
     public internal(set) var pressed: Bool {
         didSet {
             self.texture = pressed ? buttonPressedTex : buttonNormalTex
@@ -14,13 +19,15 @@ class Button: SKSpriteNode {
             
         }
     }
-    var label: SKLabelNode
-    static var buttonList: [Button] = []
     
-    init(rect: CGRect, text: String) {
+    private var touch: UITouch?
+    
+    init(rect: CGRect, text: String, action: @escaping () -> Void) {
         self.label = SKLabelNode(text: text)
         self.pressed = false
+        self.action = action
         super.init(texture: buttonNormalTex, color: .white, size: rect.size)
+        self.isUserInteractionEnabled = true
         self.position = CGPoint(x: rect.maxX - rect.width/2, y: rect.maxY - rect.height/2)
         self.label.position = CGPoint(x: 0, y: -10)
         self.label.fontSize = self.label.text!.count < 10 ? 23*(rect.size.height/39) : 17.5*(rect.size.height/39)
@@ -32,7 +39,7 @@ class Button: SKSpriteNode {
     }
     
     deinit {
-        for i in (0..<Button.buttonList.count) where self == Button.buttonList[i] {
+        for i in (0..<Button.buttonList.count) where self === Button.buttonList[i] {
             Button.buttonList.remove(at: i)
         }
     }
@@ -40,6 +47,19 @@ class Button: SKSpriteNode {
     func press() {}
     
     func unpress() {}
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touch = touches.first
+        pressed = true
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touch, let parent = self.parent else { return }
+        if self.contains(touch.location(in: parent)) {
+            action()
+        }
+        pressed = false
+    }
     
     static func unpressAll() {
         for i in (0..<Button.buttonList.count) {

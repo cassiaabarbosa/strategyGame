@@ -12,7 +12,7 @@ class EndGameScene: SKScene {
     
     var background: SKSpriteNode?
     var resultLabel: SKLabelNode
-    var playAgainButton: Button = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Continue")
+    var playAgainButton: Button = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Continue", action: {})
     var backgroundMusic: SKAudioNode!
     
     init(size: CGSize, resultText: String) {
