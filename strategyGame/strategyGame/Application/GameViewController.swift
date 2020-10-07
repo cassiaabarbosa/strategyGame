@@ -50,7 +50,7 @@ class GameViewController: UIViewController {
     
     func loadGameScene() {
         if let view: SKView = self.view as? SKView {
-            let scene: SKScene = GameScene(size: view.bounds.size)
+            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.randomLevel())
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
                 

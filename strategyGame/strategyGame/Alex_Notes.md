@@ -28,3 +28,7 @@ O player deverá aprender a:
 - atacar inimigos
 - entender os diferentes ataques e especiais
 - entender que ao atacar o personagem não pode mais se mover naquele turno
+
+
+Lembretes:
+O warning sobre Metal compiler parece não ter solução segundo essa thread no fórum: https://developer.apple.com/forums/thread/659856

@@ -48,7 +48,7 @@ class EndGameScene: SKScene {
     
     func loadGameScene() {
         if let view: SKView = self.view {
-            let scene: SKScene = GameScene(size: view.bounds.size)
+            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.randomLevel())
             scene.scaleMode = .aspectFill
                 
             view.presentScene(scene)

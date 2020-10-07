@@ -24,7 +24,9 @@ class MainMenuGameScene: SKScene {
     
     lazy var tutorialButton = Button(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale),
                                      text: "Tutorial",
-                                     action: {})
+                                     action: { [weak self] in
+                                        self?.loadTutorialScene()
+                                     })
     
     lazy var creditsButton = Button(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale),
                                     text: "Credits",
@@ -63,7 +65,24 @@ class MainMenuGameScene: SKScene {
             
     func loadGameScene() {
         if let view: SKView = self.view {
-            let scene: SKScene = GameScene(size: view.bounds.size)
+            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.randomLevel())
+                // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFill
+                
+                // Present the scene
+            view.presentScene(scene)
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = false
+            view.showsNodeCount = false
+        } else {
+            fatalError("No SKView for viewController")
+        }
+    }
+    
+    func loadTutorialScene() {
+        if let view: SKView = self.view {
+            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.tutorial1)
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
                 

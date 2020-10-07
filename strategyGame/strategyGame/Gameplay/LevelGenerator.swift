@@ -9,9 +9,21 @@
 import Foundation
 
 class LevelGenerator {
-    private var levels: [String] = []
     
-    private let one: String = """
+    static public var levels: [LevelDescription] = [
+        level1,
+        level2,
+        level3,
+        level4,
+        level5,
+        level6,
+        level7,
+        level8,
+        level9,
+        level10
+    ]
+    
+    static public let level1 = LevelDescription(width: 6, height: 8, tileSet: """
 .h....\
 .....v\
 hc.m..\
@@ -20,8 +32,8 @@ sM.Thh\
 ..h..h\
 ..Rl..\
 ..h...
-"""
-    private let two: String = """
+""")
+    static public let level2 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 ....v.\
 ...c..\
@@ -30,8 +42,8 @@ sM.Thh\
 .sR.lT\
 M..m..\
 ......
-"""
-    private let three: String = """
+""")
+    static public let level3 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 .c....\
 .h.v..\
@@ -40,8 +52,8 @@ m.m.h.\
 ......\
 Rs.M.l\
 .....T
-"""
-    private let four: String = """
+""")
+    static public let level4 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 .c....\
 ....v.\
@@ -50,8 +62,8 @@ Rs.M.l\
 h.M...\
 ....T.\
 s.Rl..
-"""
-    private let five: String = """
+""")
+    static public let level5 = LevelDescription(width: 6, height: 8, tileSet: """
 .....v\
 ......\
 ..c...\
@@ -60,9 +72,9 @@ mM..Tm\
 ......\
 shR.hl\
 ......
-"""
+""")
     
-    private let six: String = """
+    static public let level6 = LevelDescription(width: 6, height: 8, tileSet: """
 ....v.\
 .hc...\
 ....m.\
@@ -71,9 +83,9 @@ shR.hl\
 .M...T\
 .m..l.\
 ..sRh.
-"""
+""")
     
-    private let seven: String = """
+    static public let level7 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 ..c...\
 ...m..\
@@ -82,9 +94,9 @@ shR.hl\
 h.....\
 ..mMh.\
 ..RlT.
-"""
+""")
     
-    private let eight: String = """
+    static public let level8 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 .....v\
 .ch.m.\
@@ -93,9 +105,9 @@ h.....\
 .s.Mm.\
 h.hT.h\
 ...R..
-"""
+""")
     
-    private let nine: String = """
+    static public let level9 = LevelDescription(width: 6, height: 8, tileSet: """
 ......\
 ...h..\
 .mc.mv\
@@ -104,9 +116,9 @@ h.....\
 .mT.mM\
 .s.Rl.\
 ..h...
-"""
+""")
     
-    private let ten: String = """
+    static public let level10 = LevelDescription(width: 6, height: 8, tileSet: """
 ..v...\
 ....m.\
 .c....\
@@ -115,26 +127,15 @@ m..m.s\
 mM..h.\
 .lRh..\
 ......
-"""
+""")
     
-    public init() {
-        populateLevelArray()
-    }
+    static public let tutorial1 = LevelDescription(width: 3, height: 3, tileSet: """
+..v\
+...\
+.M.
+""")
     
-    public func randomLevel() -> String {
+    static public func randomLevel() -> LevelDescription {
         return levels[Int.random(in: 0..<levels.count)]
-    }
-    
-    private func populateLevelArray() {
-        levels.append(one)
-        levels.append(two)
-        levels.append(three)
-        levels.append(four)
-        levels.append(five)
-        levels.append(six)
-        levels.append(seven)
-        levels.append(eight)
-        levels.append(nine)
-        levels.append(ten)
     }
 }

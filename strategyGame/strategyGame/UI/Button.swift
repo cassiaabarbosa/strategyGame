@@ -26,7 +26,7 @@ class Button: SKSpriteNode {
         self.label = SKLabelNode(text: text)
         self.pressed = false
         self.action = action
-        self.isToggle = unToggle == nil
+        self.isToggle = unToggle != nil
         self.unToggle = unToggle
         
         super.init(texture: buttonNormalTex, color: .white, size: rect.size)

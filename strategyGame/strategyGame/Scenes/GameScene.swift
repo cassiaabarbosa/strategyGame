@@ -5,7 +5,6 @@ class GameScene: SKScene {
     
     var grid: Grid!
     var hud: HUD!
-    var levelGen = LevelGenerator()
     
     var background: SKSpriteNode
     
@@ -29,19 +28,11 @@ mM..h.\
 ......
 """
     
-//    var templateSceneString: String = """
-//    .vm...\
-//    h...c.\
-//    ......\
-//    ..mm..\
-//    .M.v..\
-//    .h..m.\
-//    ..T.R.\
-//    mm....
-//    """
+    let level: LevelDescription
     
-    override init(size: CGSize) {
+    init(size: CGSize, level: LevelDescription) {
         self.background = SKSpriteNode(imageNamed: "Background")
+        self.level = level
         
         super.init(size: size)
         
@@ -63,11 +54,13 @@ mM..h.\
         if tileW * 8 > view.frame.height/2 {
             tileW = view.frame.height * 0.07875
         }
-        let gridW = tileW * 6
-        self.grid = Grid(position: CGPoint(x: frame.midX - gridW/2, y: 700 * hCorrectionMultiplier), width: 6, height: 8, tileSize: CGSize(width: tileW, height: tileW))
+        let gridW = tileW * CGFloat(level.width)
+        self.grid = Grid(position: CGPoint(x: frame.midX - gridW/2, y: 700 * hCorrectionMultiplier), width: level.width, height: level.height, tileSize: CGSize(width: tileW, height: tileW))
         addChild(grid)
+        
         GameManager.shared.awake(grid: grid, scene: self)
-        grid.drawGrid(tileSet: levelGen.randomLevel())
+        grid.drawGrid(tileSet: level.tileSet)
+        
         hud = HUD(rect: view.frame)
         addChild(hud)
     }
