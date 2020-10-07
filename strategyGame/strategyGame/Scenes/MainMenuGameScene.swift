@@ -15,7 +15,6 @@ class MainMenuGameScene: SKScene {
     var title: SKSpriteNode
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
-    var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
     
     lazy var playButton = Button(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale),
                                  text: "Play",
@@ -36,27 +35,25 @@ class MainMenuGameScene: SKScene {
     override init(size: CGSize) {
         background = SKSpriteNode(imageNamed: "Background")
         titleTex = SKTexture(imageNamed: "title-1")
-        titleTex.filteringMode = .nearest
         title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
-        title.position = CGPoint(x: 207, y: 600)
-        
-        modal.position = CGPoint(x: 207, y: 100)
-        modal.isHidden = true
         
         super.init(size: size)
-    }
-    
-    override func didMove(to view: SKView) {
+        
         self.background.position = CGPoint(x: frame.midX, y: frame.midY)
         self.background.size = CGSize(width: frame.size.width, height: frame.size.height)
         self.background.zPosition = -10
+        titleTex.filteringMode = .nearest
+        title.position = CGPoint(x: 207, y: 600)
+    }
+    
+    override func didMove(to view: SKView) {
+        
         self.playMusic()
         addChild(background)
         addChild(playButton)
         addChild(tutorialButton)
         addChild(creditsButton)
         addChild(title)
-        addChild(modal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,10 +95,6 @@ class MainMenuGameScene: SKScene {
         }
     }
     
-    func loadModal() {
-        modal.isHidden = false
-    }
-       
     func playMusic() {
         if let musicURL = Bundle.main.url(forResource: "calma", withExtension: "mp3") {
             backgroundMusic = SKAudioNode(url: musicURL)

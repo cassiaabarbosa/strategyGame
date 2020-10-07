@@ -7,7 +7,7 @@ class GameScene: SKScene {
     var hud: HUD!
     var levelGen = LevelGenerator()
     
-    var background: SKSpriteNode!
+    var background: SKSpriteNode
     
     var backgroundMusic: SKAudioNode!
     var quackSound: SKAudioNode!
@@ -41,20 +41,24 @@ mM..h.\
 //    """
     
     override init(size: CGSize) {
+        self.background = SKSpriteNode(imageNamed: "Background")
+        
         super.init(size: size)
+        
+        self.background.position = CGPoint(x: frame.midX, y: frame.midY)
+        self.background.size = CGSize(width: frame.size.width, height: frame.size.height)
+        self.background.zPosition = -10
+        addChild(background)
     }
     
     override func didMove(to view: SKView) {
         loadSounds()
         playMusic()
         AnimationHandler.shared.awake() // initialize static property
-        self.background = SKSpriteNode(imageNamed: "Background")
-        self.background.position = CGPoint(x: frame.midX, y: frame.midY)
-        self.background.size = CGSize(width: frame.size.width, height: frame.size.height)
-        self.background.zPosition = -10
-        addChild(background)
+        
         let hCorrectionMultiplier = view.frame.height / 896
         //let wCorrectionMultiplier = view.frame.width / 414
+        
         var tileW = view.frame.width/6
         if tileW * 8 > view.frame.height/2 {
             tileW = view.frame.height * 0.07875
@@ -77,17 +81,10 @@ mM..h.\
             let location: CGPoint = touch.location(in: self)
             let touchedNodes: [SKNode] = nodes(at: location)
             for node in touchedNodes {
-                if let tile: Tile = node as? Tile {
+                if let tile = node as? Tile {
                     GameManager.shared.touchTile(tile: tile)
                     hud?.updateCharName(name: tile.character?.name)
                     return
-                }
-                if let button: Button = node as? Button {
-                    if button.pressed {
-                        button.unpress()
-                    } else {
-                        button.press()
-                    }
                 }
             }
         }

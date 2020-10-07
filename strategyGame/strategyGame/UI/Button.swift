@@ -8,9 +8,11 @@ class Button: SKSpriteNode {
     
     public var buttonNormalTex = SKTexture(imageNamed: "button")
     public var buttonPressedTex = SKTexture(imageNamed: "ButtonPressed")
-    public var pressedColor: UIColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
+    public var pressedColor = UIColor(hue: 0, saturation: 0.6, brightness: 0.5, alpha: 1)
     public var label: SKLabelNode
     public var action: () -> Void
+    public var unToggle: ( () -> Void )?
+    public let isToggle: Bool
     
     public internal(set) var pressed: Bool {
         didSet {
@@ -20,13 +22,15 @@ class Button: SKSpriteNode {
         }
     }
     
-    private var touch: UITouch?
-    
-    init(rect: CGRect, text: String, action: @escaping () -> Void) {
+    init(rect: CGRect, text: String, action: @escaping () -> Void, unToggle: ( () -> Void )? = nil ) {
         self.label = SKLabelNode(text: text)
         self.pressed = false
         self.action = action
+        self.isToggle = unToggle == nil
+        self.unToggle = unToggle
+        
         super.init(texture: buttonNormalTex, color: .white, size: rect.size)
+        
         self.isUserInteractionEnabled = true
         self.position = CGPoint(x: rect.maxX - rect.width/2, y: rect.maxY - rect.height/2)
         self.label.position = CGPoint(x: 0, y: -10)
@@ -34,6 +38,7 @@ class Button: SKSpriteNode {
         self.label.fontColor = #colorLiteral(red: 0.2803396583, green: 0.2141204476, blue: 0.1477846205, alpha: 1)
         self.label.zPosition = 1.0
         self.label.fontName = "Copperplate-Bold"
+        
         addChild(label)
         Button.buttonList.append(self)
     }
@@ -44,18 +49,19 @@ class Button: SKSpriteNode {
         }
     }
     
-    func press() {}
-    
-    func unpress() {}
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touch = touches.first
-        pressed = true
+        if isToggle {
+            pressed = !pressed
+            if pressed { action() } else { unToggle?() }
+        } else {
+            pressed = true
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touch, let parent = self.parent else { return }
-        if self.contains(touch.location(in: parent)) {
+        if isToggle { return }
+        guard let t = touches.first, let parent = self.parent else { return }
+        if self.contains(t.location(in: parent)) {
             action()
         }
         pressed = false
