@@ -18,16 +18,17 @@ class GameManager {
         case specialAttack
     }
     
-    static let shared: GameManager = GameManager()
+    static let shared = GameManager()
     var animating: Bool = false
     var scene: GameScene!
     var pathfinding: Pathfinding?
-    var enemies: [Enemy] = [Enemy]()
-    var players: [Actor] = [Actor]()
-    var mountains: [Mountain] = [Mountain]()
-    var holes: [Hole] = [Hole]()
-    var objectives: [Objective] = [Objective]()
+    var enemies = [Enemy]()
+    var players = [Actor]()
+    var mountains = [Mountain]()
+    var holes = [Hole]()
+    var objectives = [Objective]()
     var grid: Grid?
+    var tutorialIndex = 1
     var currentCharacter: Actor? {
         didSet {
             if oldValue == nil { return }
@@ -158,6 +159,10 @@ class GameManager {
     
     func endTurn() {
         if players.isEmpty || enemies.isEmpty {
+            if scene.level.tutorialText != nil {
+                scene.loadNextTutorial()
+                return
+            }
             scene.loadEndGameScene()
             return
         }
@@ -178,7 +183,7 @@ class GameManager {
     }
     
     func touchTile(tile: Tile) {
-        guard let grid = grid else { fatalError()}
+        guard let grid = grid else { fatalError() }
         func selectCharacter(character: Actor) {
             Button.unpressAll()
             Button.showAll()

@@ -118,7 +118,7 @@ class HUD: SKShapeNode {
         self.charName.textLabel.text = name
     }
     
-    func updateMoveDescription(moveDescription: String?) {
+    func updateMoveDescription(moveDescription: String) {
         self.moveDescription.textLabel.text = moveDescription
     }
     

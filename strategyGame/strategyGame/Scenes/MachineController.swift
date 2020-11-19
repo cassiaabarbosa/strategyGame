@@ -29,13 +29,13 @@ class MachineController {
             }
             
             if !enemy.isExausted {
-                guard let objectiveTile: Tile = enemy.objective else { fatalError("MachineController::enemyMove(): objectiveTile not found!") }
+                guard let objectiveTile = enemy.objective else { fatalError("MachineController::enemyMove(): objectiveTile not found!") }
                 if objectiveTile.character != nil {
                     guard let player: Actor = objectiveTile.character else { fatalError("MachineController::enemyMove(): player not found!") }
                     enemy.basicAttack(tile: player.tile, completion: {
                         completion()
                     })
-                } else if let _: Objective = objectiveTile.prop as? Objective {
+                } else if let _ = objectiveTile.prop as? Objective {
                     guard let objective: Objective = objectiveTile.prop as? Objective else { fatalError("MachineController::enemyMove(): objective not found!") }
                     enemy.basicAttack(tile: objective.tile, completion: {
                         completion()
@@ -54,14 +54,12 @@ class MachineController {
         
         func enemyTurnRecursively(enemies: [Enemy], index: Int) {
             if index == enemies.count {
-//                print("exiting recursion: index\(index) = enemies.count\(enemies.count)")
                 completion()
                 return
             }
             moveEnemy(enemies[index]) {
                 enemyTurnRecursively(enemies: enemies, index: index + 1)
             }
-//            print("recursion: enemies.count: \(enemies.count), index: \(index)")
         }
         
         if enemies.count == 0 {

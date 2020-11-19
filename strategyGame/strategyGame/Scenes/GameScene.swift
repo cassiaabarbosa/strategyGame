@@ -63,6 +63,10 @@ mM..h.\
         
         hud = HUD(rect: view.frame)
         addChild(hud)
+        
+        if let text = level.tutorialText {
+            hud.updateMoveDescription(moveDescription: text)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,6 +84,28 @@ mM..h.\
                     return
                 }
             }
+        }
+    }
+    
+    func loadNextTutorial() {
+        if let view: SKView = self.view {
+            var scene: SKScene
+            GameManager.shared.destroy()
+            if LevelGenerator.tutorialIndex < LevelGenerator.tutorials.count-1 {
+                scene = GameScene(size: view.bounds.size, level: LevelGenerator.nextTutorial())
+            } else {
+                scene = MainMenuGameScene(size: view.bounds.size)
+            }
+            
+            scene.scaleMode = .aspectFill
+                
+            view.presentScene(scene)
+            view.ignoresSiblingOrder = true
+            
+            view.showsFPS = false
+            view.showsNodeCount = false
+        } else {
+            fatalError("No SKView for viewController")
         }
     }
     

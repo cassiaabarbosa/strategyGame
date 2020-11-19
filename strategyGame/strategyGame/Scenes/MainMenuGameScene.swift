@@ -82,7 +82,8 @@ class MainMenuGameScene: SKScene {
     
     func loadTutorialScene() {
         if let view: SKView = self.view {
-            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.tutorial1)
+            LevelGenerator.tutorialIndex = 0
+            let scene: SKScene = GameScene(size: view.bounds.size, level: LevelGenerator.nextTutorial())
                 // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
                 
