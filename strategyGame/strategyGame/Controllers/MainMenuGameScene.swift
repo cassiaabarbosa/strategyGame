@@ -10,6 +10,7 @@ import SpriteKit
 
 class MainMenuGameScene: SKScene {
     
+    var gameScene: GameScene?
     var background: SKSpriteNode?
     var titleTex = SKTexture(imageNamed: "title-1")
     var title: SKSpriteNode
@@ -18,17 +19,21 @@ class MainMenuGameScene: SKScene {
     var creditsButton: CreditsButton = CreditsButton(rect: CGRect(x: 120, y: 100, width: 120*buttonScale, height: 39*buttonScale), text: "Credits")
     var player: SKAudioNode = SKAudioNode()
     var backgroundMusic: SKAudioNode!
-    var modal: Modal = Modal(rect: CGRect(x: 500, y: 300, width: 300, height: 300))
+    var modal: Modal = Modal(rect: CGRect(x: 100, y: 100, width: 200, height: 200))
+    var musicButton: MusicButton = MusicButton(rect: CGRect(x: 100, y: 200, width: 20*buttonScale, height: 20*buttonScale), text: "")
+    
+    var sfxButton: AudioButton = AudioButton(rect: CGRect(x: 100, y: 100, width: 20*buttonScale, height: 20*buttonScale), text: "")
     
     override init(size: CGSize) {
         title = SKSpriteNode(texture: titleTex, color: .white, size: CGSize(width: size.width, height: 294.4))
         
         title.position = CGPoint(x: 207, y: 600)
         
-        modal.position = CGPoint(x: 207, y: 100)
-        modal.isHidden = true
-        
         super.init(size: size)
+        modal.position = CGPoint(x: frame.midX, y: (frame.midY)*0.5)
+        modal.isHidden = true
+        musicButton.isHidden = true
+        sfxButton.isHidden = true
     }
     
     override func didMove(to view: SKView) {
@@ -44,6 +49,8 @@ class MainMenuGameScene: SKScene {
         addChild(creditsButton)
         addChild(title)
         addChild(modal)
+        addChild(sfxButton)
+        addChild(musicButton)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,6 +79,8 @@ class MainMenuGameScene: SKScene {
                         playButton.isHidden = true
                         creditsButton.isHidden = true
                         settingsButton.isHidden = true
+                        musicButton.isHidden = false
+                        sfxButton.isHidden = false
                     }
                 }
                 if let creditsButton: CreditsButton = node as? CreditsButton {
@@ -82,6 +91,42 @@ class MainMenuGameScene: SKScene {
                         loadCreditsGameScene()
                     }
                 }
+                
+                if let musicButton: MusicButton = node as? MusicButton {
+                    if musicButton.pressed {
+                        musicButton.unpress()
+                        backgroundMusic.run(SKAction.play())
+                        gameScene?.run(SKAction.play())
+                        musicButton.texture = SKTexture(imageNamed: "MusicButton")
+                        
+                    } else {
+                        musicButton.texture = SKTexture(imageNamed: "MusicMutedButtonPressed")
+                        backgroundMusic.run(SKAction.stop())
+                    }
+                }
+//                if let modal: Modal = node as? Modal {
+//                    if musicButton.pressed {
+//                        musicButton.unpress()
+//                    } else {
+//                        musicButton.press()
+//                        musicButton.texture = SKTexture(imageNamed: "MusicMutedButtonPressed")
+//                        backgroundMusic.run(SKAction.stop())
+//                    }
+//
+//                    if sfxButton.pressed {
+//                        sfxButton.unpress()
+//                    } else {
+//                        sfxButton.press()
+//                        sfxButton.texture = SKTexture(imageNamed: "SoundMutedButtonPressed")
+//                        gameScene?.canoSound.run(SKAction.stop())
+//                        gameScene?.quackSound.run(SKAction.stop())
+//                        gameScene?.cameraSound.run(SKAction.stop())
+//                        gameScene?.setTrapSound.run(SKAction.stop())
+//                        gameScene?.hitWallSound.run(SKAction.stop())
+//                        gameScene?.cairBuracoSound.run(SKAction.stop())
+//
+//                    }
+//                }
             }
         }
     }
