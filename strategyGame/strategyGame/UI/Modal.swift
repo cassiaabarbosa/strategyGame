@@ -13,10 +13,6 @@ class Modal: SKSpriteNode {
     var backgroundTex = SKTexture(imageNamed: "modal")
     
     
-    init(rect: CGRect) {
-        super.init(texture: backgroundTex, color: .red, size: rect.size)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
