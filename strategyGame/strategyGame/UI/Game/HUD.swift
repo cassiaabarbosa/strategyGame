@@ -61,6 +61,7 @@ class HUD: SKShapeNode {
         moveDescription.position = CGPoint(x: 2*(frame.midX/3)+10, y: 145  * hCorrectionMultiplier)
         moveDescription.textLabel.fontName = "Helvetica"
         moveDescription.textLabel.text = "Touch a character to select them. You can either move, attack or use a special attack with each character."
+        moveDescription.textLabel.fontSize = 16
         moveDescription.textLabel.preferredMaxLayoutWidth = 250 * wCorrectionMultiplier
         moveDescription.textLabel.position = CGPoint(x: moveDescription.textLabel.position.x, y: -40)
         moveDescription.textLabel.lineBreakMode = NSLineBreakMode.byCharWrapping
