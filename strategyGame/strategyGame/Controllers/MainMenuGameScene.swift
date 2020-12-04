@@ -12,7 +12,7 @@ class MainMenuGameScene: SKScene {
     
     var gameScene: GameScene?
     var background: SKSpriteNode?
-    var titleTex = SKTexture(imageNamed: "title")
+    var titleTex = SKTexture(imageNamed: "title-1")
     var title: SKSpriteNode
     var playButton: PlayButton = PlayButton(rect: CGRect(x: 120, y: 300, width: 120*buttonScale, height: 39*buttonScale), text: "Play")
     var settingsButton: SettingsButton = SettingsButton(rect: CGRect(x: 120, y: 200, width: 120*buttonScale, height: 39*buttonScale), text: "Settings")
@@ -37,10 +37,7 @@ class MainMenuGameScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        self.musicButton.zPosition = 2
-        self.sfxButton.zPosition = 2
-        self.musicButton.texture = SKTexture(imageNamed: "MusicButton")
-        self.sfxButton.texture = SKTexture(imageNamed: "SoundButton")
+        titleTex.filteringMode = .nearest
         self.background = SKSpriteNode(imageNamed: "Background")
         self.background?.position = CGPoint(x: frame.midX, y: frame.midY)
         self.background?.size = CGSize(width: frame.size.width, height: frame.size.height)

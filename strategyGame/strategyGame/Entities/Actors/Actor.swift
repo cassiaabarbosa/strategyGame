@@ -18,7 +18,7 @@ class Actor: Entity, Pushable {
     public private(set) var attackRange: Int
     internal var isExausted: Bool = false
     var breadcrumbs: [Tile] = [Tile]()
-    private var stunned: Int = 0
+    internal var stunned: Int = 0
     var wholeNumberValue: Float?
     var canMove: Bool = true
     
@@ -78,6 +78,9 @@ class Actor: Entity, Pushable {
     
     func walk(tile: Tile) {
         move(tile: tile)
+        if let trap = self.tile.prop as? Trap {
+            trap.activateTrap(character: self)
+        }
         self.movesLeft = 0 // TODO: ir decrementando até chegar em zero
     }
     

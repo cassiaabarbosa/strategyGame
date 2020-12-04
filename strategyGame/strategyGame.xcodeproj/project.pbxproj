@@ -45,6 +45,7 @@
 		8C87DBD42358DDB9001FB9DF /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBD32358DDB9001FB9DF /* Coord.swift */; };
 		8C87DBD62358F7DF001FB9DF /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C87DBD52358F7DF001FB9DF /* Background.swift */; };
 		8C87DBD82358F8D9001FB9DF /* BackgroundShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */; };
+		8C9DFF9423B2C26600864E03 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9DFF9323B2C26600864E03 /* LevelGenerator.swift */; };
 		8CB1B43223621D77005FB0D5 /* quack.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8CB1B43123621D77005FB0D5 /* quack.wav */; };
 		8CC08CC2235A02280005D0FD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC08CC1235A02280005D0FD /* Button.swift */; };
 		8CC91D3C235E2AA900A3C9C7 /* EndTurnButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */; };
@@ -120,6 +121,7 @@
 		8C87DBD32358DDB9001FB9DF /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 		8C87DBD52358F7DF001FB9DF /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		8C87DBD72358F8D9001FB9DF /* BackgroundShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = BackgroundShader.fsh; sourceTree = "<group>"; };
+		8C9DFF9323B2C26600864E03 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		8CB1B43123621D77005FB0D5 /* quack.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = quack.wav; sourceTree = "<group>"; };
 		8CC08CC1235A02280005D0FD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		8CC91D3B235E2AA900A3C9C7 /* EndTurnButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTurnButton.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				CB63D4B3235BA23D00E57A8D /* Entities */,
 				8C4816C3236A359C0073072B /* Protocols.swift */,
 				8C205408235A54B5004F73E3 /* AnimationHandler.swift */,
+				8C9DFF9323B2C26600864E03 /* LevelGenerator.swift */,
 				8C02075023565849009A8659 /* Grid.swift */,
 				8C87DBCE2358CBC9001FB9DF /* Tile.swift */,
 				8C87DBD52358F7DF001FB9DF /* Background.swift */,
@@ -471,6 +474,7 @@
 				CBDBB1BB235637E5004F7AC1 /* Ranged.swift in Sources */,
 				79F8F4EA23623C7400095A54 /* EndGameScene.swift in Sources */,
 				4F0664B52360DD4E00568AD3 /* Objective.swift in Sources */,
+				8C9DFF9423B2C26600864E03 /* LevelGenerator.swift in Sources */,
 				79F8F4E82362213900095A54 /* HealthBar.swift in Sources */,
 				CB9D6C7B234E6BF7000FA87E /* GameScene.swift in Sources */,
 				CBE9B4D6239D80F500D25DAB /* Modal.swift in Sources */,

@@ -17,6 +17,12 @@ class MachineController {
         func moveEnemy(_ enemy: Enemy, completion: @escaping () -> Void) {
             print(enemy.name)
             enemy.findAGoal()
+            if enemy.stunned > 0 {
+                print("\(enemy.name) is stunned")
+                enemy.stunned -= 1
+                completion()
+                return
+            }
             if !enemy.breadcrumbs.isEmpty {
                 for tile in 0 ..< enemy.breadcrumbs.count {
                     enemy.walk(tile: enemy.breadcrumbs[tile])
